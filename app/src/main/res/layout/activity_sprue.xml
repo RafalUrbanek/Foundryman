@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SprueActivity">
+
+    <TextView
+        android:id="@+id/sprueText8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/sprueDepth"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueDim5"
+        app:layout_constraintEnd_toStartOf="@+id/sprueDim2"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim5" />
+
+    <EditText
+        android:id="@+id/sprueDim5"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim4" />
+
+    <TextView
+        android:id="@+id/sprueText7"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:text="@string/flowRate"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/sprueDim4"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="284dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim1" />
+
+    <TextView
+        android:id="@+id/sprueText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/diameter"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueDim4"
+        app:layout_constraintEnd_toStartOf="@+id/sprueDim4"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim4" />
+
+    <EditText
+        android:id="@+id/sprueDim2"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim1" />
+
+    <EditText
+        android:id="@+id/sprueDim3"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/sprueText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/sprueDepth"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueDim2"
+        app:layout_constraintEnd_toStartOf="@+id/sprueDim2"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim2" />
+
+    <TextView
+        android:id="@+id/summaryTxtLShape"
+        android:layout_width="0sp"
+        android:layout_height="40sp"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <EditText
+        android:id="@+id/projectNameTxt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:hint="Project name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/optionsBtn"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/optionsBtn"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_manage" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summaryTxtLShape" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sprueSpinner"
+        app:srcCompat="@mipmap/sprue" />
+
+    <TextView
+        android:id="@+id/sprueText1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/sprue_type"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/sprueSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/summaryTxtLShape" />
+
+    <Spinner
+        android:id="@+id/sprueSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/sprueText1" />
+
+    <TextView
+        android:id="@+id/sprueText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/diameter"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueDim1"
+        app:layout_constraintEnd_toStartOf="@+id/sprueDim1"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim1" />
+
+    <EditText
+        android:id="@+id/sprueDim1"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/sprueSpinner" />
+
+    <TextView
+        android:id="@+id/sprueText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="@string/sprueHeight"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueDim3"
+        app:layout_constraintEnd_toStartOf="@+id/sprueDim3"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim3" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_help" />
+
+    <Button
+        android:id="@+id/sprueCalcBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="START"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/sprueDim7" />
+
+    <TextView
+        android:id="@+id/sprueText6"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:text="@string/factor"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/sprueText7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/sprueDim6"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/sprueText7"
+        app:layout_constraintStart_toEndOf="@+id/sprueText6"
+        app:layout_constraintTop_toTopOf="@+id/sprueText6" />
+
+    <EditText
+        android:id="@+id/sprueDim7"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim6"
+        app:layout_constraintStart_toEndOf="@+id/sprueText7"
+        app:layout_constraintTop_toTopOf="@+id/sprueText7" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/sprueText6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sprueDim7"
+        app:layout_constraintTop_toTopOf="@+id/sprueText6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

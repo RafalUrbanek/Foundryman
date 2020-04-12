@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="tools">
+    <item>Main</item>
+    <item>sprue</item>
+    <item>L shape</item>
+    <item>ratios</item>
+    <item>casting</item>
+    <item>feeders</item>
+    <item>tools</item>
+</string-array>
+
+    <string-array name="sprues">
+        <item>circular</item>
+        <item>square</item>
+        <item>rectangular</item>
+    </string-array>
+</resources>
