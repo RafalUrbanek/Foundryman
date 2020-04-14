@@ -28,7 +28,6 @@ public class SprueActivity extends AppCompatActivity implements
     TextView topText;
     TextView sprueText2, sprueText3, sprueText5, sprueText8;
     EditText sprueDim1, sprueDim2, sprueDim3, sprueDim4, sprueDim5, sprueDim6, sprueDim7;
-    Double[] sprueDimVals = new Double[7];
     Button calcBtn;
     Double[] inputData;
 
@@ -108,7 +107,6 @@ public class SprueActivity extends AppCompatActivity implements
         if (!(String.valueOf(sprueDim7.getText())).isEmpty()){
             inputData[6] = Double.valueOf(String.valueOf(sprueDim7.getText()));
         }
-
     }
 
     // adds listeners to value fields
