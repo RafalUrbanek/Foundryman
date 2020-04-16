@@ -3,7 +3,6 @@ package com.Raf.foundryman;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Support {
     static final double WELL_HEIGHT = 0.1;
@@ -12,6 +11,7 @@ public class Support {
     static Double[] dataOutput = new Double[8];
     static double safetyFactor = 0.0;
     static double densityPlaceholder = 2.5; //     <----- to be replaced once alloy pick is in place
+    static boolean[] modified = {false, false, false, false, false, false, false};
 
     // select correct activity based on the spinner selection
     public static void spinnerNavigator(Context context, int position) {
@@ -48,17 +48,17 @@ public class Support {
 
         // circular sprue
         if (Values.getSprueTypeSelected() == 0 || Values.getSprueTypeSelected() == 1) {
-            if (dataOutput[2] != null) {
-                if (dataOutput[0] != null && dataInput[3] == null && dataInput[6] == null) {
+            if (modified[2]) {
+                if (modified[0] && !modified[3] && !modified[6]) {
                     updateData(1); // has height and top area
                     Log.d("TAG 1", "passed");
 
-                } else if (dataOutput[3] != null && dataInput[0] == null && dataInput[6] == null) {
+                } else if (modified[3] && !modified[0] && !modified[6]) {
                     updateData(2); // has height and bottom area
                     dataOutput[7] = 1.0;
                     Log.d("TAG 2", "passed");
 
-                } else if (dataOutput[6] != null && dataInput[0] == null && dataInput[3] == null) {
+                } else if (modified[6] && !modified[0] && !modified[3]) {
                     // has height and flow rate
                     dataOutput[7] = 1.0;
                     Log.d("TAG 3", "passed");

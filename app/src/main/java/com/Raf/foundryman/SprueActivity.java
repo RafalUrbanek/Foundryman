@@ -27,7 +27,7 @@ public class SprueActivity extends AppCompatActivity implements
     Spinner sprueSpinner;
     TextView topText;
     TextView sprueText2, sprueText3, sprueText5, sprueText8;
-    EditText sprueDim1, sprueDim2, sprueDim3, sprueDim4, sprueDim5, sprueDim6, sprueDim7;
+    EditText[] sprueDims;
     Button calcBtn;
     Double[] inputData;
 
@@ -43,6 +43,7 @@ public class SprueActivity extends AppCompatActivity implements
         flag = false;
         inputData = new Double[8];
         inputData[7] = 0.0;
+        sprueDims = new EditText[7];
 
         tools = getResources().getStringArray(R.array.tools);
         sprueTypes = getResources().getStringArray(R.array.sprues);
@@ -52,13 +53,13 @@ public class SprueActivity extends AppCompatActivity implements
         sprueText5 = findViewById(R.id.sprueText5);
         sprueText8 = findViewById(R.id.sprueText8);
 
-        sprueDim1 = findViewById(R.id.sprueDim1);
-        sprueDim2 = findViewById(R.id.sprueDim2);
-        sprueDim3 = findViewById(R.id.sprueDim3);
-        sprueDim4 = findViewById(R.id.sprueDim4);
-        sprueDim5 = findViewById(R.id.sprueDim5);
-        sprueDim6 = findViewById(R.id.sprueDim6);
-        sprueDim7 = findViewById(R.id.sprueDim7);
+        sprueDims[0] = findViewById(R.id.sprueDim1);
+        sprueDims[1] = findViewById(R.id.sprueDim2);
+        sprueDims[2] = findViewById(R.id.sprueDim3);
+        sprueDims[3] = findViewById(R.id.sprueDim4);
+        sprueDims[4] = findViewById(R.id.sprueDim5);
+        sprueDims[5] = findViewById(R.id.sprueDim6);
+        sprueDims[6] = findViewById(R.id.sprueDim7);
 
         populateDataFieldListeners();
         populateDataArray();
@@ -75,42 +76,22 @@ public class SprueActivity extends AppCompatActivity implements
     }
     // calls addCalcBtnListener on all sprueDims fields
     private void populateDataFieldListeners() {
-        addCalcBtnListener(sprueDim1);
-        addCalcBtnListener(sprueDim2);
-        addCalcBtnListener(sprueDim3);
-        addCalcBtnListener(sprueDim4);
-        addCalcBtnListener(sprueDim5);
-        addCalcBtnListener(sprueDim6);
-        addCalcBtnListener(sprueDim7);
+        for(int i = 0; i <6; i++){
+            addCalcBtnListener(sprueDims[i]);
+        }
     }
 
     // Populates array containing field values
     private void populateDataArray(){
-        if (!(String.valueOf(sprueDim1.getText())).isEmpty()){
-            inputData[0] = Double.valueOf(String.valueOf(sprueDim1.getText()));
-        }
-        if (!(String.valueOf(sprueDim2.getText())).isEmpty()){
-            inputData[1] = Double.valueOf(String.valueOf(sprueDim2.getText()));
-        }
-        if (!(String.valueOf(sprueDim3.getText())).isEmpty()){
-            inputData[2] = Double.valueOf(String.valueOf(sprueDim3.getText()));
-        }
-        if (!(String.valueOf(sprueDim4.getText())).isEmpty()){
-            inputData[3] = Double.valueOf(String.valueOf(sprueDim4.getText()));
-        }
-        if (!(String.valueOf(sprueDim5.getText())).isEmpty()){
-            inputData[4] = Double.valueOf(String.valueOf(sprueDim5.getText()));
-        }
-        if (!(String.valueOf(sprueDim6.getText())).isEmpty()){
-            inputData[5] = Double.valueOf(String.valueOf(sprueDim6.getText()));
-        }
-        if (!(String.valueOf(sprueDim7.getText())).isEmpty()){
-            inputData[6] = Double.valueOf(String.valueOf(sprueDim7.getText()));
+        for(int i = 0; i <6; i++) {
+            if (!(String.valueOf(sprueDims[i].getText())).isEmpty()) {
+                inputData[i] = Double.valueOf(String.valueOf(sprueDims[i].getText()));
+            }
         }
     }
 
     // adds listeners to value fields
-    public void addCalcBtnListener(EditText dimInput) {
+    public void addCalcBtnListener(final EditText dimInput) {
         dimInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -120,6 +101,25 @@ public class SprueActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                // marks the data field as hand modified
+                //(((int)dimInput.getId() % 10)-1);
+                Log.d("Mod test: ", String.valueOf((((int)dimInput.getId() % 10)-1))); //       <--- works fine
+                int position = ((int)dimInput.getId() % 10) - 1;
+                Log.d("test MODIFIED array: ", "array pos " + position + "equals: " +
+                        String.valueOf(Support.modified[position]));
+                Log.d("string getClass: " , String.valueOf(dimInput.getText()));
+//                if (dimInput.getText().getClass() ==){
+//                    Log.d("diminput getText: ", String.valueOf(dimInput.getText()));
+//                } else{
+//                    Log.d("diminput gettext: ", "value: " + dimInput.getText());
+//                }
+
+                Support.modified[position] = false;
+                if (String.valueOf(dimInput.getText()) != ""){
+                    Support.modified[position] = true;
+
+                }
 
                 // modify the array based on values in sprueDim values
                 populateDataArray();
@@ -146,24 +146,24 @@ public class SprueActivity extends AppCompatActivity implements
                 sprueText5.setText(getResources().getString(R.string.diameter));
                 sprueText3.setVisibility(TextView.INVISIBLE);
                 sprueText8.setVisibility(TextView.INVISIBLE);
-                sprueDim2.setVisibility(EditText.INVISIBLE);
-                sprueDim5.setVisibility(EditText.INVISIBLE);
+                sprueDims[1].setVisibility(EditText.INVISIBLE);
+                sprueDims[4].setVisibility(EditText.INVISIBLE);
                 break;
             case 1:
                 sprueText2.setText(getResources().getString(R.string.width));
                 sprueText5.setText(getResources().getString(R.string.width));
                 sprueText3.setVisibility(TextView.INVISIBLE);
                 sprueText8.setVisibility(TextView.INVISIBLE);
-                sprueDim2.setVisibility(EditText.INVISIBLE);
-                sprueDim5.setVisibility(EditText.INVISIBLE);
+                sprueDims[1].setVisibility(EditText.INVISIBLE);
+                sprueDims[4].setVisibility(EditText.INVISIBLE);
                 break;
             case 2:
                 sprueText2.setText(getResources().getString(R.string.width));
                 sprueText5.setText(getResources().getString(R.string.width));
                 sprueText3.setVisibility(TextView.VISIBLE);
                 sprueText8.setVisibility(TextView.VISIBLE);
-                sprueDim2.setVisibility(EditText.VISIBLE);
-                sprueDim5.setVisibility(EditText.VISIBLE);
+                sprueDims[1].setVisibility(EditText.VISIBLE);
+                sprueDims[4].setVisibility(EditText.VISIBLE);
                 break;
         }
     }
