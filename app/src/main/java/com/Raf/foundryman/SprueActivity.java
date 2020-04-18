@@ -1,3 +1,6 @@
+// Apply single button listener for all buttons.
+// follow https://stackoverflow.com/questions/25905086/multiple-buttons-onclicklistener-android
+
 package com.Raf.foundryman;
 
 import android.content.Intent;
@@ -5,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +31,7 @@ public class SprueActivity extends AppCompatActivity implements
     TextView sprueText2, sprueText3, sprueText5, sprueText8;
     EditText[] sprueDims;
     Button calcBtn;
+    Button resetBtn;
     Double[] inputData;
 
     String[] tools;
@@ -64,16 +67,42 @@ public class SprueActivity extends AppCompatActivity implements
         populateDataFieldListeners();
         populateDataArray();
 
-        calcBtn = findViewById(R.id.sprueCalcBtn);
-        calcBtn.setBackgroundColor(getResources().getColor(R.color.button_red));
         configureOptionsBtn();
         configureProjectText();
         configureSpinner();
         configureSprueSpinner();
         configureDisplayState();
-
+        setCalcBtn();
+        setResetBtn();
         topText.setText(tools[1].toUpperCase());
     }
+
+    void setCalcBtn(){
+        calcBtn = findViewById(R.id.sprueCalcBtn);
+        calcBtn.setBackgroundColor(getResources().getColor(R.color.button_red));
+
+        calcBtn.setOnClickListener(new View.OnClickListener() {
+            Double[] values;
+            public void onClick(View v) {
+                values = Support.dataOutput;
+                for(int i = 0; i< inputData.length -1; i++){
+                    if (values[i] != null){
+                        double round;
+                        if (i == 5) {
+                            sprueDims[i].setText(String.valueOf(Math.round(values[i])));
+                        } else if(i == 6){
+                            round = Math.round(values[i] * 100);
+                            sprueDims[i].setText(String.valueOf(round / 100));
+                        } else{
+                            round = Math.round(values[i] * 10);
+                            sprueDims[i].setText(String.valueOf(round / 10));
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     // calls addCalcBtnListener on all sprueDims fields
     private void populateDataFieldListeners() {
         for(int i = 0; i <6; i++){
@@ -101,19 +130,7 @@ public class SprueActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
-                // marks the data field as hand modified
-                //(((int)dimInput.getId() % 10)-1);
-                Log.d("Mod test: ", String.valueOf((((int)dimInput.getId() % 10)-1))); //       <--- works fine
                 int position = ((int)dimInput.getId() % 10) - 1;
-                Log.d("test MODIFIED array: ", "array pos " + position + "equals: " +
-                        String.valueOf(Support.modified[position]));
-                Log.d("string getClass: " , String.valueOf(dimInput.getText()));
-//                if (dimInput.getText().getClass() ==){
-//                    Log.d("diminput getText: ", String.valueOf(dimInput.getText()));
-//                } else{
-//                    Log.d("diminput gettext: ", "value: " + dimInput.getText());
-//                }
 
                 Support.modified[position] = false;
                 if (String.valueOf(dimInput.getText()) != ""){
@@ -137,6 +154,24 @@ public class SprueActivity extends AppCompatActivity implements
 
     private void displayToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void setResetBtn(){
+        resetBtn = findViewById(R.id.resetBtn);
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i=0; i < Support.modified.length; i++){
+                    Support.modified[i] = false;
+                }
+
+                for(int i=0; i < Support.dataOutput.length; i++){
+                    Support.dataOutput[i] = null;
+                    inputData[i] = null;
+                    sprueDims[i].setText("");
+                }
+            }
+        });
     }
 
     private void configureDisplayState() {

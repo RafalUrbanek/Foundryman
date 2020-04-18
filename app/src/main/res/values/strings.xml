@@ -25,4 +25,5 @@
     <string name="flowRate">mass flow rate[kg/s]</string>
     <string name="flowRateImp">mass flow rate [lb/s]</string>
     <string name="sprueDepth">depth</string>
+    <string name="Reset">Reset</string>
 </resources>
