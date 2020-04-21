@@ -26,4 +26,18 @@
     <string name="flowRateImp">mass flow rate [lb/s]</string>
     <string name="sprueDepth">depth</string>
     <string name="Reset">Reset</string>
+    <string name="sprueHelp">
+        \tThe Sprue is the vertical part of the running system that in sand
+        casting typically connects the pouring basin at the top with further parts of the running
+        system. It is crucial to correctly design this element to avoid situations where the sprue
+        is either too tapered, increasing metal velocity at the bottom or not tapered enough
+        allowing the liquid metal to fall turbulently. Both cases can potentially introduce defects
+        in the system.\n\n
+        \tThis calculator allows you to calculate the correct dimensions of the sprue based on it\'s
+        height and either the top or bottom size. Optionally you can set the required volumetric
+        flow rate of the metal with the sprue height (feature to be implemented).\n\n
+        \tThe Safety Factor is the percentage value introduced to compensate for any potential flow
+        losses in the initial stages of the system. Positive values of the Safety Factor increase
+        the taper, choking the metal flow and therefore preventing any potential turbulent flow.
+        The default value is 20%</string>
 </resources>

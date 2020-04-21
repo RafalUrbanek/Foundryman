@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void configureOptionsBtn(){
-        ImageButton optionsBtn = findViewById(R.id.optionsBtn);
+        ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

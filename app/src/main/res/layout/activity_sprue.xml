@@ -42,7 +42,7 @@
         android:id="@+id/sprueDim4"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="234dp"
+        android:layout_marginTop="265dp"
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
@@ -76,7 +76,7 @@
         android:id="@+id/sprueDim3"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="160dp"
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
@@ -102,7 +102,7 @@
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/resetBtn"
+        app:layout_constraintStart_toEndOf="@+id/sprueResetBtn"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <EditText
@@ -114,7 +114,7 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
-        app:layout_constraintEnd_toStartOf="@+id/optionsBtn"
+        app:layout_constraintEnd_toStartOf="@+id/MainOptionsBtn"
         app:layout_constraintStart_toEndOf="@+id/spinner"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,7 +126,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/optionsBtn"
+        android:id="@+id/MainOptionsBtn"
         android:layout_width="50dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
@@ -198,7 +198,7 @@
         android:id="@+id/sprueDim1"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
@@ -219,7 +219,7 @@
         app:layout_constraintTop_toTopOf="@+id/sprueDim3" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/sprueHelpBtn"
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -232,7 +232,7 @@
         android:layout_height="80dp"
         android:text="START"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/sprueHelpBtn"
         app:layout_constraintStart_toEndOf="@+id/sprueDim7" />
 
     <TextView
@@ -289,7 +289,7 @@
         app:layout_constraintTop_toTopOf="@+id/sprueText6" />
 
     <Button
-        android:id="@+id/resetBtn"
+        android:id="@+id/sprueResetBtn"
         android:layout_width="80dp"
         android:layout_height="0dp"
         android:text="@string/Reset"

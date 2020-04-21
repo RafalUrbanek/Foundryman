@@ -31,7 +31,7 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/spinner"
-            app:layout_constraintEnd_toStartOf="@+id/optionsBtn"
+            app:layout_constraintEnd_toStartOf="@+id/MainOptionsBtn"
             app:layout_constraintStart_toEndOf="@+id/spinner"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/optionsBtn"
+            android:id="@+id/MainOptionsBtn"
             android:layout_width="50dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/spinner"

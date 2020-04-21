@@ -1,13 +1,14 @@
-// Apply single button listener for all buttons.
-// follow https://stackoverflow.com/questions/25905086/multiple-buttons-onclicklistener-android
-
 package com.Raf.foundryman;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SprueActivity extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener {
+        AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     Spinner toolSpinner;
     Spinner sprueSpinner;
@@ -32,11 +33,14 @@ public class SprueActivity extends AppCompatActivity implements
     EditText[] sprueDims;
     Button calcBtn;
     Button resetBtn;
+    ImageButton helpBtn;
     Double[] inputData;
-
+    Double[] values;
     String[] tools;
     String[] sprueTypes;
     boolean flag;
+    boolean userDataInput = true;
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -74,38 +78,30 @@ public class SprueActivity extends AppCompatActivity implements
         configureDisplayState();
         setCalcBtn();
         setResetBtn();
+        setHelpButton();
         topText.setText(tools[1].toUpperCase());
     }
 
-    void setCalcBtn(){
+    void setCalcBtn() {
         calcBtn = findViewById(R.id.sprueCalcBtn);
         calcBtn.setBackgroundColor(getResources().getColor(R.color.button_red));
+        calcBtn.setOnClickListener(this);
+    }
 
-        calcBtn.setOnClickListener(new View.OnClickListener() {
-            Double[] values;
-            public void onClick(View v) {
-                values = Support.dataOutput;
-                for(int i = 0; i< inputData.length -1; i++){
-                    if (values[i] != null){
-                        double round;
-                        if (i == 5) {
-                            sprueDims[i].setText(String.valueOf(Math.round(values[i])));
-                        } else if(i == 6){
-                            round = Math.round(values[i] * 100);
-                            sprueDims[i].setText(String.valueOf(round / 100));
-                        } else{
-                            round = Math.round(values[i] * 10);
-                            sprueDims[i].setText(String.valueOf(round / 10));
-                        }
-                    }
-                }
-            }
-        });
+    private void setResetBtn(){
+        resetBtn = findViewById(R.id.sprueResetBtn);
+        resetBtn.setBackgroundColor(getResources().getColor(R.color.button_red));
+        resetBtn.setOnClickListener(this);
+    }
+
+    void setHelpButton(){
+        helpBtn = findViewById(R.id.sprueHelpBtn);
+        helpBtn.setOnClickListener(this);
     }
 
     // calls addCalcBtnListener on all sprueDims fields
     private void populateDataFieldListeners() {
-        for(int i = 0; i <6; i++){
+        for (int i = 0; i < 6; i++) {
             addCalcBtnListener(sprueDims[i]);
         }
     }
@@ -130,12 +126,10 @@ public class SprueActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-                int position = ((int)dimInput.getId() % 10) - 1;
-
-                Support.modified[position] = false;
-                if (String.valueOf(dimInput.getText()) != ""){
+                int position = ((int)dimInput.getId() % 10);
+                if (userDataInput) Support.modified[position] = false;
+                if (!String.valueOf(dimInput.getText()).isEmpty() && userDataInput){
                     Support.modified[position] = true;
-
                 }
 
                 // modify the array based on values in sprueDim values
@@ -148,30 +142,24 @@ public class SprueActivity extends AppCompatActivity implements
                 } else {
                     calcBtn.setBackgroundColor(getResources().getColor(R.color.button_green));
                 }
+
+                dataColorSetter();
             }
         });
+    }
+
+    private void dataColorSetter() {
+        for (int i = 0; i < Support.modified.length; i++){
+            if (Support.modified[i] == true) {
+                sprueDims[i].setTextColor(getResources().getColor(R.color.dark_green));
+            } else{
+                sprueDims[i].setTextColor(Color.BLACK);
+            }
+        }
     }
 
     private void displayToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-    }
-
-    private void setResetBtn(){
-        resetBtn = findViewById(R.id.resetBtn);
-        resetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(int i=0; i < Support.modified.length; i++){
-                    Support.modified[i] = false;
-                }
-
-                for(int i=0; i < Support.dataOutput.length; i++){
-                    Support.dataOutput[i] = null;
-                    inputData[i] = null;
-                    sprueDims[i].setText("");
-                }
-            }
-        });
     }
 
     private void configureDisplayState() {
@@ -234,7 +222,7 @@ public class SprueActivity extends AppCompatActivity implements
     }
 
     private void configureOptionsBtn(){
-        ImageButton optionsBtn = findViewById(R.id.optionsBtn);
+        ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,5 +252,58 @@ public class SprueActivity extends AppCompatActivity implements
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
     }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.sprueCalcBtn:
+                userDataInput = false;
+                values = Support.dataOutput;
+                for(int i = 0; i< inputData.length -1; i++){
+                    if (values[i] != null){
+                        double round;
+                        if (i == 5) {
+                            sprueDims[i].setText(String.valueOf(Math.round(values[i])));
+                        } else if(i == 6){
+                            round = Math.round(values[i] * 100);
+                            sprueDims[i].setText(String.valueOf(round / 100));
+                        } else{
+                            round = Math.round(values[i] * 10);
+                            sprueDims[i].setText(String.valueOf(round / 10));
+                        }
+                    }
+                }
+                userDataInput = true;
+                break;
+
+            case R.id.sprueResetBtn:
+                for(int i=0; i < Support.modified.length -1; i++){
+                    Support.modified[i] = false;
+                }
+
+                for(int i=0; i < Support.dataOutput.length -1; i++){
+                    Support.dataOutput[i] = null;
+                    inputData[i] = null;
+                    sprueDims[i].setText("");
+                }
+                break;
+
+            case R.id.sprueHelpBtn:
+                AlertDialog.Builder helpAlert  = new AlertDialog.Builder(this);
+                helpAlert.setMessage(R.string.sprueHelp);
+                helpAlert.setTitle("SPRUE");
+                helpAlert.setPositiveButton("OK", null);
+                helpAlert.setCancelable(true);
+                helpAlert.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                helpAlert.create().show();
+                break;
+        }
+    }
 }
+
 

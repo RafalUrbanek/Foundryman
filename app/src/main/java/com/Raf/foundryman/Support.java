@@ -67,12 +67,11 @@ public class Support {
 
             // rectangular (not square) sprue
             } else {
-                if (dataOutput[2] != null) {
-                    if (dataOutput[0] != null && dataOutput[1] != null && ((dataOutput[3] != null) ^
-                            (dataOutput[4] != null))) {
+                if (modified[2]) {
+                    if (modified[0] && modified[1] && (modified[3] ^ modified[4])) {
                         updateData(1);// has height, top area, and one of bottom dimensions
                         dataOutput[7] = 1.0;
-                    } else if (dataOutput[3] != null && dataOutput[4] != null) {
+                    } else if (modified[3] && modified[4] && (modified[0] ^ modified[1])) {
                         updateData(2);// has height and bottom area and one of the top dimensions
                         dataOutput[7] = 1.0;
                     }  else dataOutput[7] = 0.0;
@@ -85,16 +84,17 @@ public class Support {
     private static void updateData(int methodPick){
 
         // Assume default safety factor if no factor selected
-        if (dataOutput[5] == null) {
-            dataOutput[5] = DEFAULT_SF;
+        if (modified[5]) {
             safetyFactor = dataOutput[5];
+        } else {
+            safetyFactor = dataOutput[5] = DEFAULT_SF;
         }
 
         if (Values.getSprueTypeSelected() == 0) {
             switch (methodPick) {
+
                 case 1: // top diameter & height
                     double bottomArea1 = getTopArea() * getTopVelocity() / getBottomVelocity() * 1000000;
-                    Log.d("HERE! ------->", String.valueOf(bottomArea1));
                     dataOutput[3] = Math.sqrt(bottomArea1 / Math.PI) * 2;
                     dataOutput[6] = getFlow();
                     dataOutput[7] = 1.0;
@@ -120,7 +120,6 @@ public class Support {
             switch (methodPick) {
                 case 1: // top diameter & height
                     double bottomArea = getTopArea() * getTopVelocity() / getBottomVelocity() * 1000000;
-                    Log.d("bottomArea in calc", String.valueOf(bottomArea));
                     dataOutput[3] = Math.sqrt(bottomArea);
                     dataOutput[6] = getFlow();
                     dataOutput[7] = 1.0;
@@ -143,22 +142,26 @@ public class Support {
             // rectangular sprue
         } else {
             switch (methodPick) {
-                case 1: // top diameter & height
-                    double bottomArea = getTopArea() * getTopVelocity() / getBottomVelocity();
-                    if (dataOutput[3] != null) dataOutput[4] = bottomArea / dataOutput[3];
+                case 1: // top dimensions & height
+                    double bottomArea = getTopArea() * getTopVelocity() / getBottomVelocity() * 1000000;
+                    if (modified[3]) dataOutput[4] = bottomArea / dataOutput[3];
                     else dataOutput[3] = bottomArea / dataOutput[4];
                     dataOutput[6] = getFlow();
                     dataOutput[7] = 1.0;
                     break;
 
-                case 2:
-                    double topArea = getBottomArea() * getBottomVelocity()/ getTopVelocity();
-                    if (dataOutput[0] != null) dataOutput[1] = topArea / dataOutput[0];
-                    else dataOutput[0] = topArea / dataOutput[1];
-                    dataOutput[0] = Math.sqrt(topArea);
+                case 2: // bottom dimensions & height
+                    double topArea = getBottomArea() * getBottomVelocity() / getTopVelocity() * 1000000;
+                    if (modified[0]) {
+                        dataOutput[1] = topArea / dataOutput[0];
+                    } else {
+                        dataOutput[0] = topArea / dataOutput[1];
+                    }
+                    //dataOutput[0] = Math.sqrt(topArea);
                     dataOutput[6] = getFlow();
                     dataOutput[7] = 1.0;
                     break;
+
                 case 3:
                     double topArea2 = dataOutput[6] / getTopVelocity();
                     double bottomArea2 = dataOutput[6] / getBottomVelocity();
@@ -178,7 +181,6 @@ public class Support {
         } else {
             area = dataOutput[0] * dataOutput[1] / 1000000;
         }
-        //Log.d("getTopArea ", "area = " + String.valueOf(area));
         return area;
     }
 
@@ -191,33 +193,30 @@ public class Support {
         } else {
             area = dataOutput[3] * dataOutput[4] / 1000000;
         }
-        //Log.d("getBottomArea ", String.valueOf(area));
         return area;
     }
 
     // returns the velocity at the bottom of the sprue based on sprue height and safety factor
     private static Double getBottomVelocity (){
         Double velocity = 0.0;
-        if (dataOutput[2] != null) {
+        if (modified[2]) {
             velocity = (Math.sqrt(2 * G * 0.1) + Math.sqrt(2 * G * (dataOutput[2] / 1000))) *
                     (1 + safetyFactor / 100);
         }
-        //Log.d("getBottomVelocity ", String.valueOf(velocity));
         return velocity;
     }
     // returns Volumetric flow rate in kg/s
     private static Double getFlow() {
         Double flowRate;
-        if (dataOutput[0] != null){
+        if (modified[0]){
             flowRate = getTopArea() * getTopVelocity() * densityPlaceholder;
-        } else if (dataOutput[2] != null){
+        } else if (modified[2]){
             flowRate = getBottomArea() * getBottomVelocity() * densityPlaceholder;
         } else {
             flowRate = 0.0;
             Log.d("getFlow: ", "Flowrate not calculated correctly due to method called " +
                     "despite missing data");
         }
-        //Log.d("getFlow ", String.valueOf(flowRate));
         return flowRate;
     }
 
@@ -225,7 +224,6 @@ public class Support {
     //account the drag in the sprue caused by safety factor applied
     private static Double getTopVelocity() {
         Double velocity = Math.sqrt(2 * G * WELL_HEIGHT);
-        Log.d("getTopVelocity ", String.valueOf(velocity));
         return velocity;
     }
 }

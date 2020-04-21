@@ -1,6 +1,5 @@
 package com.Raf.foundryman;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -59,7 +58,7 @@ public class RatiosActivity extends AppCompatActivity implements
     }
 
     private void configureOptionsBtn(){
-        ImageButton optionsBtn = findViewById(R.id.optionsBtn);
+        ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

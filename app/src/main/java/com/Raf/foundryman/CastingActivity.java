@@ -58,7 +58,7 @@ public class CastingActivity extends AppCompatActivity implements
     }
 
     private void configureOptionsBtn(){
-        ImageButton optionsBtn = findViewById(R.id.optionsBtn);
+        ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
