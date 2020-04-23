@@ -6,6 +6,184 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="1"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mainTxtBranches"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <TextView
+        android:id="@+id/mainTxtBranches"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="NUMBER OF RUNNER BRANCHES"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintStart_toEndOf="@+id/divider18"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/mainTxtSprues"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="NUMBER OF SPRUES"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider19"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider18"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <View
+        android:id="@+id/divider16"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/divider14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/divider15"
+        app:layout_constraintTop_toBottomOf="@+id/divider13"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/divider14"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtRatio" />
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtYield" />
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtWeight" />
+
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtFillTime" />
+
+    <TextView
+        android:id="@+id/mainTxtFillTime"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="PREDICTED FILL TIME"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtAvrgFlow" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtAvrgFlow" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtFlow" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/mainTxtWeight"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="ESTIMATED WEIGHT"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+
+    <TextView
+        android:id="@+id/mainTxtFlow"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="INITIAL FLOW"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/mainTxtAvrgFlow"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="AVERAGE FLOW"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider8" />
+
     <View
         android:id="@+id/divider3"
         android:layout_width="0dp"
@@ -17,16 +195,14 @@
         app:layout_constraintTop_toBottomOf="@+id/summaryTxtMain" />
 
     <TextView
-        android:id="@+id/descriptionTxt2"
+        android:id="@+id/mainTxtYield"
         android:layout_width="120dp"
-        android:layout_height="30sp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="35dp"
         android:gravity="center"
         android:text="YIELD"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionTxt1" />
+        app:layout_constraintTop_toBottomOf="@+id/divider12" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -75,19 +251,64 @@
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/descriptionTxt1"
+        android:id="@+id/mainTxtRatio"
         android:layout_width="120dp"
-        android:layout_height="30sp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="35dp"
         android:gravity="center"
-        android:text="RUNNER RATIO"
+        android:text="SYSTEM RATIO"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/summaryTxtMain" />
+        app:layout_constraintTop_toBottomOf="@+id/mainTxtYield" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:srcCompat="@mipmap/full_system" />
+
+    <View
+        android:id="@+id/divider15"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/divider14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toEndOf="@+id/divider17"
+        app:layout_constraintTop_toBottomOf="@+id/divider13"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider17"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/divider14"
+        app:layout_constraintStart_toEndOf="@+id/mainTxtWeight"
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="1"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintEnd_toStartOf="@+id/divider18"
+        app:layout_constraintStart_toEndOf="@+id/mainTxtSprues"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

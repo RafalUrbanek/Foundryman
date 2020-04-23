@@ -24,7 +24,7 @@ public class RatiosActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ratios);
+        setContentView(R.layout.activity_runner);
         flag = false;
         tools = getResources().getStringArray(R.array.tools);
         topText = findViewById(R.id.summaryTxtRatios);
