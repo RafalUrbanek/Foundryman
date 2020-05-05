@@ -18,7 +18,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="sprue_type">sprue type</string>
-    <string name="diameter">Dia</string>
+    <string name="diameter">dia</string>
     <string name="width">width</string>
     <string name="sprueHeight">height</string>
     <string name="factor">safety factor [%]</string>
@@ -40,6 +40,8 @@
         losses in the initial stages of the system. Positive values of the Safety Factor increase
         the taper, choking the metal flow and therefore preventing any potential turbulent flow.
         The default value is 20%</string>
-    <string name="feedersTotalWeight">Total feeder Weight</string>
-    <string name="FeedersInsulatedText">Insulated</string>
+    <string name="feedersTotalWeight">Total Feeder Weight</string>
+    <string name="FeedersInsulatedText">insulated</string>
+    <string name="height">height</string>
+    <string name="Insulation">insulation</string>
 </resources>
