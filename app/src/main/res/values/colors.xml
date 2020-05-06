@@ -6,4 +6,7 @@
     <color name="button_red">#D3EC5959</color>
     <color name="button_green">#D35BEC59</color>
     <color name="dark_green">#D3015000</color>
+    <color name="sleeve_yellow">#DBD76A</color>
+    <color name="sleeve_red">#DB8B82</color>
+    <color name="sleeve_gray">#DBD9D1</color>
 </resources>

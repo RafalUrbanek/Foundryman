@@ -13,6 +13,17 @@
         tools:layout_editor_absoluteX="-34dp"
         tools:layout_editor_absoluteY="0dp">
 
+        <EditText
+            android:id="@+id/feederAmmountInput"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/feederDesc"
+            app:layout_constraintEnd_toEndOf="@+id/feederSleeveBtn"
+            app:layout_constraintStart_toEndOf="@+id/feederDesc4"
+            app:layout_constraintTop_toTopOf="@+id/feederDesc" />
+
         <TextView
             android:id="@+id/feederDesc10"
             android:layout_width="0dp"
@@ -22,7 +33,7 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/divider28"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <TextView
             android:id="@+id/feederDesc9"
@@ -32,7 +43,7 @@
             android:text="mass"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/divider30"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <View
             android:id="@+id/divider30"
@@ -52,7 +63,7 @@
             android:text="mod"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/divider29"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <View
             android:id="@+id/divider29"
@@ -72,7 +83,7 @@
             android:text="@string/height"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/divider27"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <View
             android:id="@+id/divider27"
@@ -112,7 +123,7 @@
             android:text="@string/Insulation"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/divider25"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <TextView
             android:id="@+id/feederDesc6"
@@ -122,7 +133,7 @@
             android:text="@string/diameter"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/divider26"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <View
             android:id="@+id/divider24"
@@ -138,21 +149,23 @@
             android:id="@+id/divider22"
             android:layout_width="0dp"
             android:layout_height="2dp"
+            android:layout_marginTop="80dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
         <TextView
             android:id="@+id/feederDesc4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="ammount"
+            android:text="amount"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/divider11"
+            app:layout_constraintBottom_toTopOf="@+id/divider22"
             app:layout_constraintEnd_toEndOf="@+id/feederDesc3"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/feederDesc3"
             app:layout_constraintTop_toBottomOf="@+id/feederDesc3" />
 
@@ -164,8 +177,8 @@
             android:gravity="center"
             android:text="@string/Insulation"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/feederAmmountField2"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/feederDiaInput"
+            app:layout_constraintEnd_toStartOf="@+id/feederAddBtn"
             app:layout_constraintTop_toBottomOf="@+id/divider6"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -176,23 +189,22 @@
             android:gravity="center"
             android:text="@string/height"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/divider11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/feederDesc1" />
 
         <EditText
-            android:id="@+id/feederAmmountField3"
+            android:id="@+id/feederHeightInput"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/feederDesc"
-            app:layout_constraintEnd_toEndOf="@+id/feederAmmountField2"
+            app:layout_constraintEnd_toEndOf="@+id/feederDiaInput"
             app:layout_constraintStart_toEndOf="@+id/feederDesc1"
             app:layout_constraintTop_toTopOf="@+id/feederDesc" />
 
         <EditText
-            android:id="@+id/feederAmmountField2"
+            android:id="@+id/feederDiaInput"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ems="10"
@@ -211,16 +223,6 @@
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider6" />
-
-        <View
-            android:id="@+id/divider11"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/summaryTxtFeeders"
@@ -292,14 +294,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider24" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="40dp"
-            android:layout_height="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider6"
-            app:srcCompat="@android:drawable/ic_input_add" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="150dp"
@@ -339,15 +333,15 @@
             android:text="no. of"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider22" />
 
         <Button
-            android:id="@+id/feederInsulatedBtn"
+            android:id="@+id/feederSleeveBtn"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="@string/FeedersInsulatedText"
             app:layout_constraintBottom_toBottomOf="@+id/feederDesc3"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/feederAddBtn"
             app:layout_constraintStart_toEndOf="@+id/feederDesc3"
             app:layout_constraintTop_toBottomOf="@+id/divider6"
             app:layout_constraintVertical_bias="0.0" />
@@ -358,8 +352,6 @@
             android:layout_height="0dp"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/divider11"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintStart_toEndOf="@+id/feederDesc2"
             app:layout_constraintTop_toTopOf="@+id/feederDesc2" />
 
@@ -371,6 +363,15 @@
             app:layout_constraintBottom_toTopOf="@+id/divider24"
             app:layout_constraintStart_toEndOf="@+id/feederDesc2"
             app:layout_constraintTop_toBottomOf="@+id/divider22" />
+
+        <ImageButton
+            android:id="@+id/feederAddBtn"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/divider22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider6"
+            app:srcCompat="@android:drawable/ic_input_add" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

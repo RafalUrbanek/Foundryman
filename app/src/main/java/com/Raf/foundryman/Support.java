@@ -10,7 +10,7 @@ public class Support {
     static final double DEFAULT_SF = 20;
     static Double[] dataOutput = new Double[8];
     static double safetyFactor = 0.0;
-    static double densityPlaceholder = 2500; //     <----- to be replaced once alloy pick is in place
+    static double density = 2500; //     <----- to be replaced once alloy pick is in place
     static boolean[] modified = {false, false, false, false, false, false, false};
 
     // select correct activity based on the spinner selection
@@ -209,9 +209,9 @@ public class Support {
     private static Double getFlow() {
         Double flowRate;
         if (modified[0]){
-            flowRate = getTopArea() * getTopVelocity() * densityPlaceholder;
+            flowRate = getTopArea() * getTopVelocity() * density;
         } else if (modified[2]){
-            flowRate = getBottomArea() * getBottomVelocity() * densityPlaceholder;
+            flowRate = getBottomArea() * getBottomVelocity() * density;
         } else {
             flowRate = 0.0;
             Log.d("getFlow: ", "Flowrate not calculated correctly due to method called " +
