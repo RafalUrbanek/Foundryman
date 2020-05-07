@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class FeedersActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
@@ -29,17 +31,25 @@ public class FeedersActivity extends AppCompatActivity implements
     TextView feederDiaInput;
     TextView feederHeightInput;
     TextView feederAmmountInput;
+    FeedersAdapter fAdapter;
 
-    String[] feederType = {};
-    int[] amount = {};
-    double[] diameter = {};
-    double[] height = {};
-    double[] mod = {};
-    double[] mass = {};
+    ArrayList<String> feederTypeName = new ArrayList<>();
+    ArrayList<Integer> amount = new ArrayList<>();
+    ArrayList<Double> diameter = new ArrayList<>();
+    ArrayList<Double> height = new ArrayList<>();
+    ArrayList<Double> mod = new ArrayList<>();
+    ArrayList<Double> mass = new ArrayList<>();
     int feederBtnCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        feederTypeName.add("Insulated");
+        amount.add(5);
+        diameter.add(10.0);
+        height.add(100.0);
+        mod.add(1.0);
+        mass.add(20.0);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feeders);
         flag = false;
@@ -50,7 +60,7 @@ public class FeedersActivity extends AppCompatActivity implements
         feederAmmountInput = findViewById(R.id.feederAmmountInput);
         feedersRecyclerView = findViewById(R.id.FeederRecycler);
 
-        FeedersAdapter fAdapter = new FeedersAdapter(this, amount, feederType, diameter, height, mod, mass);
+        fAdapter = new FeedersAdapter(this, amount, feederTypeName, diameter, height, mod, mass);
         feedersRecyclerView.setAdapter(fAdapter);
         feedersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -113,33 +123,52 @@ public class FeedersActivity extends AppCompatActivity implements
         });
     }
 
+    private String getFeederType(int type){
+        String feederName;
+        if (type == 0) {
+            feederName = "No Sleeve";
+        }else if(type == 1){
+            feederName = "Insulated";
+        } else {
+            feederName = "Exothermic";
+        }
+        return feederName;
+    }
+
     private void configureAddBtn(){
         addBtn = findViewById(R.id.feederAddBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double ammount;
-                Double dia;
-                Double height;
-                Double mass;
+                int btnAmount;
+                Double btnDia;
+                Double btnHeight;
+                Double btnMass;
 
                 if (!String.valueOf(feederAmmountInput.getText()).isEmpty() &&
                         !String.valueOf(feederDiaInput.getText()).isEmpty() &&
                         !String.valueOf(feederHeightInput.getText()).isEmpty()) {
-
-                    ammount = Double.valueOf(String.valueOf(feederAmmountInput.getText()));
-                    dia = Double.valueOf(String.valueOf(feederDiaInput.getText()));
-                    height = Double.valueOf(String.valueOf(feederHeightInput.getText()));
-                    mass = ammount * height / 1000 * Math.PI * (dia / 2 / 1000) * (dia / 2 / 1000) * Support.density;
-                    
+                    btnAmount = Integer.valueOf(String.valueOf(feederAmmountInput.getText()));
+                    btnDia = Double.valueOf(String.valueOf(feederDiaInput.getText()));
+                    btnHeight = Double.valueOf(String.valueOf(feederHeightInput.getText()));
+                    btnMass = btnAmount * btnHeight / 1000 * Math.PI * (btnDia / 2 / 1000) * (btnDia / 2 / 1000) * Support.density;
                     feederAmmountInput.setText("");
                     feederDiaInput.setText("");
                     feederHeightInput.setText("");
 
+                    amount.add(btnAmount);
+                    feederTypeName.add(getFeederType(feederBtnCounter));
+                    diameter.add(btnDia);
+                    height.add(btnHeight);
+                    mod.add(1.0);
+                    mass.add(btnMass);
+
+                    fAdapter.notifyItemChanged(amount.size()-1);
                 }
             }
         });
     }
+
 
     private void configureOptionsBtn(){
         ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);

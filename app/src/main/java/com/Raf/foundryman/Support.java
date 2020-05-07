@@ -12,6 +12,7 @@ public class Support {
     static double safetyFactor = 0.0;
     static double density = 2500; //     <----- to be replaced once alloy pick is in place
     static boolean[] modified = {false, false, false, false, false, false, false};
+    static double feederMass = 0;
 
     // select correct activity based on the spinner selection
     public static void spinnerNavigator(Context context, int position) {
