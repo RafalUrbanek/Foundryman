@@ -39,16 +39,11 @@ public class FeedersActivity extends AppCompatActivity implements
     ArrayList<Double> height = new ArrayList<>();
     ArrayList<Double> mod = new ArrayList<>();
     ArrayList<Double> mass = new ArrayList<>();
+    ArrayList<Button> removeBtn = new ArrayList<>();
     int feederBtnCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        feederTypeName.add("Insulated");
-        amount.add(5);
-        diameter.add(10.0);
-        height.add(100.0);
-        mod.add(1.0);
-        mass.add(20.0);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feeders);
@@ -144,14 +139,19 @@ public class FeedersActivity extends AppCompatActivity implements
                 Double btnDia;
                 Double btnHeight;
                 Double btnMass;
+                Double btnMassRounded;
 
                 if (!String.valueOf(feederAmmountInput.getText()).isEmpty() &&
                         !String.valueOf(feederDiaInput.getText()).isEmpty() &&
                         !String.valueOf(feederHeightInput.getText()).isEmpty()) {
+                    Button btn = findViewById(R.id.lineRemoveBtn);
+                    removeBtn.add(btn);
                     btnAmount = Integer.valueOf(String.valueOf(feederAmmountInput.getText()));
                     btnDia = Double.valueOf(String.valueOf(feederDiaInput.getText()));
                     btnHeight = Double.valueOf(String.valueOf(feederHeightInput.getText()));
                     btnMass = btnAmount * btnHeight / 1000 * Math.PI * (btnDia / 2 / 1000) * (btnDia / 2 / 1000) * Support.density;
+                    btnMass *= 100;
+                    btnMassRounded =(double) Math.round(btnMass) / 100;
                     feederAmmountInput.setText("");
                     feederDiaInput.setText("");
                     feederHeightInput.setText("");
@@ -161,9 +161,10 @@ public class FeedersActivity extends AppCompatActivity implements
                     diameter.add(btnDia);
                     height.add(btnHeight);
                     mod.add(1.0);
-                    mass.add(btnMass);
+                    mass.add(btnMassRounded);
 
                     fAdapter.notifyItemChanged(amount.size()-1);
+
                 }
             }
         });

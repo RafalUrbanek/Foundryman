@@ -366,7 +366,7 @@
 
         <ImageButton
             android:id="@+id/feederAddBtn"
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/divider22"
             app:layout_constraintEnd_toEndOf="parent"
