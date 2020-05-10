@@ -3,8 +3,14 @@ package com.Raf.foundryman;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Button;
+
+import java.util.ArrayList;
 
 public class Support {
+
+    // GENERAL VARIABLES
+    static double feederMass;
     static final double WELL_HEIGHT = 0.1;
     static final double G = 9.8;
     static final double DEFAULT_SF = 20;
@@ -12,7 +18,41 @@ public class Support {
     static double safetyFactor = 0.0;
     static double density = 2500; //     <----- to be replaced once alloy pick is in place
     static boolean[] modified = {false, false, false, false, false, false, false};
-    static double feederMass = 0;
+
+    // recycler view content in Feeder Activity
+    static ArrayList<String> feederTypeName = new ArrayList<>();
+    static ArrayList<Integer> amount = new ArrayList<>();
+    static ArrayList<Double> diameter = new ArrayList<>();
+    static ArrayList<Double> height = new ArrayList<>();
+    static ArrayList<Double> mod = new ArrayList<>();
+    static ArrayList<Double> mass = new ArrayList<>();
+    static ArrayList<Button> removeBtn = new ArrayList<>();
+    static int feederBtnCounter = 0;
+
+    public static void removeFeederLine (int position){
+        Log.d("LOG", "position: " + String.valueOf(position));
+        amount.remove(position);
+        feederTypeName.remove(position);
+        diameter.remove(position);
+        height.remove(position);
+        mod.remove(position);
+        mass.remove(position);
+        recalculateFeederMass();
+    }
+
+    public static void recalculateFeederMass() {
+        feederMass = 0;
+        double massSum = 0;
+        if (!mass.isEmpty()) {
+            for (int i = 0; i < mass.size(); i++) {
+                massSum += mass.get(i);
+            }
+        }
+
+        massSum *=100;
+        massSum = Math.round(massSum);
+        feederMass = massSum / 100;
+    }
 
     // select correct activity based on the spinner selection
     public static void spinnerNavigator(Context context, int position) {

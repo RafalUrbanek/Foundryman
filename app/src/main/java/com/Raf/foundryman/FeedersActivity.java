@@ -11,12 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 public class FeedersActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
@@ -32,15 +29,7 @@ public class FeedersActivity extends AppCompatActivity implements
     TextView feederHeightInput;
     TextView feederAmmountInput;
     FeedersAdapter fAdapter;
-
-    ArrayList<String> feederTypeName = new ArrayList<>();
-    ArrayList<Integer> amount = new ArrayList<>();
-    ArrayList<Double> diameter = new ArrayList<>();
-    ArrayList<Double> height = new ArrayList<>();
-    ArrayList<Double> mod = new ArrayList<>();
-    ArrayList<Double> mass = new ArrayList<>();
-    ArrayList<Button> removeBtn = new ArrayList<>();
-    int feederBtnCounter = 0;
+    static TextView totalMass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +43,10 @@ public class FeedersActivity extends AppCompatActivity implements
         feederHeightInput = findViewById(R.id.feederHeightInput);
         feederAmmountInput = findViewById(R.id.feederAmmountInput);
         feedersRecyclerView = findViewById(R.id.FeederRecycler);
+        totalMass = findViewById(R.id.totalFeederMass);
 
-        fAdapter = new FeedersAdapter(this, amount, feederTypeName, diameter, height, mod, mass);
+        fAdapter = new FeedersAdapter(this, Support.amount, Support.feederTypeName,
+                Support.diameter, Support.height, Support.mod, Support.mass);
         feedersRecyclerView.setAdapter(fAdapter);
         feedersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -66,7 +57,11 @@ public class FeedersActivity extends AppCompatActivity implements
         configureSpinner();
 
         topText.setText(tools[5].toUpperCase());
+    }
 
+    public static void setTotalFeederMass(){
+        Support.recalculateFeederMass();
+        totalMass.setText(Double.toString(Support.feederMass));
     }
 
     private void configureSpinner() {
@@ -97,10 +92,10 @@ public class FeedersActivity extends AppCompatActivity implements
         sleeveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (++feederBtnCounter > 2){
-                    feederBtnCounter = 0;
+                if (++Support.feederBtnCounter > 2){
+                    Support.feederBtnCounter = 0;
                 }
-                switch(feederBtnCounter){
+                switch(Support.feederBtnCounter){
                     case 0:
                         sleeveBtn.setText("No Sleeve");
                         sleeveBtn.setBackgroundColor(getResources().getColor(R.color.sleeve_gray));
@@ -145,7 +140,7 @@ public class FeedersActivity extends AppCompatActivity implements
                         !String.valueOf(feederDiaInput.getText()).isEmpty() &&
                         !String.valueOf(feederHeightInput.getText()).isEmpty()) {
                     Button btn = findViewById(R.id.lineRemoveBtn);
-                    removeBtn.add(btn);
+                    Support.removeBtn.add(btn);
                     btnAmount = Integer.valueOf(String.valueOf(feederAmmountInput.getText()));
                     btnDia = Double.valueOf(String.valueOf(feederDiaInput.getText()));
                     btnHeight = Double.valueOf(String.valueOf(feederHeightInput.getText()));
@@ -156,20 +151,19 @@ public class FeedersActivity extends AppCompatActivity implements
                     feederDiaInput.setText("");
                     feederHeightInput.setText("");
 
-                    amount.add(btnAmount);
-                    feederTypeName.add(getFeederType(feederBtnCounter));
-                    diameter.add(btnDia);
-                    height.add(btnHeight);
-                    mod.add(1.0);
-                    mass.add(btnMassRounded);
+                    Support.amount.add(btnAmount);
+                    Support.feederTypeName.add(getFeederType(Support.feederBtnCounter));
+                    Support.diameter.add(btnDia);
+                    Support.height.add(btnHeight);
+                    Support.mod.add(1.0);
+                    Support.mass.add(btnMassRounded);
 
-                    fAdapter.notifyItemChanged(amount.size()-1);
-
+                    fAdapter.notifyItemChanged(Support.amount.size()-1);
+                    setTotalFeederMass();
                 }
             }
         });
     }
-
 
     private void configureOptionsBtn(){
         ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);

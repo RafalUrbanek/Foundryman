@@ -1,6 +1,8 @@
 package com.Raf.foundryman;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,12 @@ import java.util.ArrayList;
 
 public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersViewHolder> {
 
+    Button remove;
     Context context;
     ArrayList<Integer> ammount;
     ArrayList<String> sleeve;
     ArrayList<Double> diameter, height, modulus, mass;
+
 
     public FeedersAdapter(Context cont, ArrayList<Integer> noOf, ArrayList<String> slv, ArrayList<Double> dia,
                           ArrayList<Double> h, ArrayList<Double> mod, ArrayList<Double> m){
@@ -39,13 +43,22 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FeedersViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FeedersViewHolder holder, final int position) {
         holder.text1.setText(String.valueOf(ammount.get(position)));
         holder.text2.setText(String.valueOf(sleeve.get(position)));
         holder.text3.setText(String.valueOf(diameter.get(position)));
         holder.text4.setText(String.valueOf(height.get(position)));
         holder.text5.setText(String.valueOf(modulus.get(position)));
         holder.text6.setText(String.valueOf(mass.get(position)));
+
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Support.removeFeederLine(position);
+                notifyItemRemoved(position);
+                FeedersActivity.setTotalFeederMass();
+            }
+        });
     }
 
     @Override
@@ -55,6 +68,7 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
 
     public class FeedersViewHolder extends RecyclerView.ViewHolder{
         TextView text1, text2, text3, text4, text5, text6;
+        Button remove;
         public FeedersViewHolder(@NonNull View itemView) {
             super(itemView);
             text1 = itemView.findViewById(R.id.lineAmmount);
@@ -63,6 +77,7 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
             text4 = itemView.findViewById(R.id.lineHeight);
             text5 = itemView.findViewById(R.id.lineMod);
             text6 = itemView.findViewById(R.id.lineMass);
+            remove = itemView.findViewById(R.id.lineRemoveBtn);
         }
     }
 }
