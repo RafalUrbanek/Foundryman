@@ -54,6 +54,24 @@ public class Support {
         feederMass = massSum / 100;
     }
 
+    public static double modulus(double height, double diameter, int insulation){
+        double multiplier;
+        if (insulation == 0){
+            multiplier = 1.0;
+        } else if(insulation == 1){
+            multiplier = 1.4;
+        } else if(insulation == 2){
+            multiplier = 1.9;
+        } else{
+            multiplier = 0.0;
+        }
+
+        double modulus = multiplier * ((diameter * height) / (2 * (diameter + 2 * height)));
+        modulus *= 100;
+        double modulusRounded = Math.round(modulus);
+        return modulusRounded / 100;
+    }
+
     // select correct activity based on the spinner selection
     public static void spinnerNavigator(Context context, int position) {
 

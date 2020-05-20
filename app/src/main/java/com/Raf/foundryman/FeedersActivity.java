@@ -155,7 +155,7 @@ public class FeedersActivity extends AppCompatActivity implements
                     Support.feederTypeName.add(getFeederType(Support.feederBtnCounter));
                     Support.diameter.add(btnDia);
                     Support.height.add(btnHeight);
-                    Support.mod.add(1.0);
+                    Support.mod.add(Support.modulus(btnHeight, btnDia, Support.feederBtnCounter));
                     Support.mass.add(btnMassRounded);
 
                     fAdapter.notifyItemChanged(Support.amount.size()-1);
