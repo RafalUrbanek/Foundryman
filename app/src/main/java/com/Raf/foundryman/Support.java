@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Support {
 
     // GENERAL VARIABLES
+    static double sprueWidth = 0.0;
     static double feederMass;
     static final double WELL_HEIGHT = 0.1;
     static final double G = 9.8;
@@ -86,7 +87,7 @@ public class Support {
                 context.startActivity(new Intent(context, LShapeActivity.class));
                 break;
             case 3:
-                context.startActivity(new Intent(context, RatiosActivity.class));
+                context.startActivity(new Intent(context, RunnerActivity.class));
                 break;
             case 4:
                 context.startActivity(new Intent(context, CastingActivity.class));

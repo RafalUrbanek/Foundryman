@@ -274,6 +274,7 @@ public class SprueActivity extends AppCompatActivity implements
                         }
                     }
                 }
+                Support.sprueWidth = Double.valueOf(String.valueOf(values[3]));
                 userDataInput = true;
                 break;
 
