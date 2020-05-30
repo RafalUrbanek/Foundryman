@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class Support {
 
     // GENERAL VARIABLES
+    static double ingateHeight = 0.0;
+    static double ingateDia = 0.0;
     static double sprueWidth = 0.0;
     static double feederMass;
     static final double WELL_HEIGHT = 0.1;

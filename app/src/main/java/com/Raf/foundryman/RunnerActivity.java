@@ -3,6 +3,8 @@ package com.Raf.foundryman;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,13 +29,14 @@ public class RunnerActivity extends AppCompatActivity implements
     Boolean flag;
     TextView topText;
     Spinner wellType;
-    int armsCount, ingateCount;
-    double width, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2;
+    int armsCount = 1;
+    int ingateCount = 1;
+    double width, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2, weight;
 
     EditText armsCountText, ingateCountText, widthText, startHeightText, endHeightText,
             wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
 
-    TextView wellText1, wellText2, ingateText1, ingateText2;
+    TextView wellText1, wellText2, ingateText1, ingateText2, weightText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,18 +96,216 @@ public class RunnerActivity extends AppCompatActivity implements
     }
 
     private void initializeValues() {
-        armsCount = 1;
-        ingateCount = 1;
+        armsCountText.setText(String.valueOf(armsCount));
+        armsCountText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d("LOG", "armsCountText");
+            }
+        });
+
+        ingateCountText.setText(String.valueOf(ingateCount));
+        ingateCountText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        widthText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        widthText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        startHeightText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        endHeightText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        wellFilter1Text.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        wellFilter2Text.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ingateFilter1Text.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ingateFilter2Text.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!String.valueOf(ingateFilter2Text.getText()).isEmpty()) {
+                    ingateFilter2 = Double.valueOf(String.valueOf(ingateFilter2Text.getText()));
+                    calculateMass();
+                } else {
+                    ingateFilter2 = 0;
+                }
+            }
+        });
+
 
         if (Support.sprueWidth != 0.0) {
             double tempWidth = Math.round(Support.sprueWidth * 100);
             width = tempWidth / 100;
             widthText.setText(Double.toString(width));
-        } else{
+        } else {
             width = 0.0;
         }
+    }
 
-                //, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2;
+    private double ingateFilterVol(){
+    double volume = 0;
+    if (ingateFilter1 != 0){
+        if (ingateFilter2 != 0){
+            volume = ingateFilter1 * ingateFilter2 * 22;
+        } else {
+            volume = ingateFilter1 * ingateFilter1 * Math.PI;
+        }
+    }
+    return volume;
+    }
+
+    // method calculates mass based on the input and results from other tabs
+    private void calculateMass(){
+        double ingateMass = 0;
+        double armMass = 0;
+        double wellMass = 0;
+        double totalMassRounded;
+
+        // calculate in-gates mass
+        if (ingatesFilterSwitch.isChecked()){
+            if (Support.ingateDia != 0 && Support.ingateHeight != 0){
+                ingateMass = (Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
+                        Support.ingateHeight * ingateCount + ingateFilterVol();
+            } else {
+                ingateMass = 100 * Math.PI * 80 * ingateCount + ingateFilterVol();
+            }
+        }
+
+        // calculate arm(s) mass
+        if (width != 0 && startHeight != 0 && endHeight != 0 && armsCount > 0){
+            armMass = Support.density * armsCount * width *((startHeight + endHeight)/ 2) * 10000;
+            if (wellType.getSelectedItemPosition() == 0){
+                Log.d("LOG", "type 0");
+            }
+        } else {
+            weight = 0;
+            weightText.setText("");
+        }
+        double totalMass = (ingateMass + armMass + wellMass) * 100;
+        totalMassRounded = Math.round(totalMass) / 100;
+        weight = totalMassRounded;
+        weightText.setText(Double.toString(weight));
     }
 
     private void initializeTexts() {
@@ -121,6 +322,7 @@ public class RunnerActivity extends AppCompatActivity implements
         wellText2 = findViewById(R.id.runner_text_11);
         ingateText1 = findViewById(R.id.runner_text_7);
         ingateText2 = findViewById(R.id.runner_text_10);
+        weightText = findViewById(R.id.runner_text_13);
     }
 
     private void configureWellSpinner(){
