@@ -10,6 +10,9 @@ import java.util.ArrayList;
 public class Support {
 
     // GENERAL VARIABLES
+    static int runnerArms = 1;
+    static int wells = 1;
+    static int sprues = 1;
     static double ingateHeight = 0.0;
     static double ingateDia = 0.0;
     static double sprueWidth = 0.0;

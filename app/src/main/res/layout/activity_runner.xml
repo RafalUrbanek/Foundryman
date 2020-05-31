@@ -11,7 +11,73 @@
         android:layout_height="match_parent"
         tools:context=".SprueActivity"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="-16dp">
+
+        <TextView
+            android:id="@+id/runner_text_15"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="average runner arm length"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/runner_arm_length" />
+
+        <EditText
+            android:id="@+id/runner_arm_length"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/runner_text_3"
+            app:layout_constraintTop_toBottomOf="@+id/runner_arms" />
+
+        <EditText
+            android:id="@+id/runner_wells"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/runner_text_3"
+            app:layout_constraintTop_toTopOf="@+id/runner_text_14" />
+
+        <TextView
+            android:id="@+id/runner_text_14"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="No. of wells"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider21" />
+
+        <ImageButton
+            android:id="@+id/sprueHelpBtn2"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider23"
+            app:srcCompat="@android:drawable/ic_menu_help" />
 
         <TextView
             android:id="@+id/runner_text_13"
@@ -24,7 +90,7 @@
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sprueHelpBtn2"
             app:layout_constraintStart_toEndOf="@+id/divider31"
             app:layout_constraintTop_toBottomOf="@+id/divider23"
             app:layout_constraintVertical_bias="0.0" />
@@ -48,7 +114,7 @@
             android:id="@+id/divider23"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="40dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -272,14 +338,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/runner_text_3"
-            app:layout_constraintTop_toBottomOf="@+id/runner_arms" />
+            app:layout_constraintTop_toBottomOf="@+id/runner_arm_length" />
 
         <TextView
             android:id="@+id/runner_text_3"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
             android:width="100dp"
             android:height="30dp"
             android:gravity="center"
@@ -287,7 +352,7 @@
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider21" />
+            app:layout_constraintTop_toBottomOf="@+id/runner_wells" />
 
         <View
             android:id="@+id/divider21"
@@ -439,7 +504,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/runner_text_3"
-            app:layout_constraintTop_toTopOf="@+id/runner_text_3" />
+            app:layout_constraintTop_toBottomOf="@+id/runner_wells" />
 
         <View
             android:id="@+id/divider31"

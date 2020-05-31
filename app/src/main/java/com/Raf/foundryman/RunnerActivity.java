@@ -29,12 +29,13 @@ public class RunnerActivity extends AppCompatActivity implements
     Boolean flag;
     TextView topText;
     Spinner wellType;
-    int armsCount = 1;
     int ingateCount = 1;
-    double width, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2, weight;
+    int filterWidth = 22;
+    double width, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2,
+            weight, armLength;
 
-    EditText armsCountText, ingateCountText, widthText, startHeightText, endHeightText,
-            wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
+    EditText armsCountText, wellCountText, ingateCountText, widthText, startHeightText, endHeightText,
+            runnerarmLength, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
 
     TextView wellText1, wellText2, ingateText1, ingateText2, weightText;
 
@@ -96,7 +97,7 @@ public class RunnerActivity extends AppCompatActivity implements
     }
 
     private void initializeValues() {
-        armsCountText.setText(String.valueOf(armsCount));
+        armsCountText.setText(String.valueOf(Support.runnerArms));
         armsCountText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -108,7 +109,23 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("LOG", "armsCountText");
+
+            }
+        });
+
+        wellCountText.setText(String.valueOf(Support.wells));
+        wellCountText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -267,7 +284,7 @@ public class RunnerActivity extends AppCompatActivity implements
     double volume = 0;
     if (ingateFilter1 != 0){
         if (ingateFilter2 != 0){
-            volume = ingateFilter1 * ingateFilter2 * 22;
+            volume = ingateFilter1 * ingateFilter2 * filterWidth;
         } else {
             volume = ingateFilter1 * ingateFilter1 * Math.PI;
         }
@@ -293,15 +310,40 @@ public class RunnerActivity extends AppCompatActivity implements
         }
 
         // calculate arm(s) mass
-        if (width != 0 && startHeight != 0 && endHeight != 0 && armsCount > 0){
-            armMass = Support.density * armsCount * width *((startHeight + endHeight)/ 2) * 10000;
-            if (wellType.getSelectedItemPosition() == 0){
-                Log.d("LOG", "type 0");
-            }
-        } else {
-            weight = 0;
-            weightText.setText("");
+        if (width > 0 && startHeight > 0 && endHeight > 0 && Support.runnerArms > 0 && armLength > 0) {
+            armMass = Support.density * Support.runnerArms * width * ((startHeight + endHeight) / 2)
+                    * armLength / 1000000;
         }
+
+        // calculate well mass
+        if (wellFilterSwitch.isChecked()) {
+            if (wellType.getSelectedItemPosition() == 0) {
+                if (wellFilter1 > 0 && wellFilter2 > 0) {
+                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) * Support.density
+                            / 1000000) + (startHeight * width * 50);
+                }
+            } else if (wellType.getSelectedItemPosition() == 1) {
+                if (wellFilter1 > 0 && wellFilter2 > 0) {
+                    wellMass = (wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 125) * Support.density
+                            / 1000000;
+                }
+            } else {
+                if (wellFilter1 > 0 && wellFilter2 > 0) {
+                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) * Support.density
+                            / 1000000);
+                }
+            }
+        } else{
+            if (wellType.getSelectedItemPosition() == 0 || wellType.getSelectedItemPosition() == 2 ) {
+                    wellMass = startHeight * width * 50 * Support.density
+                            / 1000000;
+            } else {
+                // Assumption that well & no filter combination is only used for small parts
+                    wellMass = 50 * 50 * 50 * Support.density
+                            / 1000000;
+            }
+        }
+
         double totalMass = (ingateMass + armMass + wellMass) * 100;
         totalMassRounded = Math.round(totalMass) / 100;
         weight = totalMassRounded;
@@ -320,6 +362,7 @@ public class RunnerActivity extends AppCompatActivity implements
         ingateFilter2Text = findViewById(R.id.runner_ingate_filter_2);
         wellText1 = findViewById(R.id.runner_text_9);
         wellText2 = findViewById(R.id.runner_text_11);
+        wellCountText = findViewById(R.id.runner_wells);
         ingateText1 = findViewById(R.id.runner_text_7);
         ingateText2 = findViewById(R.id.runner_text_10);
         weightText = findViewById(R.id.runner_text_13);

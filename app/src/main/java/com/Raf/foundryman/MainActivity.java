@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements
@@ -20,12 +19,18 @@ public class MainActivity extends AppCompatActivity implements
     String projectName;
     Spinner toolSpinner;
     Boolean flag;
+    TextView spruesAmmount;
+    TextView wells;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         flag = false;
+        spruesAmmount = findViewById(R.id.mainTxt1);
+        spruesAmmount.setText(String.valueOf(Support.sprues));
+        wells = findViewById(R.id.mainTxt2);
+        wells.setText(String.valueOf(Support.wells));
         tools = getResources().getStringArray(R.array.tools);
         projectName = Values.getProjectName();
         configureOptionsBtn();
@@ -49,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Values.setProjectName(projectText.getText().toString());
-                //Toast.makeText (MainActivity.this, "name has been modified", Toast.LENGTH_LONG).show();
                 return false;
             }
         });

@@ -6,25 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/mainTxt2"
+        android:layout_width="80dp"
         android:layout_height="0dp"
-        android:ems="10"
-        android:inputType="number"
+        android:gravity="center"
         android:text="1"
         android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/divider19"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/mainTxtBranches"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/mainTxt1"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="1"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintStart_toEndOf="@+id/mainTxtSprues"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/mainTxtBranches"
         android:layout_width="80dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="NUMBER OF RUNNER BRANCHES"
+        android:text="RUNNER BRANCHES"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/divider19"
         app:layout_constraintStart_toEndOf="@+id/divider18"
@@ -297,18 +310,5 @@
         app:layout_constraintBottom_toTopOf="@+id/divider14"
         app:layout_constraintStart_toEndOf="@+id/mainTxtWeight"
         app:layout_constraintTop_toBottomOf="@+id/divider7" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="1"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/divider19"
-        app:layout_constraintEnd_toStartOf="@+id/divider18"
-        app:layout_constraintStart_toEndOf="@+id/mainTxtSprues"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
