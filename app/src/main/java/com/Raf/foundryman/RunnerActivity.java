@@ -31,11 +31,12 @@ public class RunnerActivity extends AppCompatActivity implements
     Spinner wellType;
     int ingateCount = 1;
     int filterWidth = 22;
+    int armsAmmount;
     double width, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2,
             weight, armLength;
 
     EditText armsCountText, wellCountText, ingateCountText, widthText, startHeightText, endHeightText,
-            runnerarmLength, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
+            armLengthText, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
 
     TextView wellText1, wellText2, ingateText1, ingateText2, weightText;
 
@@ -97,6 +98,28 @@ public class RunnerActivity extends AppCompatActivity implements
     }
 
     private void initializeValues() {
+
+        armLengthText.setText(String.valueOf(Support.runnerArms));
+        armLengthText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!String.valueOf(armLengthText.getText()).isEmpty()) {
+                    armLength = Integer.valueOf(String.valueOf(armLengthText.getText()));
+                } else {
+                    armLength = 0;
+                }
+                calculateMass();
+            }
+        });
+
         armsCountText.setText(String.valueOf(Support.runnerArms));
         armsCountText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -109,7 +132,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(armsCountText.getText()).isEmpty()) {
+                    armsAmmount = Integer.valueOf(String.valueOf(armsCountText.getText()));
+                } else {
+                    armsAmmount = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -125,7 +153,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(wellCountText.getText()).isEmpty()) {
+                    Support.wells = Integer.valueOf(String.valueOf(wellCountText.getText()));
+                } else {
+                    Support.wells = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -141,7 +174,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(ingateCountText.getText()).isEmpty()) {
+                    ingateCount = Integer.valueOf(String.valueOf(ingateCountText.getText()));
+                } else {
+                    ingateCount = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -156,22 +194,13 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        widthText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(widthText.getText()).isEmpty()) {
+                    width = Double.valueOf(String.valueOf(widthText.getText()));
+                    Support.sprueWidth = width;
+                } else if (Support.sprueWidth > 0){
+                    width = Support.sprueWidth;
+                } else width = 0;
+                calculateMass();
             }
         });
 
@@ -186,7 +215,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(startHeightText.getText()).isEmpty()) {
+                    startHeight = Double.valueOf(String.valueOf(startHeightText.getText()));
+                } else {
+                    startHeight = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -201,7 +235,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(endHeightText.getText()).isEmpty()) {
+                    endHeight = Double.valueOf(String.valueOf(endHeightText.getText()));
+                } else {
+                    endHeight = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -216,7 +255,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(wellFilter1Text.getText()).isEmpty()) {
+                    wellFilter1 = Double.valueOf(String.valueOf(wellFilter1Text.getText()));
+                } else {
+                    wellFilter1 = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -231,7 +275,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(wellFilter2Text.getText()).isEmpty()) {
+                    wellFilter2 = Double.valueOf(String.valueOf(wellFilter2Text.getText()));
+                } else {
+                    wellFilter2 = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -246,7 +295,12 @@ public class RunnerActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!String.valueOf(ingateFilter1Text.getText()).isEmpty()) {
+                    ingateFilter1 = Double.valueOf(String.valueOf(ingateFilter1Text.getText()));
+                } else {
+                    ingateFilter1 = 0;
+                }
+                calculateMass();
             }
         });
 
@@ -263,15 +317,15 @@ public class RunnerActivity extends AppCompatActivity implements
             public void afterTextChanged(Editable s) {
                 if (!String.valueOf(ingateFilter2Text.getText()).isEmpty()) {
                     ingateFilter2 = Double.valueOf(String.valueOf(ingateFilter2Text.getText()));
-                    calculateMass();
                 } else {
                     ingateFilter2 = 0;
                 }
+                calculateMass();
             }
         });
 
 
-        if (Support.sprueWidth != 0.0) {
+        if (Support.sprueWidth > 0.0) {
             double tempWidth = Math.round(Support.sprueWidth * 100);
             width = tempWidth / 100;
             widthText.setText(Double.toString(width));
@@ -301,18 +355,27 @@ public class RunnerActivity extends AppCompatActivity implements
 
         // calculate in-gates mass
         if (ingatesFilterSwitch.isChecked()){
-            if (Support.ingateDia != 0 && Support.ingateHeight != 0){
+            if (Support.ingateDia > 0 && Support.ingateHeight > 0){
                 ingateMass = (Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
-                        Support.ingateHeight * ingateCount + ingateFilterVol();
+                        Support.ingateHeight * ingateCount + ingateFilterVol() * ingateCount;
             } else {
-                ingateMass = 100 * Math.PI * 80 * ingateCount + ingateFilterVol();
+                ingateMass = 100 * Math.PI * 80 * ingateCount + ingateFilterVol() * ingateCount;
+            }
+        } else {
+            if (Support.ingateDia > 0 && Support.ingateHeight > 0){
+                ingateMass = (Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
+                        Support.ingateHeight * ingateCount;
+            } else {
+                ingateMass = 100 * Math.PI * 80 * ingateCount;
             }
         }
 
         // calculate arm(s) mass
+        Log.d("arm mass", "armsAmmount " + String.valueOf(armsAmmount) + " endHeight " + String.valueOf(endHeight));
         if (width > 0 && startHeight > 0 && endHeight > 0 && Support.runnerArms > 0 && armLength > 0) {
-            armMass = Support.density * Support.runnerArms * width * ((startHeight + endHeight) / 2)
-                    * armLength / 1000000;
+            armMass = Support.density * armsAmmount * width * ((startHeight + endHeight) / 2)
+                    * armLength / 1000000000;
+            Log.d("HELLO", "WORLD");
         }
 
         // calculate well mass
@@ -343,14 +406,19 @@ public class RunnerActivity extends AppCompatActivity implements
                             / 1000000;
             }
         }
-
-        double totalMass = (ingateMass + armMass + wellMass) * 100;
-        totalMassRounded = Math.round(totalMass) / 100;
-        weight = totalMassRounded;
-        weightText.setText(Double.toString(weight));
+        Log.d("Ingates", String.valueOf(ingateMass));
+        Log.d("arms", String.valueOf(armMass));
+        Log.d("wells", String.valueOf(wellMass));
+        if (ingateMass > 0 && armMass > 0 && wellMass > 0) {
+            double totalMass = (ingateMass + armMass + wellMass) * 100;
+            totalMassRounded = Math.round(totalMass) / 100;
+            weight = totalMassRounded;
+            weightText.setText(Double.toString(weight));
+        }
     }
 
     private void initializeTexts() {
+        armLengthText = findViewById(R.id.runner_arm_length);
         armsCountText = findViewById(R.id.runner_arms);
         ingateCountText  = findViewById(R.id.runner_ingates);
         widthText = findViewById(R.id.runner_width);
