@@ -99,7 +99,22 @@ public class RunnerActivity extends AppCompatActivity implements
 
     private void initializeValues() {
 
-        armLengthText.setText(String.valueOf(Support.runnerArms));
+        armLength = 100;
+        armsAmmount = 1;
+        startHeight = 20;
+        endHeight = 20;
+
+        if (Support.sprueWidth > 0.0) {
+            double tempWidth = Math.round(Support.sprueWidth * 100);
+            width = tempWidth / 100;
+        } else {
+            width = 20.0;
+        }
+        widthText.setText(Double.toString(width));
+        startHeightText.setText(Double.toString(startHeight));
+        endHeightText.setText(Double.toString(endHeight));
+
+        armLengthText.setText(String.valueOf(armLength));
         armLengthText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,9 +127,9 @@ public class RunnerActivity extends AppCompatActivity implements
             @Override
             public void afterTextChanged(Editable s) {
                 if (!String.valueOf(armLengthText.getText()).isEmpty()) {
-                    armLength = Integer.valueOf(String.valueOf(armLengthText.getText()));
+                    armLength = Double.valueOf(String.valueOf(armLengthText.getText()));
                 } else {
-                    armLength = 0;
+                    armLength = 100;
                 }
                 calculateMass();
             }
@@ -199,7 +214,7 @@ public class RunnerActivity extends AppCompatActivity implements
                     Support.sprueWidth = width;
                 } else if (Support.sprueWidth > 0){
                     width = Support.sprueWidth;
-                } else width = 0;
+                }
                 calculateMass();
             }
         });
@@ -323,21 +338,12 @@ public class RunnerActivity extends AppCompatActivity implements
                 calculateMass();
             }
         });
-
-
-        if (Support.sprueWidth > 0.0) {
-            double tempWidth = Math.round(Support.sprueWidth * 100);
-            width = tempWidth / 100;
-            widthText.setText(Double.toString(width));
-        } else {
-            width = 0.0;
-        }
     }
 
     private double ingateFilterVol(){
     double volume = 0;
-    if (ingateFilter1 != 0){
-        if (ingateFilter2 != 0){
+    if (ingateFilter1 > 0){
+        if (ingateFilter2 > 0){
             volume = ingateFilter1 * ingateFilter2 * filterWidth;
         } else {
             volume = ingateFilter1 * ingateFilter1 * Math.PI;
@@ -356,65 +362,64 @@ public class RunnerActivity extends AppCompatActivity implements
         // calculate in-gates mass
         if (ingatesFilterSwitch.isChecked()){
             if (Support.ingateDia > 0 && Support.ingateHeight > 0){
-                ingateMass = (Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
-                        Support.ingateHeight * ingateCount + ingateFilterVol() * ingateCount;
+                ingateMass = (((Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
+                        Support.ingateHeight * ingateCount * Support.density) + (ingateFilterVol() *
+                        ingateCount * Support.density)) / 1000000000;
             } else {
-                ingateMass = 100 * Math.PI * 80 * ingateCount + ingateFilterVol() * ingateCount;
+                ingateMass = ((100 * Math.PI * 80 * ingateCount * Support.density) + (ingateFilterVol() *
+                        ingateCount * Support.density)) / 1000000000;
             }
         } else {
             if (Support.ingateDia > 0 && Support.ingateHeight > 0){
-                ingateMass = (Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
-                        Support.ingateHeight * ingateCount;
+                ingateMass = ((Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
+                        Support.ingateHeight * ingateCount * Support.density) / 1000000000;
             } else {
-                ingateMass = 100 * Math.PI * 80 * ingateCount;
+                ingateMass = 100 * Math.PI * 80 * ingateCount * Support.density / 1000000000;
             }
         }
 
         // calculate arm(s) mass
-        Log.d("arm mass", "armsAmmount " + String.valueOf(armsAmmount) + " endHeight " + String.valueOf(endHeight));
         if (width > 0 && startHeight > 0 && endHeight > 0 && Support.runnerArms > 0 && armLength > 0) {
             armMass = Support.density * armsAmmount * width * ((startHeight + endHeight) / 2)
                     * armLength / 1000000000;
-            Log.d("HELLO", "WORLD");
         }
 
         // calculate well mass
         if (wellFilterSwitch.isChecked()) {
             if (wellType.getSelectedItemPosition() == 0) {
-                if (wellFilter1 > 0 && wellFilter2 > 0) {
-                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) * Support.density
-                            / 1000000) + (startHeight * width * 50);
+                if (wellFilter1 > 5 && wellFilter2 > 10) {
+                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) *
+                            Support.density * Support.wells / 1000000000) + (startHeight * width * 50);
                 }
             } else if (wellType.getSelectedItemPosition() == 1) {
                 if (wellFilter1 > 0 && wellFilter2 > 0) {
-                    wellMass = (wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 125) * Support.density
-                            / 1000000;
+                    wellMass = (wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 125) *
+                            Support.density * Support.wells / 1000000000;
                 }
             } else {
                 if (wellFilter1 > 0 && wellFilter2 > 0) {
-                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) * Support.density
-                            / 1000000);
+                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) *
+                            Support.density * Support.wells / 1000000000);
                 }
             }
         } else{
             if (wellType.getSelectedItemPosition() == 0 || wellType.getSelectedItemPosition() == 2 ) {
-                    wellMass = startHeight * width * 50 * Support.density
-                            / 1000000;
+                    wellMass = startHeight * width * 50 * Support.density * Support.wells / 1000000000;
             } else {
                 // Assumption that well & no filter combination is only used for small parts
-                    wellMass = 50 * 50 * 50 * Support.density
-                            / 1000000;
+                    wellMass = 50 * 50 * 50 * Support.density * Support.wells / 1000000000;
             }
         }
         Log.d("Ingates", String.valueOf(ingateMass));
         Log.d("arms", String.valueOf(armMass));
         Log.d("wells", String.valueOf(wellMass));
-        if (ingateMass > 0 && armMass > 0 && wellMass > 0) {
-            double totalMass = (ingateMass + armMass + wellMass) * 100;
-            totalMassRounded = Math.round(totalMass) / 100;
-            weight = totalMassRounded;
-            weightText.setText(Double.toString(weight));
-        }
+        double totalMass = (ingateMass + armMass + wellMass) * 100;
+        totalMass = Math.round(totalMass);
+        Log.d("LOG", "totalMassRounded: " + totalMass);
+        weight = totalMass / 100;
+        weightText.setText(Double.toString(weight));
+        Support.runnerMass = weight;
+        Log.d("LOG", "mass: " + weight);
     }
 
     private void initializeTexts() {

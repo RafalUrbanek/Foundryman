@@ -233,8 +233,7 @@
         android:text="START"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/sprueHelpBtn"
-        app:layout_constraintStart_toEndOf="@+id/sprueDim7" />
+        app:layout_constraintEnd_toStartOf="@+id/sprueHelpBtn" />
 
     <TextView
         android:id="@+id/sprueText6"
@@ -248,13 +247,14 @@
 
     <EditText
         android:id="@+id/sprueDim6"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/sprueText7"
+        app:layout_constraintEnd_toStartOf="@+id/sprueCalcBtn"
         app:layout_constraintStart_toEndOf="@+id/sprueText6"
         app:layout_constraintTop_toTopOf="@+id/sprueText6" />
 
@@ -279,15 +279,6 @@
         app:layout_constraintBottom_toTopOf="@+id/sprueText6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sprueDim7"
-        app:layout_constraintTop_toTopOf="@+id/sprueText6" />
 
     <Button
         android:id="@+id/sprueResetBtn"
