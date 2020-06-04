@@ -9,7 +9,121 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SprueActivity">
+        tools:context=".SprueActivity"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="130dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lShape_img"
+            app:layout_constraintEnd_toStartOf="@+id/lShape_img" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="65dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lShape_img"
+            app:layout_constraintEnd_toStartOf="@+id/lShape_img" />
+
+        <TextView
+            android:id="@+id/lShape_text_mass_flow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lShape_text_2"
+            app:layout_constraintEnd_toStartOf="@+id/lShape_help_btn"
+            app:layout_constraintStart_toEndOf="@+id/divider32"
+            app:layout_constraintTop_toBottomOf="@+id/lShape_text_1" />
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginBottom="80dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/lShape_help_btn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider5"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@android:drawable/ic_menu_help" />
+
+        <View
+            android:id="@+id/divider32"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lShape_text_1"
+            app:layout_constraintTop_toBottomOf="@+id/divider5"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/lShape_text_1"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="Volumetric flow [dm^3/s]"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+        <TextView
+            android:id="@+id/lShape_text_2"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="Mass flow [kg/s]"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lShape_text_1" />
+
+        <TextView
+            android:id="@+id/lShape_text_vol_flow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lShape_text_1"
+            app:layout_constraintEnd_toStartOf="@+id/lShape_help_btn"
+            app:layout_constraintStart_toEndOf="@+id/divider32"
+            app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
         <TextView
             android:id="@+id/summaryTxtLShape"
@@ -69,6 +183,59 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/summaryTxtLShape" />
+
+        <ImageView
+            android:id="@+id/lShape_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/divider5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@mipmap/l_shape" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Sprue size"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toStartOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Runner height"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView9"
+            app:layout_constraintEnd_toStartOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Radius"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintEnd_toStartOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lShape_img"
+            app:layout_constraintEnd_toStartOf="@+id/lShape_img" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
