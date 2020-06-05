@@ -18,6 +18,8 @@ public class Support {
     static double sprueWidth = 0.0;
     static double feederMass;
     static double runnerMass;
+    static double sprueVelocity = 0.0;
+    static double initialMassFlowrate = 0.0;
     static final double WELL_HEIGHT = 0.1;
     static final double G = 9.8;
     static final double DEFAULT_SF = 20;
