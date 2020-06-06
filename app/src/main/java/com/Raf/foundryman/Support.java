@@ -16,6 +16,7 @@ public class Support {
     static double ingateHeight = 0.0;
     static double ingateDia = 0.0;
     static double sprueWidth = 0.0;
+    static double sprueHeight = 0.0;
     static double feederMass;
     static double runnerMass;
     static double sprueVelocity = 0.0;

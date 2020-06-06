@@ -56,9 +56,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/lShape_input_bottom_dim"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/lShape_input_bottom_dim"
             app:layout_constraintTop_toBottomOf="@+id/lShape_input_bottom_dim" />
 
@@ -152,6 +153,7 @@
             android:id="@+id/lShape_text_mass_flow2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="20dp"
             android:width="100dp"
             android:height="30dp"
@@ -226,6 +228,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="2dp"
             android:width="100dp"
             android:height="30dp"
             android:background="@color/field_gray"
@@ -385,14 +388,23 @@
 
         <EditText
             android:id="@+id/lShape_input_bottom_dim"
-            android:layout_width="180dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="5dp"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dia_dim_btn"
             app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+        <Button
+            android:id="@+id/dia_dim_btn"
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/diameter"
+            app:layout_constraintBottom_toBottomOf="@+id/lShape_input_bottom_dim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lShape_input_bottom_dim" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

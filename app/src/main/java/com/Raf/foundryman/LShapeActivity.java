@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,14 +19,15 @@ public class LShapeActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     String[] tools;
-    Button calculateBtn;
+    Button calculateBtn, diaDimBtn;
     ImageButton helpBtn;
     Spinner toolSpinner;
     Boolean flag;
+    Boolean diaDimFlag = true;
     EditText bottomDiaEdit, velocityEdit, sprueHeightEdit;
     TextView topText, massFlowText1, massFlowText2, volFlowText, radiusText, runnerHeightText, sprueSizeText;
 
-    double massFlowrate, weightFlowrate, velocity, sprueHeight, bottomDim, radius, runnerHeight;
+    double massFlowrate, velocity, sprueHeight, bottomDim, radius, runnerHeight, volFolwrate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,17 @@ public class LShapeActivity extends AppCompatActivity implements
     }
 
     private void initializeValues() {
+        if (Support.sprueHeight > 0){
+            sprueHeight = Support.sprueHeight;
+        } else {
+            sprueHeight = 0;
+        }
+
+        if (Support.sprueWidth > 0){
+            bottomDim = Support.sprueWidth;
+            bottomDiaEdit.setText(String.valueOf(bottomDim));
+        }
+
         if (Support.sprueVelocity > 0){
             velocity = Support.sprueVelocity;
             velocityEdit.setText(String.valueOf(velocity));
@@ -52,6 +65,8 @@ public class LShapeActivity extends AppCompatActivity implements
             massFlowrate = Support.initialMassFlowrate;
             massFlowText1.setText(String.valueOf(massFlowrate));
             massFlowText2.setText(String.valueOf(massFlowrate));
+            volFolwrate = massFlowrate * Support.density / 1000;
+            volFlowText.setText(String.valueOf(volFolwrate));
         } else massFlowrate = 0;
     }
 
@@ -68,7 +83,21 @@ public class LShapeActivity extends AppCompatActivity implements
         runnerHeightText = findViewById(R.id.lShape_text_height);
         sprueSizeText = findViewById(R.id.lShape_text_sprue);
         calculateBtn = findViewById(R.id.lShape_calc_btn);
+        diaDimBtn = findViewById(R.id.dia_dim_btn);
         helpBtn = findViewById(R.id.lShape_help_btn);
+
+        diaDimBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (diaDimFlag) {
+                    diaDimBtn.setText("DIM");
+                    diaDimFlag = false;
+                } else {
+                    diaDimBtn.setText("DIA");
+                    diaDimFlag = true;
+                }
+            }
+        });
 
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +118,22 @@ public class LShapeActivity extends AppCompatActivity implements
 
     }
 
-    private void calculate() {
 
+
+    private void calculate() {
+        if (bottomDim > 0){
+            if (velocity > 0){
+
+            } else if (sprueHeight > 0){
+
+            } else {
+                Toast.makeText(this,"Please enter valid metal velocity at sprue " +
+                        "bottom or sprue height including pouring cup", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this,"Please enter valid sprue bottom diameter or " +
+                    "dimension", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void configureSpinner() {
