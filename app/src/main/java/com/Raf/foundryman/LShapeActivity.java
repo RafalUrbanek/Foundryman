@@ -119,12 +119,28 @@ public class LShapeActivity extends AppCompatActivity implements
     }
 
 
+    private double radiusMultiplier(double velocity){
+        double radM;
+        if (velocity < 1){
+            radM = 1.21;
+        }else if (velocity < 2){
+            radM = ((velocity - 1) / (2 - 1)) * (1.38 - 1.21) - 1.21;
+        } else if (velocity < 4){
+            radM = 1.38;
+        } else if (velocity < 8){
+            radM = 1.38;
+        } else {
+            radM = 1.37;
+        }
+        return radM;
+    }
 
     private void calculate() {
         if (bottomDim > 0){
             if (velocity > 0){
 
             } else if (sprueHeight > 0){
+                velocity = Support.gravity * Math.sqrt(sprueHeight/(0.5 * Support.gravity));
 
             } else {
                 Toast.makeText(this,"Please enter valid metal velocity at sprue " +

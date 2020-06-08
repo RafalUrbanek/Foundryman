@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Support {
 
     // GENERAL VARIABLES
+    static double gravity = 9.8;
     static int runnerArms = 1;
     static int wells = 1;
     static int sprues = 1;
