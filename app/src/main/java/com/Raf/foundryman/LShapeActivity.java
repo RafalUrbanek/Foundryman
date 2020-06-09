@@ -2,6 +2,7 @@ package com.Raf.foundryman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -118,13 +119,29 @@ public class LShapeActivity extends AppCompatActivity implements
 
     }
 
+    private double exitHeightMultiplier(double velocity){
+        double exitHeight;
+
+        if (velocity < 1){
+            exitHeight = 0.76;
+        }else if (velocity < 2){
+            exitHeight = ((velocity - 1) / (2 - 1)) * (0.91 - 0.76) + 0.76;
+        } else if (velocity < 4){
+            exitHeight = ((velocity - 1) / (2 - 1)) * (0.98 - 0.91) + 0.91;
+        } else if (velocity < 8){
+            exitHeight = ((velocity - 1) / (2 - 1)) * (1 - 0.98) + 0.98;
+        } else {
+            exitHeight = 1;
+        }
+        return exitHeight;
+    }
 
     private double radiusMultiplier(double velocity){
         double radM;
         if (velocity < 1){
             radM = 1.21;
         }else if (velocity < 2){
-            radM = ((velocity - 1) / (2 - 1)) * (1.38 - 1.21) - 1.21;
+            radM = ((velocity - 1) / (2 - 1)) * (1.38 - 1.21) + 1.21;
         } else if (velocity < 4){
             radM = 1.38;
         } else if (velocity < 8){
@@ -136,19 +153,85 @@ public class LShapeActivity extends AppCompatActivity implements
     }
 
     private void calculate() {
-        if (bottomDim > 0){
-            if (velocity > 0){
+        if (!String.valueOf(bottomDiaEdit.getText()).isEmpty()){
+            bottomDim = Double.valueOf(String.valueOf(bottomDiaEdit.getText()));
+        } else {
+            bottomDim = 0;
+        }
 
-            } else if (sprueHeight > 0){
-                velocity = Support.gravity * Math.sqrt(sprueHeight/(0.5 * Support.gravity));
+        if (!String.valueOf(velocityEdit.getText()).isEmpty()){
+            velocity = Double.valueOf(String.valueOf(velocityEdit.getText()));
+        } else {
+            velocity = 0;
+        }
+
+        if (!String.valueOf(sprueHeightEdit.getText()).isEmpty()){
+            sprueHeight = Double.valueOf(String.valueOf(sprueHeightEdit.getText()));
+        } else {
+            sprueHeight = 0;
+        }
+
+        if (bottomDim > 0){
+            if ( velocity <= 0) {
+                if (sprueHeight > 0) {
+                    velocity = Support.gravity * Math.sqrt(sprueHeight/ 1000 / (0.5 * Support.gravity));
+                    Log.d("LOG", "Velocity: " + String.valueOf(velocity));
+                } else {
+                    Toast.makeText(this, "Please enter valid metal velocity at sprue " +
+                            "bottom or sprue height including pouring cup", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            if (velocity > 0) {
+                double bottomArea;
+                if (diaDimFlag){
+                    bottomArea = Math.PI * ((bottomDim/2) * (bottomDim/2));
+                } else {
+                    bottomArea = bottomDim * bottomDim;
+                }
+
+                volFolwrate = Math.round(bottomArea * velocity * 1000);
+                volFlowText.setText(String.valueOf(volFolwrate));
+
+                double massFlowrateRounded = volFolwrate * Support.density / 1000000000 * 100;
+                massFlowrateRounded = Math.round(massFlowrateRounded);
+                massFlowrate =  massFlowrateRounded / 100;
+                massFlowText1.setText(String.valueOf(massFlowrate));
+                massFlowText2.setText(String.valueOf(massFlowrate));
+
+                sprueSizeText.setText(String.valueOf(bottomDim));
+                double radiusRounded = Math.round(bottomDim * radiusMultiplier(velocity) * 10);
+                radius = radiusRounded / 10;
+                radiusText.setText(String.valueOf(radius));
+
+                double runnerHeightRounded;
+                if (diaDimFlag){
+                    runnerHeightRounded = Math.round(bottomDim * exitHeightMultiplier(velocity) *
+                            (Math.PI / 4) * 10);
+                    runnerHeight = runnerHeightRounded / 10;
+                } else {
+                    runnerHeightRounded = Math.round(bottomDim * exitHeightMultiplier(velocity) * 10);
+                    runnerHeight = runnerHeightRounded / 10;
+                }
+
+                runnerHeightText.setText(String.valueOf(runnerHeight));
 
             } else {
-                Toast.makeText(this,"Please enter valid metal velocity at sprue " +
-                        "bottom or sprue height including pouring cup", Toast.LENGTH_LONG).show();
+                sprueSizeText.setText("");
+                runnerHeightText.setText("");
+                radiusText.setText("");
+                massFlowText1.setText("");
+                massFlowText2.setText("");
             }
+
         } else {
             Toast.makeText(this,"Please enter valid sprue bottom diameter or " +
                     "dimension", Toast.LENGTH_LONG).show();
+            sprueSizeText.setText("");
+            runnerHeightText.setText("");
+            radiusText.setText("");
+            massFlowText1.setText("");
+            massFlowText2.setText("");
         }
     }
 

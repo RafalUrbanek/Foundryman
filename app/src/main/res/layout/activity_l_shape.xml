@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             app:layout_constraintEnd_toEndOf="@+id/lShape_input_velocity"
             app:layout_constraintStart_toStartOf="@+id/lShape_input_velocity"
             app:layout_constraintTop_toBottomOf="@+id/lShape_input_velocity" />
@@ -58,7 +58,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/lShape_input_bottom_dim"
             app:layout_constraintTop_toBottomOf="@+id/lShape_input_bottom_dim" />
@@ -204,7 +204,7 @@
             android:width="100dp"
             android:height="30dp"
             android:gravity="center"
-            android:text="Volumetric flow [dm^3/s]"
+            android:text="Volumetric flow [mm^3/s]"
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -392,7 +392,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             app:layout_constraintEnd_toStartOf="@+id/dia_dim_btn"
             app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
