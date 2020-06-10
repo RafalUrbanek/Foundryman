@@ -14,12 +14,15 @@ public class Support {
     static int runnerArms = 1;
     static int wells = 1;
     static int sprues = 1;
+    static int partsPerMould = 1;
     static double ingateHeight = 0.0;
+    static String materialName;
     static double ingateDia = 0.0;
     static double sprueWidth = 0.0;
     static double sprueHeight = 0.0;
     static double feederMass;
     static double runnerMass;
+    static double castingMass;
     static double sprueVelocity = 0.0;
     static double initialMassFlowrate = 0.0;
     static final double WELL_HEIGHT = 0.1;
@@ -27,7 +30,7 @@ public class Support {
     static final double DEFAULT_SF = 20;
     static Double[] dataOutput = new Double[8];
     static double safetyFactor = 0.0;
-    static double density = 2500; //     <----- to be replaced once alloy pick is in place
+    static double density = 2400;
     static boolean[] modified = {false, false, false, false, false, false, false};
 
     // recycler view content in Feeder Activity

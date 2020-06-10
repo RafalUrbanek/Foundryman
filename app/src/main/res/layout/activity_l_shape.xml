@@ -102,7 +102,7 @@
 
         <TextView
             android:id="@+id/lShape_text_mass_flow"
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="0dp"
             android:gravity="center"
             android:text="0"
@@ -388,7 +388,7 @@
 
         <EditText
             android:id="@+id/lShape_input_bottom_dim"
-            android:layout_width="120dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:ems="10"

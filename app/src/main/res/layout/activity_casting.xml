@@ -11,6 +11,83 @@
         android:layout_height="match_parent"
         tools:context=".SprueActivity">
 
+        <EditText
+            android:id="@+id/casting_parts_per_mould"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
+            app:layout_constraintTop_toBottomOf="@+id/casting_part_weight" />
+
+        <TextView
+            android:id="@+id/casting_mat_type_text5"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="Part weight [kg]"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/casting_part_weight"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/casting_part_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number|numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
+            app:layout_constraintTop_toBottomOf="@+id/casting_mat_density" />
+
+        <TextView
+            android:id="@+id/casting_mat_type_text4"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="Material name"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/casting_mat_name"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/casting_mat_type_text3"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="Parts per mould"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/casting_parts_per_mould"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/casting_mat_density"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
+            app:layout_constraintTop_toBottomOf="@+id/casting_mat_name" />
+
+        <TextView
+            android:id="@+id/casting_mat_type_text2"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Material density at liquidus [kg/m^3]"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/casting_mat_density"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/summaryTxtLShape"
             android:layout_width="0sp"
@@ -69,6 +146,47 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/summaryTxtLShape" />
+
+        <TextView
+            android:id="@+id/casting_mat_type_text"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="Material type"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/casting_alloy_spinner"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/casting_alloy_spinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
+            app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+        <EditText
+            android:id="@+id/casting_mat_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
+            app:layout_constraintTop_toBottomOf="@+id/casting_alloy_spinner" />
+
+        <Button
+            android:id="@+id/casting_apply_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apply Changes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/casting_parts_per_mould" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
