@@ -22,4 +22,15 @@
         <item>Iron alloy</item>
         <item>Magnesium alloy</item>
     </string-array>
+
+    <string-array name="mod_geometries">
+        <item>cylinder</item>
+        <item>cuboid</item>
+        <item>sphere</item>
+    </string-array>
+
+    <string-array name="area_calc">
+        <item>circle</item>
+        <item>rectangle</item>
+    </string-array>
 </resources>
