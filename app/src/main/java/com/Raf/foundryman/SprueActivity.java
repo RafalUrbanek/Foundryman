@@ -157,10 +157,6 @@ public class SprueActivity extends AppCompatActivity implements
         }
     }
 
-    private void displayToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-    }
-
     private void configureDisplayState() {
         switch(Values.getSprueTypeSelected()){
             case 0:

@@ -86,6 +86,21 @@ public class Support {
         return modulusRounded / 100;
     }
 
+    // rounds double value to n number of places
+    public static double round(double number, int decPlace){
+        String multiplier = "1";
+        if (decPlace >= 0){
+            for (int i=0; i<decPlace; i++){
+                multiplier += "0";
+            }
+        }
+        decPlace = Integer.valueOf(multiplier);
+        number *= decPlace;
+        number = Math.round(number);
+        number /= decPlace;
+        return number;
+    }
+
     // select correct activity based on the spinner selection
     public static void spinnerNavigator(Context context, int position) {
 

@@ -1,11 +1,12 @@
 package com.Raf.foundryman;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,18 +19,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 public class ToolsActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     String[] tools;
     String[] modGeometries;
     Spinner toolSpinner;
-    Boolean flag;
+    Boolean flag, converterFlag;
     TextView topText;
     Spinner modSpinner;
     TextView modText1, modText2, modText3, modText4, modText5;
     TextView volumeResult, modulusResult;
-    EditText modulusEdit1, modulusEdit2, modulusEdit3, cmText, inchText;
+    EditText modulusEdit1, modulusEdit2, modulusEdit3, mmText, inchText;
     ImageView geometryPic;
     Button modCalculateBtn;
 
@@ -38,6 +41,7 @@ public class ToolsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tools);
         flag = false;
+        converterFlag = true;
 
         initialize();
         configureOptionsBtn();
@@ -45,8 +49,83 @@ public class ToolsActivity extends AppCompatActivity implements
         configureSpinner();
         configureModSpinner();
         configureModBtn();
+        configureConverterFields();
 
         topText.setText(tools[6].toUpperCase());
+    }
+
+    private void configureConverterFields() {
+
+        mmText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                double mmVal;
+
+                if (!String.valueOf(mmText.getText()).isEmpty()) {
+                    mmVal = Double.valueOf(String.valueOf(mmText.getText()));
+                } else {
+                    mmVal = 0;
+                }
+                if (converterFlag){
+                    converterFlag = false;
+                    inchText.setText(String.valueOf(mmToInch(mmVal)));
+                } else {
+                    converterFlag = true;
+                }
+            }
+        });
+
+        inchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                double inchVal;
+
+                if (!String.valueOf(inchText.getText()).isEmpty()) {
+                    inchVal = Double.valueOf(String.valueOf(inchText.getText()));
+                } else {
+                    inchVal = 0;
+                }
+
+                if (converterFlag){
+                    converterFlag = false;
+                    mmText.setText(String.valueOf(inchToMm(inchVal)));
+                } else {
+                    converterFlag = true;
+                }
+            }
+        });
+    }
+
+    private double mmToInch(double mm){
+        double inch = mm / 25.4;
+        inch *= 100;
+        inch = Math.round(inch);
+        inch /= 100;
+        return inch;
+    }
+
+    private double inchToMm(double inch){
+        double mm = inch * 25.4;
+        mm *= 100;
+        mm = Math.round(mm);
+        mm /= 100;
+        return mm;
     }
 
     private void displayToast(String text){
@@ -74,8 +153,8 @@ public class ToolsActivity extends AppCompatActivity implements
                             area = ((Math.PI * rad * rad) + (2 * (2 * Math.PI * rad) * height));
                             mod = vol / area;
 
-                            volumeResult.setText(String.valueOf(vol));
-                            modulusResult.setText(String.valueOf(mod));
+                            volumeResult.setText(String.valueOf(Math.round(vol)));
+                            modulusResult.setText(String.valueOf(Support.round(mod, 2)));
                         } else {
                             displayToast("Please enter valid numbers for height and radius");
                         }
@@ -95,8 +174,8 @@ public class ToolsActivity extends AppCompatActivity implements
                             area = 2 * (length * width) + 2 * (length * height) + 2 * (width * height);
                             mod = vol / area;
 
-                            volumeResult.setText(String.valueOf(vol));
-                            modulusResult.setText(String.valueOf(mod));
+                            volumeResult.setText(String.valueOf(Math.round(vol)));
+                            modulusResult.setText(String.valueOf(Support.round(mod, 2)));
                         } else {
                             displayToast("Please enter valid numbers for height and width and length");
                         }
@@ -110,11 +189,11 @@ public class ToolsActivity extends AppCompatActivity implements
                         rad = Double.valueOf(String.valueOf(modulusEdit1.getText()));
                         if (rad > 0){
                             area = 4 * Math.PI * rad * rad;
-                            vol = (4/3) * Math.PI * rad * rad * rad;
+                            vol = (4/3) * Math.PI * (rad * rad * rad);
                             mod = vol / area;
 
-                            volumeResult.setText(String.valueOf(vol));
-                            modulusResult.setText(String.valueOf(mod));
+                            volumeResult.setText(String.valueOf(Math.round(vol)));
+                            modulusResult.setText(String.valueOf(Support.round(mod, 2)));
                         } else {
                             displayToast("Please enter valid radius value");
                         }
@@ -147,7 +226,7 @@ public class ToolsActivity extends AppCompatActivity implements
         modulusEdit1 = findViewById(R.id.tools_editText1);
         modulusEdit2 = findViewById(R.id.tools_editText2);
         modulusEdit3 = findViewById(R.id.tools_editText3);
-        cmText = findViewById(R.id.tools_cm_text);
+        mmText = findViewById(R.id.tools_cm_text);
         inchText = findViewById(R.id.tools_inch_text);
         topText = findViewById(R.id.summaryTxtTools);
         tools = getResources().getStringArray(R.array.tools);

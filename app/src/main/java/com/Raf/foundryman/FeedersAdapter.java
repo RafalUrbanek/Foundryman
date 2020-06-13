@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersViewHolder> {
 
-    Button remove;
     Context context;
     ArrayList<Integer> ammount;
     ArrayList<String> sleeve;
@@ -43,7 +42,7 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FeedersViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull FeedersViewHolder holder,final int position) {
         holder.text1.setText(String.valueOf(ammount.get(position)));
         holder.text2.setText(String.valueOf(sleeve.get(position)));
         holder.text3.setText(String.valueOf(diameter.get(position)));
