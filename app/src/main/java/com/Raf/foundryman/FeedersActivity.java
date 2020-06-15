@@ -160,6 +160,11 @@ public class FeedersActivity extends AppCompatActivity implements
 
                     fAdapter.notifyItemChanged(Support.amount.size()-1);
                     setTotalFeederMass();
+                    if (!Support.feederIndex.isEmpty()){
+                        Support.feederIndex.add(Support.feederIndex.get(Support.feederIndex.size() - 1) + 1);
+                    } else {
+                        Support.feederIndex.add(0);
+                    }
                 }
             }
         });

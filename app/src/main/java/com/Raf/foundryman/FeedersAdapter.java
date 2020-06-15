@@ -1,17 +1,14 @@
 package com.Raf.foundryman;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersViewHolder> {
@@ -43,6 +40,7 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
 
     @Override
     public void onBindViewHolder(@NonNull FeedersViewHolder holder,final int position) {
+
         holder.text1.setText(String.valueOf(ammount.get(position)));
         holder.text2.setText(String.valueOf(sleeve.get(position)));
         holder.text3.setText(String.valueOf(diameter.get(position)));
@@ -53,8 +51,10 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Support.removeFeederLine(position);
-                notifyItemRemoved(position);
+                int index = Support.recLinePosition(position);
+                Log.d("LOG", "position: " + position + "  index: " + index);
+                Support.removeFeederLine(index);
+                notifyItemRemoved(index);
                 FeedersActivity.setTotalFeederMass();
             }
         });

@@ -150,7 +150,7 @@ public class ToolsActivity extends AppCompatActivity implements
                         rad = Double.valueOf(String.valueOf(modulusEdit2.getText()));
                         if (height > 0 && rad > 0) {
                             vol = Math.PI * rad * rad * height;
-                            area = ((Math.PI * rad * rad) + (2 * (2 * Math.PI * rad) * height));
+                            area = ((Math.PI * rad * rad) + (2 * Math.PI * rad * height));
                             mod = vol / area;
 
                             volumeResult.setText(String.valueOf(Math.round(vol)));

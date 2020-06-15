@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="tools">
-    <item>main</item>
-    <item>sprue</item>
-    <item>L shape</item>
-    <item>runner</item>
     <item>casting</item>
+    <item>sprue</item>
+    <item>L-shape</item>
+    <item>runner</item>
     <item>feeders</item>
+    <item>summary</item>
     <item>tools</item>
 </string-array>
 

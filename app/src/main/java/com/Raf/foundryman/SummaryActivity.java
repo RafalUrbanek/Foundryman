@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements
+public class SummaryActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     String[] tools;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_summary);
         flag = false;
         spruesAmmount = findViewById(R.id.mainTxt1);
         spruesAmmount.setText(String.valueOf(Support.sprues));
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, OptionsActivity.class));
+                startActivity(new Intent(SummaryActivity.this, OptionsActivity.class));
             }
         });
     }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements
         if (flag == false) {
             flag = true;
         } else {
-            Support.spinnerNavigator(MainActivity.this, position);
+            Support.spinnerNavigator(SummaryActivity.this, position);
         }
     }
 

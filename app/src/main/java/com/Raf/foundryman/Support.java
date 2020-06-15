@@ -34,6 +34,7 @@ public class Support {
     static boolean[] modified = {false, false, false, false, false, false, false};
 
     // recycler view content in Feeder Activity
+    static ArrayList<Integer> feederIndex = new ArrayList<>();
     static ArrayList<String> feederTypeName = new ArrayList<>();
     static ArrayList<Integer> amount = new ArrayList<>();
     static ArrayList<Double> diameter = new ArrayList<>();
@@ -45,6 +46,7 @@ public class Support {
 
     public static void removeFeederLine (int position){
         Log.d("LOG", "position: " + String.valueOf(position));
+        feederIndex.remove(position);
         amount.remove(position);
         feederTypeName.remove(position);
         diameter.remove(position);
@@ -52,6 +54,11 @@ public class Support {
         mod.remove(position);
         mass.remove(position);
         recalculateFeederMass();
+    }
+
+    public static int recLinePosition(int position){
+        int index = feederIndex.indexOf(position);
+        return index;
     }
 
     public static void recalculateFeederMass() {
@@ -70,6 +77,7 @@ public class Support {
 
     public static double modulus(double height, double diameter, int insulation){
         double multiplier;
+        double radius = diameter / 2;
         if (insulation == 0){
             multiplier = 1.0;
         } else if(insulation == 1){
@@ -80,10 +88,10 @@ public class Support {
             multiplier = 0.0;
         }
 
-        double modulus = multiplier * ((diameter * height) / (2 * (diameter + 2 * height)));
-        modulus *= 100;
-        double modulusRounded = Math.round(modulus);
-        return modulusRounded / 100;
+        double modulus = multiplier * ((Math.PI* radius * radius * height) /
+                (Math.PI * radius * radius + (2 * Math.PI * radius * height)));
+
+        return round(modulus, 2);
     }
 
     // rounds double value to n number of places
@@ -106,7 +114,7 @@ public class Support {
 
         switch (position) {
             case 0:
-                context.startActivity(new Intent(context, MainActivity.class));
+                context.startActivity(new Intent(context, SummaryActivity.class));
                 break;
             case 1:
                 context.startActivity(new Intent(context, SprueActivity.class));
