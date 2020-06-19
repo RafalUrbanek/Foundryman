@@ -16,11 +16,11 @@ public class SummaryActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     String[] tools;
-    String projectName;
     Spinner toolSpinner;
     Boolean flag;
     TextView spruesAmmount;
     TextView wells;
+    EditText projectText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,9 @@ public class SummaryActivity extends AppCompatActivity implements
         wells = findViewById(R.id.mainTxt2);
         wells.setText(String.valueOf(Support.wells));
         tools = getResources().getStringArray(R.array.tools);
-        projectName = Values.getProjectName();
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
         configureOptionsBtn();
-        configureProjectText();
         configureSpinner();
     }
 
@@ -44,19 +44,7 @@ public class SummaryActivity extends AppCompatActivity implements
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tools);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolSpinner.setAdapter(adapter);
-        toolSpinner.setSelection(0);
-    }
-
-    private void configureProjectText() {
-        final EditText projectText = findViewById(R.id.projectNameTxt);
-        projectText.setText(Values.getProjectName());
-        projectText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Values.setProjectName(projectText.getText().toString());
-                return false;
-            }
-        });
+        toolSpinner.setSelection(5);
     }
 
     private void configureOptionsBtn(){
@@ -75,6 +63,7 @@ public class SummaryActivity extends AppCompatActivity implements
         if (flag == false) {
             flag = true;
         } else {
+            Values.setProjectName(String.valueOf(projectText.getText()));
             Support.spinnerNavigator(SummaryActivity.this, position);
         }
     }

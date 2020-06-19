@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +29,7 @@ public class SprueActivity extends AppCompatActivity implements
     Spinner sprueSpinner;
     TextView topText;
     TextView sprueText2, sprueText3, sprueText5, sprueText8;
+    EditText projectText;
     EditText[] sprueDims;
     Button calcBtn;
     Button resetBtn;
@@ -47,7 +48,7 @@ public class SprueActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sprue);
         flag = false;
-        inputData = new Double[8];
+        inputData = Support.sprueValArray;
         inputData[7] = 0.0;
         sprueDims = new EditText[7];
 
@@ -58,6 +59,8 @@ public class SprueActivity extends AppCompatActivity implements
         sprueText3 = findViewById(R.id.sprueText3);
         sprueText5 = findViewById(R.id.sprueText5);
         sprueText8 = findViewById(R.id.sprueText8);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
 
         sprueDims[0] = findViewById(R.id.sprueDim1);
         sprueDims[1] = findViewById(R.id.sprueDim2);
@@ -68,10 +71,9 @@ public class SprueActivity extends AppCompatActivity implements
         sprueDims[6] = findViewById(R.id.sprueDim7);
 
         populateDataFieldListeners();
-        populateDataArray();
+
 
         configureOptionsBtn();
-        configureProjectText();
         configureSpinner();
         configureSprueSpinner();
         configureDisplayState();
@@ -79,6 +81,15 @@ public class SprueActivity extends AppCompatActivity implements
         setResetBtn();
         setHelpButton();
         topText.setText(tools[1].toUpperCase());
+        loadValues();
+    }
+
+    private void loadValues() {
+        for(int i = 0; i<7; i++){
+            if (inputData[i] != null && inputData[i] >0) {
+                sprueDims[i].setText(String.valueOf(Support.round(inputData[i], 2)));
+            }
+        }
     }
 
     void setCalcBtn() {
@@ -114,6 +125,27 @@ public class SprueActivity extends AppCompatActivity implements
         }
     }
 
+    private int fieldPosition(int idNumber){
+        switch (idNumber) {
+            case R.id.sprueDim1:
+                return 0;
+            case R.id.sprueDim2:
+                return 1;
+            case R.id.sprueDim3:
+                return 2;
+            case R.id.sprueDim4:
+                return 3;
+            case R.id.sprueDim5:
+                return 4;
+            case R.id.sprueDim6:
+                return 5;
+            case R.id.sprueDim7:
+                return 6;
+            default:
+                return -1;
+        }
+    }
+
     // adds listeners to value fields
     public void addCalcBtnListener(final EditText dimInput) {
         dimInput.addTextChangedListener(new TextWatcher() {
@@ -125,7 +157,8 @@ public class SprueActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable s) {
-                int position = ((int)dimInput.getId() % 10);
+
+                int position = fieldPosition(dimInput.getId());
                 if (userDataInput) Support.modified[position] = false;
                 if (!String.valueOf(dimInput.getText()).isEmpty() && userDataInput){
                     Support.modified[position] = true;
@@ -204,18 +237,6 @@ public class SprueActivity extends AppCompatActivity implements
         toolSpinner.setSelection(1);
 }
 
-    private void configureProjectText() {
-        final EditText projectText = findViewById(R.id.projectNameTxt);
-        projectText.setText(Values.getProjectName());
-        projectText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Values.setProjectName(projectText.getText().toString());
-                return false;
-            }
-        });
-    }
-
     private void configureOptionsBtn(){
         ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);
         optionsBtn.setOnClickListener(new View.OnClickListener() {
@@ -239,6 +260,8 @@ public class SprueActivity extends AppCompatActivity implements
             if (flag == false) {
                 flag = true;
             } else {
+                Support.sprueValArray = inputData;
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 Support.spinnerNavigator(SprueActivity.this, position);
             }
         }

@@ -16,10 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.w3c.dom.Text;
 
 public class ToolsActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
@@ -32,7 +29,7 @@ public class ToolsActivity extends AppCompatActivity implements
     Spinner modSpinner;
     TextView modText1, modText2, modText3, modText4, modText5;
     TextView volumeResult, modulusResult;
-    EditText modulusEdit1, modulusEdit2, modulusEdit3, mmText, inchText;
+    EditText modulusEdit1, modulusEdit2, modulusEdit3, mmText, inchText, projectText;
     ImageView geometryPic;
     Button modCalculateBtn;
 
@@ -221,6 +218,8 @@ public class ToolsActivity extends AppCompatActivity implements
         modText3 = findViewById(R.id.tools_text3);
         modText4 = findViewById(R.id.tools_text4);
         modText5 = findViewById(R.id.tools_text5);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
         volumeResult = findViewById(R.id.tools_volume_text);
         modulusResult = findViewById(R.id.tools_modulus_text);
         modulusEdit1 = findViewById(R.id.tools_editText1);
@@ -278,6 +277,7 @@ public class ToolsActivity extends AppCompatActivity implements
             if (flag == false) {
                 flag = true;
             } else {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 Support.spinnerNavigator(ToolsActivity.this, position);
             }
         }

@@ -251,7 +251,7 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="120dp"
+            android:layout_width="130dp"
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

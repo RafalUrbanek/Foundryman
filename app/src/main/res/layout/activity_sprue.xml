@@ -31,10 +31,10 @@
     <TextView
         android:id="@+id/sprueText7"
         android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:text="@string/flowRate"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -120,7 +120,7 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="120dp"
+        android:layout_width="130dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -221,27 +221,27 @@
     <ImageButton
         android:id="@+id/sprueHelpBtn"
         android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_help" />
 
     <Button
         android:id="@+id/sprueCalcBtn"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:text="START"
-        android:textSize="14sp"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:text="CALCULATE"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sprueHelpBtn" />
 
     <TextView
         android:id="@+id/sprueText6"
         android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:text="@string/factor"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/sprueText7"
         app:layout_constraintStart_toStartOf="parent" />
 

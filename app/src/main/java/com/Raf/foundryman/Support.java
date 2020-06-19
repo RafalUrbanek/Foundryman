@@ -10,49 +10,73 @@ import java.util.ArrayList;
 public class Support {
 
     // GENERAL VARIABLES
-    static double gravity = 9.8;
-    static int runnerArms = 1;
-    static int wells = 1;
+    // from casting activity
     static int sprues = 1;
     static int partsPerMould = 1;
-    static double ingateHeight = 0.0;
     static String materialName;
-    static double ingateDia = 0.0;
-    static double sprueWidth = 0.0;
-    static double sprueHeight = 0.0;
-    static double feederMass;
-    static double runnerMass;
-    static double castingMass;
-    static double sprueVelocity = 0.0;
+    static double density = 2400;
+
+    // from l-shape activity
+    static boolean diaDim = true;
     static double initialMassFlowrate = 0.0;
+    static double initialVolFlowrate = 0.0;
+    static double sprueVelocity = 0.0;
+    static double sprueHeight = 0.0;
+    static double LshapeRad = 0.0;
+    static double runnerHeight = 0.0;
+    static double sprueWidth = 0.0;
+
+    // from runner bar activity
+    static int runnerArms = 1;
+    static int wells = 1;
+    static int wellType = 0;
+    static boolean wellFilterState = false;
+    static boolean ingateFilterSwitch = false;
+    static double runnerArmLength;
+    static int ingateCount;
+    static double runnerWidth;
+    static double runnerStartHeight;
+    static double runnerEndHeight;
+    static double wellFilter1;
+    static double wellFilter2;
+    static double ingateFilter1;
+    static double ingateFilter2;
+    static double runnerMass;
+
+    // from sprue activity
+    static Double[] sprueValArray = new Double[8];
+    static double ingateHeight = 0.0;
+    static double ingateDia = 0.0;
+    static double totalFeederMass;
+    static double castingMass;
     static final double WELL_HEIGHT = 0.1;
     static final double G = 9.8;
     static final double DEFAULT_SF = 20;
     static Double[] dataOutput = new Double[8];
     static double safetyFactor = 0.0;
-    static double density = 2400;
+
     static boolean[] modified = {false, false, false, false, false, false, false};
 
     // recycler view content in Feeder Activity
     static ArrayList<Integer> feederIndex = new ArrayList<>();
     static ArrayList<String> feederTypeName = new ArrayList<>();
-    static ArrayList<Integer> amount = new ArrayList<>();
-    static ArrayList<Double> diameter = new ArrayList<>();
-    static ArrayList<Double> height = new ArrayList<>();
-    static ArrayList<Double> mod = new ArrayList<>();
-    static ArrayList<Double> mass = new ArrayList<>();
+    static ArrayList<Integer> feederAmount = new ArrayList<>();
+    static ArrayList<Double> feederDiameter = new ArrayList<>();
+    static ArrayList<Double> feederHeight = new ArrayList<>();
+    static ArrayList<Double> feederMod = new ArrayList<>();
+    static ArrayList<Double> feederMass = new ArrayList<>();
     static ArrayList<Button> removeBtn = new ArrayList<>();
     static int feederBtnCounter = 0;
 
     public static void removeFeederLine (int position){
         Log.d("LOG", "position: " + String.valueOf(position));
         feederIndex.remove(position);
-        amount.remove(position);
+        feederAmount.remove(position);
         feederTypeName.remove(position);
-        diameter.remove(position);
-        height.remove(position);
-        mod.remove(position);
-        mass.remove(position);
+        feederDiameter.remove(position);
+        feederHeight.remove(position);
+        feederMod.remove(position);
+        feederMass.remove(position);
         recalculateFeederMass();
     }
 
@@ -62,17 +86,17 @@ public class Support {
     }
 
     public static void recalculateFeederMass() {
-        feederMass = 0;
+        totalFeederMass = 0;
         double massSum = 0;
-        if (!mass.isEmpty()) {
-            for (int i = 0; i < mass.size(); i++) {
-                massSum += mass.get(i);
+        if (!feederMass.isEmpty()) {
+            for (int i = 0; i < feederMass.size(); i++) {
+                massSum += feederMass.get(i);
             }
         }
 
         massSum *=100;
         massSum = Math.round(massSum);
-        feederMass = massSum / 100;
+        totalFeederMass = massSum / 100;
     }
 
     public static double modulus(double height, double diameter, int insulation){
@@ -114,7 +138,7 @@ public class Support {
 
         switch (position) {
             case 0:
-                context.startActivity(new Intent(context, SummaryActivity.class));
+                context.startActivity(new Intent(context, CastingActivity.class));
                 break;
             case 1:
                 context.startActivity(new Intent(context, SprueActivity.class));
@@ -126,10 +150,10 @@ public class Support {
                 context.startActivity(new Intent(context, RunnerActivity.class));
                 break;
             case 4:
-                context.startActivity(new Intent(context, CastingActivity.class));
+                context.startActivity(new Intent(context, FeedersActivity.class));
                 break;
             case 5:
-                context.startActivity(new Intent(context, FeedersActivity.class));
+                context.startActivity(new Intent(context, SummaryActivity.class));
                 break;
             case 6:
                 context.startActivity(new Intent(context, ToolsActivity.class));

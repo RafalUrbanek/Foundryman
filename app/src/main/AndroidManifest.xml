@@ -9,20 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LShapeActivity"></activity>
-        <activity android:name=".SprueActivity" />
-        <activity android:name=".ToolsActivity" />
-        <activity android:name=".FeedersActivity" />
-        <activity android:name=".SummaryActivity" />
-        <activity android:name=".RunnerActivity" />
-        <activity android:name=".OptionsActivity" />
-        <activity android:name=".CastingActivity">
+        <activity android:name=".Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CastingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LShapeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SprueActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ToolsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FeedersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SummaryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RunnerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OptionsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

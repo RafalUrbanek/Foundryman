@@ -2,7 +2,6 @@ package com.Raf.foundryman;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +27,7 @@ public class FeedersActivity extends AppCompatActivity implements
     TextView feederDiaInput;
     TextView feederHeightInput;
     TextView feederAmmountInput;
+    EditText projectText;
     FeedersAdapter fAdapter;
     static TextView totalMass;
 
@@ -44,24 +44,25 @@ public class FeedersActivity extends AppCompatActivity implements
         feederAmmountInput = findViewById(R.id.feederAmmountInput);
         feedersRecyclerView = findViewById(R.id.FeederRecycler);
         totalMass = findViewById(R.id.totalFeederMass);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
 
-        fAdapter = new FeedersAdapter(this, Support.amount, Support.feederTypeName,
-                Support.diameter, Support.height, Support.mod, Support.mass);
+        fAdapter = new FeedersAdapter(this, Support.feederAmount, Support.feederTypeName,
+                Support.feederDiameter, Support.feederHeight, Support.feederMod, Support.feederMass);
         feedersRecyclerView.setAdapter(fAdapter);
         feedersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         configureOptionsBtn();
         configureFeederBtn();
         configureAddBtn();
-        configureProjectText();
         configureSpinner();
 
-        topText.setText(tools[5].toUpperCase());
+        topText.setText(tools[4].toUpperCase());
     }
 
     public static void setTotalFeederMass(){
         Support.recalculateFeederMass();
-        totalMass.setText(Double.toString(Support.feederMass));
+        totalMass.setText(Double.toString(Support.totalFeederMass));
     }
 
     private void configureSpinner() {
@@ -70,19 +71,7 @@ public class FeedersActivity extends AppCompatActivity implements
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tools);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolSpinner.setAdapter(adapter);
-        toolSpinner.setSelection(5);
-    }
-
-    private void configureProjectText() {
-        final EditText projectText = findViewById(R.id.projectNameTxt);
-        projectText.setText(Values.getProjectName());
-        projectText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Values.setProjectName(projectText.getText().toString());
-                return false;
-            }
-        });
+        toolSpinner.setSelection(4);
     }
 
     private void configureFeederBtn(){
@@ -134,7 +123,6 @@ public class FeedersActivity extends AppCompatActivity implements
                 Double btnDia;
                 Double btnHeight;
                 Double btnMass;
-                Double btnMassRounded;
 
                 if (!String.valueOf(feederAmmountInput.getText()).isEmpty() &&
                         !String.valueOf(feederDiaInput.getText()).isEmpty() &&
@@ -144,21 +132,20 @@ public class FeedersActivity extends AppCompatActivity implements
                     btnAmount = Integer.valueOf(String.valueOf(feederAmmountInput.getText()));
                     btnDia = Double.valueOf(String.valueOf(feederDiaInput.getText()));
                     btnHeight = Double.valueOf(String.valueOf(feederHeightInput.getText()));
-                    btnMass = btnAmount * btnHeight / 1000 * Math.PI * (btnDia / 2 / 1000) * (btnDia / 2 / 1000) * Support.density;
-                    btnMass *= 100;
-                    btnMassRounded =(double) Math.round(btnMass) / 100;
+                    btnMass = Support.round(btnAmount * btnHeight / 1000 * Math.PI *
+                            (btnDia / 2 / 1000) * (btnDia / 2 / 1000) * Support.density, 2);
                     feederAmmountInput.setText("");
                     feederDiaInput.setText("");
                     feederHeightInput.setText("");
 
-                    Support.amount.add(btnAmount);
+                    Support.feederAmount.add(btnAmount);
                     Support.feederTypeName.add(getFeederType(Support.feederBtnCounter));
-                    Support.diameter.add(btnDia);
-                    Support.height.add(btnHeight);
-                    Support.mod.add(Support.modulus(btnHeight, btnDia, Support.feederBtnCounter));
-                    Support.mass.add(btnMassRounded);
+                    Support.feederDiameter.add(btnDia);
+                    Support.feederHeight.add(btnHeight);
+                    Support.feederMod.add(Support.modulus(btnHeight, btnDia, Support.feederBtnCounter));
+                    Support.feederMass.add(btnMass);
 
-                    fAdapter.notifyItemChanged(Support.amount.size()-1);
+                    fAdapter.notifyItemChanged(Support.feederAmount.size()-1);
                     setTotalFeederMass();
                     if (!Support.feederIndex.isEmpty()){
                         Support.feederIndex.add(Support.feederIndex.get(Support.feederIndex.size() - 1) + 1);
@@ -186,6 +173,7 @@ public class FeedersActivity extends AppCompatActivity implements
         if (flag == false) {
             flag = true;
         } else {
+            Values.setProjectName(String.valueOf(projectText.getText()));
             Support.spinnerNavigator(FeedersActivity.this, position);
         }
     }

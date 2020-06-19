@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -19,21 +20,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 public class RunnerActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     String[] tools;
     String[] wellTypes = {"L-shape", "Standard", "No well"};
     Spinner toolSpinner;
+    Button calculateBtn;
+    ImageButton helpBtn;
     Switch wellFilterSwitch, ingatesFilterSwitch;
+    EditText projectText;
     Boolean flag;
     TextView topText;
     Spinner wellType;
-    int ingateCount = 1;
+    int ingateCount;
     int filterWidth = 22;
     int armsAmmount;
-    double width, startHeight, endHeight, wellFilter1, wellFilter2, ingateFilter1, ingateFilter2,
-            weight, armLength;
 
     EditText armsCountText, wellCountText, ingateCountText, widthText, startHeightText, endHeightText,
             armLengthText, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
@@ -48,14 +52,31 @@ public class RunnerActivity extends AppCompatActivity implements
         tools = getResources().getStringArray(R.array.tools);
         topText = findViewById(R.id.summaryTxtRatios);
         configureOptionsBtn();
-        configureProjectText();
         configureSpinner();
         configureWellSpinner();
         configureSwitches();
         initializeTexts();
         initializeValues();
+        initializeButtons();
 
         topText.setText(tools[3].toUpperCase());
+    }
+
+    private void initializeButtons() {
+
+        calculateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateMass();
+            }
+        });
+
+        helpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void configureSwitches() {
@@ -99,254 +120,70 @@ public class RunnerActivity extends AppCompatActivity implements
 
     private void initializeValues() {
 
-        armLength = 100;
-        armsAmmount = 1;
-        startHeight = 20;
-        endHeight = 20;
+        wellType.setSelection(Support.wellType);
+        wellFilterSwitch.setChecked(Support.wellFilterState);
+        ingatesFilterSwitch.setChecked(Support.ingateFilterSwitch);
+        if (Support.runnerWidth > 0.0) {
 
-        if (Support.sprueWidth > 0.0) {
-            double tempWidth = Math.round(Support.sprueWidth * 100);
-            width = tempWidth / 100;
-        } else {
-            width = 20.0;
+            widthText.setText(Double.toString(Support.round(Support.runnerWidth, 2)));
+        } else if (Support.sprueWidth > 0) {
+            widthText.setText(Double.toString(Support.round(Support.sprueWidth, 2)));
         }
-        widthText.setText(Double.toString(width));
-        startHeightText.setText(Double.toString(startHeight));
-        endHeightText.setText(Double.toString(endHeight));
 
-        armLengthText.setText(String.valueOf(armLength));
-        armLengthText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        if (Support.wells > 0) {
+            wellCountText.setText(Integer.toString(Support.wells));
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+        if (Support.runnerArms > 0) {
+            armsAmmount = Support.runnerArms;
+            armsCountText.setText(String.valueOf(armsAmmount));
+        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(armLengthText.getText()).isEmpty()) {
-                    armLength = Double.valueOf(String.valueOf(armLengthText.getText()));
-                } else {
-                    armLength = 100;
-                }
-                calculateMass();
-            }
-        });
+        if (Support.runnerArmLength > 0.0) {
+            armLengthText.setText(Double.toString(Support.round(Support.runnerArmLength, 2)));
+        }
 
-        armsCountText.setText(String.valueOf(Support.runnerArms));
-        armsCountText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        if (Support.ingateCount > 0) {
+            ingateCount = Support.ingateCount;
+            ingateCountText.setText(String.valueOf(ingateCount));
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+        if (Support.runnerStartHeight > 0.0) {
+            startHeightText.setText(Double.toString(Support.round(Support.runnerStartHeight, 2)));
+        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(armsCountText.getText()).isEmpty()) {
-                    armsAmmount = Integer.valueOf(String.valueOf(armsCountText.getText()));
-                } else {
-                    armsAmmount = 0;
-                }
-                calculateMass();
-            }
-        });
+        if (Support.runnerEndHeight > 0.0) {
+            endHeightText.setText(Double.toString(Support.round(Support.runnerEndHeight, 2)));
+        }
 
-        wellCountText.setText(String.valueOf(Support.wells));
-        wellCountText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        if (Support.wellFilter1 > 0.0) {
+            wellFilter1Text.setText(Double.toString(Support.round(Support.wellFilter1,2)));
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+        if (Support.wellFilter2 > 0.0) {
+            wellFilter2Text.setText(Double.toString(Support.round(Support.wellFilter2,2)));
+        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(wellCountText.getText()).isEmpty()) {
-                    Support.wells = Integer.valueOf(String.valueOf(wellCountText.getText()));
-                } else {
-                    Support.wells = 0;
-                }
-                calculateMass();
-            }
-        });
+        if (Support.ingateFilter1 > 0.0) {
+            ingateFilter1Text.setText(Double.toString(Support.round(Support.ingateFilter1,2)));
+        }
 
-        ingateCountText.setText(String.valueOf(ingateCount));
-        ingateCountText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        if (Support.ingateFilter2 > 0.0) {
+            ingateFilter2Text.setText(Double.toString(Support.round(Support.ingateFilter2,2)));
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(ingateCountText.getText()).isEmpty()) {
-                    ingateCount = Integer.valueOf(String.valueOf(ingateCountText.getText()));
-                } else {
-                    ingateCount = 0;
-                }
-                calculateMass();
-            }
-        });
-
-        widthText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(widthText.getText()).isEmpty()) {
-                    width = Double.valueOf(String.valueOf(widthText.getText()));
-                    Support.sprueWidth = width;
-                } else if (Support.sprueWidth > 0){
-                    width = Support.sprueWidth;
-                }
-                calculateMass();
-            }
-        });
-
-        startHeightText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(startHeightText.getText()).isEmpty()) {
-                    startHeight = Double.valueOf(String.valueOf(startHeightText.getText()));
-                } else {
-                    startHeight = 0;
-                }
-                calculateMass();
-            }
-        });
-
-        endHeightText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(endHeightText.getText()).isEmpty()) {
-                    endHeight = Double.valueOf(String.valueOf(endHeightText.getText()));
-                } else {
-                    endHeight = 0;
-                }
-                calculateMass();
-            }
-        });
-
-        wellFilter1Text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(wellFilter1Text.getText()).isEmpty()) {
-                    wellFilter1 = Double.valueOf(String.valueOf(wellFilter1Text.getText()));
-                } else {
-                    wellFilter1 = 0;
-                }
-                calculateMass();
-            }
-        });
-
-        wellFilter2Text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(wellFilter2Text.getText()).isEmpty()) {
-                    wellFilter2 = Double.valueOf(String.valueOf(wellFilter2Text.getText()));
-                } else {
-                    wellFilter2 = 0;
-                }
-                calculateMass();
-            }
-        });
-
-        ingateFilter1Text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(ingateFilter1Text.getText()).isEmpty()) {
-                    ingateFilter1 = Double.valueOf(String.valueOf(ingateFilter1Text.getText()));
-                } else {
-                    ingateFilter1 = 0;
-                }
-                calculateMass();
-            }
-        });
-
-        ingateFilter2Text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!String.valueOf(ingateFilter2Text.getText()).isEmpty()) {
-                    ingateFilter2 = Double.valueOf(String.valueOf(ingateFilter2Text.getText()));
-                } else {
-                    ingateFilter2 = 0;
-                }
-                calculateMass();
-            }
-        });
+        if (Support.runnerMass > 0.0) {
+            weightText.setText(Double.toString(Support.round(Support.runnerMass,2)));
+        }
     }
 
     private double ingateFilterVol(){
     double volume = 0;
-    if (ingateFilter1 > 0){
-        if (ingateFilter2 > 0){
-            volume = ingateFilter1 * ingateFilter2 * filterWidth;
+    if (Support.ingateFilter1 > 0){
+        if (Support.ingateFilter2 > 0){
+            volume = Support.ingateFilter1 * Support.ingateFilter2 * filterWidth;
         } else {
-            volume = ingateFilter1 * ingateFilter1 * Math.PI;
+            volume = Support.ingateFilter1 * Support.ingateFilter1 * Math.PI;
         }
     }
     return volume;
@@ -354,72 +191,117 @@ public class RunnerActivity extends AppCompatActivity implements
 
     // method calculates mass based on the input and results from other tabs
     private void calculateMass(){
+
+        if (!String.valueOf(armsCountText.getText()).isEmpty()){
+            Support.runnerArms = Integer.valueOf(String.valueOf(armsCountText.getText()));
+        }
+
+        if (!String.valueOf(wellCountText.getText()).isEmpty()){
+            Support.wells = Integer.valueOf(String.valueOf(wellCountText.getText()));
+        }
+
+        if (!String.valueOf(ingateCountText.getText()).isEmpty()){
+            Support.ingateCount = Integer.valueOf(String.valueOf(ingateCountText.getText()));
+        }
+
+        if (!String.valueOf(widthText.getText()).isEmpty()){
+            Support.runnerWidth = Double.valueOf(String.valueOf(widthText.getText()));
+        }
+
+        if (!String.valueOf(ingateCountText.getText()).isEmpty()){
+            Support.ingateCount = Integer.valueOf(String.valueOf(ingateCountText.getText()));
+        }
+
+        if (!String.valueOf(startHeightText.getText()).isEmpty()){
+            Support.runnerStartHeight = Double.valueOf(String.valueOf(startHeightText.getText()));
+        }
+
+        if (!String.valueOf(endHeightText.getText()).isEmpty()){
+            Support.runnerEndHeight = Double.valueOf(String.valueOf(endHeightText.getText()));
+        }
+
+        if (!String.valueOf(armLengthText.getText()).isEmpty()){
+            Support.runnerArmLength = Double.valueOf(String.valueOf(armLengthText.getText()));
+        }
+
+        if (!String.valueOf(wellFilter1Text.getText()).isEmpty()){
+            Support.wellFilter1 = Double.valueOf(String.valueOf(wellFilter1Text.getText()));
+        }
+
+        if (!String.valueOf(wellFilter2Text.getText()).isEmpty()){
+            Support.wellFilter2 = Double.valueOf(String.valueOf(wellFilter2Text.getText()));
+        }
+
+        if (!String.valueOf(ingateFilter1Text.getText()).isEmpty()){
+            Support.ingateFilter1 = Double.valueOf(String.valueOf(ingateFilter1Text.getText()));
+        }
+
+        if (!String.valueOf(ingateFilter2Text.getText()).isEmpty()){
+            Support.ingateFilter2 = Double.valueOf(String.valueOf(ingateFilter2Text.getText()));
+        }
+
         double ingateMass = 0;
         double armMass = 0;
         double wellMass = 0;
-        double totalMassRounded;
 
         // calculate in-gates mass
         if (ingatesFilterSwitch.isChecked()){
             if (Support.ingateDia > 0 && Support.ingateHeight > 0){
                 ingateMass = (((Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
-                        Support.ingateHeight * ingateCount * Support.density) + (ingateFilterVol() *
-                        ingateCount * Support.density)) / 1000000000;
+                        Support.ingateHeight * Support.ingateCount * Support.density) + (ingateFilterVol() *
+                        Support.ingateCount * Support.density)) / 1000000000;
             } else {
-                ingateMass = ((100 * Math.PI * 80 * ingateCount * Support.density) + (ingateFilterVol() *
-                        ingateCount * Support.density)) / 1000000000;
+                ingateMass = ((100 * Math.PI * 80 * Support.ingateCount * Support.density) + (ingateFilterVol() *
+                        Support.ingateCount * Support.density)) / 1000000000;
             }
         } else {
             if (Support.ingateDia > 0 && Support.ingateHeight > 0){
                 ingateMass = ((Support.ingateDia / 2) * (Support.ingateDia / 2) * Math.PI *
-                        Support.ingateHeight * ingateCount * Support.density) / 1000000000;
+                        Support.ingateHeight * Support.ingateCount * Support.density) / 1000000000;
             } else {
-                ingateMass = 100 * Math.PI * 80 * ingateCount * Support.density / 1000000000;
+                ingateMass = 100 * Math.PI * 80 * Support.ingateCount * Support.density / 1000000000;
             }
         }
 
         // calculate arm(s) mass
-        if (width > 0 && startHeight > 0 && endHeight > 0 && Support.runnerArms > 0 && armLength > 0) {
-            armMass = Support.density * armsAmmount * width * ((startHeight + endHeight) / 2)
-                    * armLength / 1000000000;
+        if (Support.runnerWidth > 0 && Support.runnerStartHeight > 0 && Support.runnerEndHeight > 0 &&
+                Support.runnerArms > 0 && Support.runnerArmLength > 0) {
+            armMass = Support.density * Support.runnerArms * Support.runnerWidth * ((Support.runnerStartHeight
+                    + Support.runnerEndHeight) / 2) * Support.runnerArmLength / 1000000000;
         }
 
         // calculate well mass
         if (wellFilterSwitch.isChecked()) {
             if (wellType.getSelectedItemPosition() == 0) {
-                if (wellFilter1 > 5 && wellFilter2 > 10) {
-                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) *
-                            Support.density * Support.wells / 1000000000) + (startHeight * width * 50);
+                if (Support.wellFilter1 > 5 && Support.wellFilter2 > 10) {
+                    wellMass = ((Support.wellFilter1 - 5) * (Support.wellFilter2 - 10) * (filterWidth + 30) *
+                            Support.density * Support.wells / 1000000000) + (Support.runnerStartHeight
+                            * Support.runnerWidth * 50 * Support.density / 1000000000);
                 }
             } else if (wellType.getSelectedItemPosition() == 1) {
-                if (wellFilter1 > 0 && wellFilter2 > 0) {
-                    wellMass = (wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 125) *
+                if (Support.wellFilter1 > 0 && Support.wellFilter2 > 0) {
+                    wellMass = (Support.wellFilter1 - 5) * (Support.wellFilter2 - 10) * (filterWidth + 125) *
                             Support.density * Support.wells / 1000000000;
                 }
             } else {
-                if (wellFilter1 > 0 && wellFilter2 > 0) {
-                    wellMass = ((wellFilter1 - 5) * (wellFilter2 - 10) * (filterWidth + 30) *
+                if (Support.wellFilter1 > 0 && Support.wellFilter2 > 0) {
+                    wellMass = ((Support.wellFilter1 - 5) * (Support.wellFilter2 - 10) * (filterWidth + 30) *
                             Support.density * Support.wells / 1000000000);
                 }
             }
         } else{
             if (wellType.getSelectedItemPosition() == 0 || wellType.getSelectedItemPosition() == 2 ) {
-                    wellMass = startHeight * width * 50 * Support.density * Support.wells / 1000000000;
+                    wellMass = Support.runnerStartHeight * Support.runnerWidth * 50 * Support.density *
+                            Support.wells / 1000000000;
             } else {
                 // Assumption that well & no filter combination is only used for small parts
                     wellMass = 50 * 50 * 50 * Support.density * Support.wells / 1000000000;
             }
         }
-        Log.d("Ingates", String.valueOf(ingateMass));
-        Log.d("arms", String.valueOf(armMass));
-        Log.d("wells", String.valueOf(wellMass));
-        double totalMass = (ingateMass + armMass + wellMass) * 100;
-        totalMass = Math.round(totalMass);
-        Log.d("LOG", "totalMassRounded: " + totalMass);
-        weight = totalMass / 100;
+
+        double weight = Support.round((ingateMass + armMass + wellMass), 2);
         weightText.setText(Double.toString(weight));
         Support.runnerMass = weight;
-        Log.d("LOG", "mass: " + weight);
     }
 
     private void initializeTexts() {
@@ -439,6 +321,10 @@ public class RunnerActivity extends AppCompatActivity implements
         ingateText1 = findViewById(R.id.runner_text_7);
         ingateText2 = findViewById(R.id.runner_text_10);
         weightText = findViewById(R.id.runner_text_13);
+        calculateBtn = findViewById(R.id.runner_calc_btn);
+        helpBtn = findViewById(R.id.runner_help_btn);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
     }
 
     private void configureWellSpinner(){
@@ -456,18 +342,6 @@ public class RunnerActivity extends AppCompatActivity implements
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolSpinner.setAdapter(adapter);
         toolSpinner.setSelection(3);
-    }
-
-    private void configureProjectText() {
-        final EditText projectText = findViewById(R.id.projectNameTxt);
-        projectText.setText(Values.getProjectName());
-        projectText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Values.setProjectName(projectText.getText().toString());
-                return false;
-            }
-        });
     }
 
     private void configureOptionsBtn(){
@@ -492,6 +366,7 @@ public class RunnerActivity extends AppCompatActivity implements
             if (flag == false) {
                 flag = true;
             } else {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 Support.spinnerNavigator(RunnerActivity.this, position);
             }
         }

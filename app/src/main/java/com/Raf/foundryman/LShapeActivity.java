@@ -24,8 +24,7 @@ public class LShapeActivity extends AppCompatActivity implements
     ImageButton helpBtn;
     Spinner toolSpinner;
     Boolean flag;
-    Boolean diaDimFlag = true;
-    EditText bottomDiaEdit, velocityEdit, sprueHeightEdit;
+    EditText bottomDiaEdit, velocityEdit, sprueHeightEdit, projectText;
     TextView topText, massFlowText1, massFlowText2, volFlowText, radiusText, runnerHeightText, sprueSizeText;
 
     double massFlowrate, velocity, sprueHeight, bottomDim, radius, runnerHeight, volFolwrate;
@@ -38,7 +37,6 @@ public class LShapeActivity extends AppCompatActivity implements
 
         initializeFields();
         configureOptionsBtn();
-        configureProjectText();
         configureSpinner();
         initializeValues();
 
@@ -46,15 +44,22 @@ public class LShapeActivity extends AppCompatActivity implements
     }
 
     private void initializeValues() {
+
         if (Support.sprueHeight > 0){
             sprueHeight = Support.sprueHeight;
-        } else {
-            sprueHeight = 0;
-        }
+        } else sprueHeight = 0;
+
 
         if (Support.sprueWidth > 0){
-            bottomDim = Support.sprueWidth;
+            bottomDim = Support.round(Support.sprueWidth, 2);
             bottomDiaEdit.setText(String.valueOf(bottomDim));
+            sprueSizeText.setText(String.valueOf(bottomDim));
+
+        }
+
+        if (Support.LshapeRad > 0){
+            radius = Support.LshapeRad;
+            radiusText.setText(String.valueOf(Support.LshapeRad));
         }
 
         if (Support.sprueVelocity > 0){
@@ -62,13 +67,28 @@ public class LShapeActivity extends AppCompatActivity implements
             velocityEdit.setText(String.valueOf(velocity));
         } else velocity = 0;
 
+        if (Support.runnerHeight > 0){
+            runnerHeight = Support.runnerHeight;
+            runnerHeightText.setText(String.valueOf(Support.runnerHeight));
+        }
+
         if (Support.initialMassFlowrate > 0){
             massFlowrate = Support.initialMassFlowrate;
             massFlowText1.setText(String.valueOf(massFlowrate));
             massFlowText2.setText(String.valueOf(massFlowrate));
+        } else massFlowrate = 0;
+
+        if (Support.initialVolFlowrate > 0){
+            volFolwrate = Support.initialVolFlowrate;
+            volFlowText.setText(String.valueOf(volFolwrate));
+        } else if (Support.initialMassFlowrate > 0){
             volFolwrate = massFlowrate * Support.density / 1000;
             volFlowText.setText(String.valueOf(volFolwrate));
-        } else massFlowrate = 0;
+        }
+
+        if (Support.diaDim){
+            diaDimBtn.setText("DIA");
+        } else diaDimBtn.setText("DIM");
     }
 
     private void initializeFields() {
@@ -86,16 +106,18 @@ public class LShapeActivity extends AppCompatActivity implements
         calculateBtn = findViewById(R.id.lShape_calc_btn);
         diaDimBtn = findViewById(R.id.dia_dim_btn);
         helpBtn = findViewById(R.id.lShape_help_btn);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
 
         diaDimBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (diaDimFlag) {
+                if (Support.diaDim) {
                     diaDimBtn.setText("DIM");
-                    diaDimFlag = false;
+                    Support.diaDim = false;
                 } else {
                     diaDimBtn.setText("DIA");
-                    diaDimFlag = true;
+                    Support.diaDim = true;
                 }
             }
         });
@@ -155,27 +177,31 @@ public class LShapeActivity extends AppCompatActivity implements
     private void calculate() {
         if (!String.valueOf(bottomDiaEdit.getText()).isEmpty()){
             bottomDim = Double.valueOf(String.valueOf(bottomDiaEdit.getText()));
+            Support.sprueWidth = bottomDim;
         } else {
             bottomDim = 0;
         }
 
-        if (!String.valueOf(velocityEdit.getText()).isEmpty()){
-            velocity = Double.valueOf(String.valueOf(velocityEdit.getText()));
-        } else {
-            velocity = 0;
-        }
-
         if (!String.valueOf(sprueHeightEdit.getText()).isEmpty()){
             sprueHeight = Double.valueOf(String.valueOf(sprueHeightEdit.getText()));
+            Support.sprueHeight = Support.round(sprueHeight, 2);
         } else {
             sprueHeight = 0;
+        }
+
+        if (!String.valueOf(velocityEdit.getText()).isEmpty()){
+            velocity = Double.valueOf(String.valueOf(velocityEdit.getText()));
+            Support.sprueVelocity = Support.round(velocity, 2);
+        } else {
+            velocity = 0;
         }
 
         if (bottomDim > 0){
             if ( velocity <= 0) {
                 if (sprueHeight > 0) {
-                    velocity = Support.gravity * Math.sqrt(sprueHeight/ 1000 / (0.5 * Support.gravity));
-                    Log.d("LOG", "Velocity: " + String.valueOf(velocity));
+                    velocity = Support.round(Support.G * Math.sqrt(sprueHeight/ 1000 / (0.5 * Support.G)), 2);
+                    Support.sprueVelocity = velocity;
+                    velocityEdit.setText(String.valueOf(velocity));
                 } else {
                     Toast.makeText(this, "Please enter valid metal velocity at sprue " +
                             "bottom or sprue height including pouring cup", Toast.LENGTH_LONG).show();
@@ -184,7 +210,7 @@ public class LShapeActivity extends AppCompatActivity implements
 
             if (velocity > 0) {
                 double bottomArea;
-                if (diaDimFlag){
+                if (Support.diaDim){
                     bottomArea = Math.PI * ((bottomDim/2) * (bottomDim/2));
                 } else {
                     bottomArea = bottomDim * bottomDim;
@@ -192,10 +218,13 @@ public class LShapeActivity extends AppCompatActivity implements
 
                 volFolwrate = Math.round(bottomArea * velocity * 1000);
                 volFlowText.setText(String.valueOf(volFolwrate));
+                Support.initialVolFlowrate = volFolwrate;
 
                 double massFlowrateRounded = volFolwrate * Support.density / 1000000000 * 100;
                 massFlowrateRounded = Math.round(massFlowrateRounded);
                 massFlowrate =  massFlowrateRounded / 100;
+                Support.initialMassFlowrate = massFlowrate;
+
                 massFlowText1.setText(String.valueOf(massFlowrate));
                 massFlowText2.setText(String.valueOf(massFlowrate));
 
@@ -203,9 +232,10 @@ public class LShapeActivity extends AppCompatActivity implements
                 double radiusRounded = Math.round(bottomDim * radiusMultiplier(velocity) * 10);
                 radius = radiusRounded / 10;
                 radiusText.setText(String.valueOf(radius));
+                Support.LshapeRad = radius;
 
                 double runnerHeightRounded;
-                if (diaDimFlag){
+                if (Support.diaDim){
                     runnerHeightRounded = Math.round(bottomDim * exitHeightMultiplier(velocity) *
                             (Math.PI / 4) * 10);
                     runnerHeight = runnerHeightRounded / 10;
@@ -215,6 +245,7 @@ public class LShapeActivity extends AppCompatActivity implements
                 }
 
                 runnerHeightText.setText(String.valueOf(runnerHeight));
+                Support.runnerHeight = runnerHeight;
 
             } else {
                 sprueSizeText.setText("");
@@ -244,17 +275,6 @@ public class LShapeActivity extends AppCompatActivity implements
         toolSpinner.setSelection(2);
     }
 
-    private void configureProjectText() {
-        final EditText projectText = findViewById(R.id.projectNameTxt);
-        projectText.setText(Values.getProjectName());
-        projectText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Values.setProjectName(projectText.getText().toString());
-                return false;
-            }
-        });
-    }
 
     private void configureOptionsBtn(){
         ImageButton optionsBtn = findViewById(R.id.MainOptionsBtn);
@@ -272,6 +292,7 @@ public class LShapeActivity extends AppCompatActivity implements
         if (flag == false) {
             flag = true;
         } else {
+            Values.setProjectName(String.valueOf(projectText.getText()));
             Support.spinnerNavigator(LShapeActivity.this, position);
         }
     }

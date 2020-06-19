@@ -23,7 +23,7 @@ public class CastingActivity extends AppCompatActivity implements
     Spinner toolSpinner;
     Boolean flag;
     TextView topText;
-    EditText matNameText, matDensityText, partWeightText, PartsPerMouldText;
+    EditText matNameText, matDensityText, partWeightText, partsPerMouldText, projectText;
     Button applyBtn;
     Spinner alloySpinner;
 
@@ -34,14 +34,26 @@ public class CastingActivity extends AppCompatActivity implements
         flag = false;
 
         initialize();
+        loadValues();
         configureOptionsBtn();
-        configureProjectText();
         configureSpinner();
         configureAlloySpinner();
         configureApplyBtn();
+    }
 
-
-        topText.setText(tools[4].toUpperCase());
+    private void loadValues() {
+        if (Support.density > 0){
+            matDensityText.setText(String.valueOf(Support.density));
+        }
+        if (Support.partsPerMould > 0){
+            partsPerMouldText.setText(String.valueOf(Support.partsPerMould));
+        }
+        if (Support.castingMass > 0){
+            partWeightText.setText(String.valueOf(Support.castingMass));
+        }
+        if (Support.materialName != null){
+            matNameText.setText(Support.materialName);
+        }
     }
 
     private void configureApplyBtn() {
@@ -49,7 +61,7 @@ public class CastingActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 if (!String.valueOf(matNameText.getText()).isEmpty()){
-                    Support.materialName = String.valueOf(matNameText);
+                    Support.materialName = String.valueOf(matNameText.getText());
                 }
 
                 if (!String.valueOf(matDensityText.getText()).isEmpty() &&
@@ -62,9 +74,9 @@ public class CastingActivity extends AppCompatActivity implements
                     Support.castingMass = Double.valueOf(String.valueOf(partWeightText.getText()));
                 }
 
-                if (!String.valueOf(PartsPerMouldText.getText()).isEmpty() &&
-                        Double.valueOf(String.valueOf(PartsPerMouldText.getText())) > 0){
-                    Support.partsPerMould = Integer.valueOf(String.valueOf(PartsPerMouldText.getText()));
+                if (!String.valueOf(partsPerMouldText.getText()).isEmpty() &&
+                        Double.valueOf(String.valueOf(partsPerMouldText.getText())) > 0){
+                    Support.partsPerMould = Integer.valueOf(String.valueOf(partsPerMouldText.getText()));
                 }
 
                 displayToast("Changes applied");
@@ -88,12 +100,15 @@ public class CastingActivity extends AppCompatActivity implements
         tools = getResources().getStringArray(R.array.tools);
         alloys = getResources().getStringArray(R.array.alloys);
         topText = findViewById(R.id.summaryTxtLShape);
+        topText.setText(tools[0].toUpperCase());
         matNameText = findViewById(R.id.casting_mat_name);
         matDensityText = findViewById(R.id.casting_mat_density);
         partWeightText = findViewById(R.id.casting_part_weight);
-        PartsPerMouldText = findViewById(R.id.casting_parts_per_mould);
+        partsPerMouldText = findViewById(R.id.casting_parts_per_mould);
         applyBtn = findViewById(R.id.casting_apply_btn);
         alloySpinner = findViewById(R.id.casting_alloy_spinner);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
     }
 
     private void configureSpinner() {
@@ -102,19 +117,7 @@ public class CastingActivity extends AppCompatActivity implements
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tools);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolSpinner.setAdapter(adapter);
-        toolSpinner.setSelection(4);
-    }
-
-    private void configureProjectText() {
-        final EditText projectText = findViewById(R.id.projectNameTxt);
-        projectText.setText(Values.getProjectName());
-        projectText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Values.setProjectName(projectText.getText().toString());
-                return false;
-            }
-        });
+        toolSpinner.setSelection(0);
     }
 
     private void configureOptionsBtn(){
@@ -160,6 +163,7 @@ public class CastingActivity extends AppCompatActivity implements
             if (flag == false) {
                 flag = true;
             } else {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 Support.spinnerNavigator(CastingActivity.this, position);
             }
         }
