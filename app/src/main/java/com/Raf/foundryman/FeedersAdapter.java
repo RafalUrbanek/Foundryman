@@ -1,7 +1,6 @@
 package com.Raf.foundryman;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,6 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
             @Override
             public void onClick(View v) {
                 int index = Support.recLinePosition(position);
-                Log.d("LOG", "position: " + position + "  index: " + index);
                 Support.removeFeederLine(index);
                 notifyItemRemoved(index);
                 FeedersActivity.setTotalFeederMass();
@@ -71,12 +69,12 @@ public class FeedersAdapter extends RecyclerView.Adapter<FeedersAdapter.FeedersV
         public FeedersViewHolder(@NonNull View itemView) {
             super(itemView);
             text1 = itemView.findViewById(R.id.lineAmmount);
-            text2 = itemView.findViewById(R.id.lineSleeve);
-            text3 = itemView.findViewById(R.id.lineDia);
+            text2 = itemView.findViewById(R.id.save_name_text);
+            text3 = itemView.findViewById(R.id.save_mat_type_text);
             text4 = itemView.findViewById(R.id.lineHeight);
-            text5 = itemView.findViewById(R.id.lineMod);
-            text6 = itemView.findViewById(R.id.lineMass);
-            remove = itemView.findViewById(R.id.lineRemoveBtn);
+            text5 = itemView.findViewById(R.id.save_mat_name_text);
+            text6 = itemView.findViewById(R.id.save_weight_text);
+            remove = itemView.findViewById(R.id.save_remove_btn);
         }
     }
 }

@@ -30,7 +30,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".RunnerActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".OptionsActivity"
+        <activity android:name=".SavesActivity"
             android:screenOrientation="portrait"/>
     </application>
 

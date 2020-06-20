@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -242,7 +240,7 @@ public class SprueActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SprueActivity.this, OptionsActivity.class));
+                startActivity(new Intent(SprueActivity.this, SavesActivity.class));
             }
         });
     }

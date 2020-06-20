@@ -2,7 +2,6 @@ package com.Raf.foundryman;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,7 +51,7 @@ public class SummaryActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SummaryActivity.this, OptionsActivity.class));
+                startActivity(new Intent(SummaryActivity.this, SavesActivity.class));
             }
         });
     }

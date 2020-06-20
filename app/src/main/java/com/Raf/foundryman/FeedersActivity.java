@@ -21,15 +21,16 @@ public class FeedersActivity extends AppCompatActivity implements
     Spinner toolSpinner;
     Boolean flag;
     TextView topText;
-    RecyclerView feedersRecyclerView;
     ImageButton addBtn;
     Button sleeveBtn;
     TextView feederDiaInput;
     TextView feederHeightInput;
     TextView feederAmmountInput;
     EditText projectText;
-    FeedersAdapter fAdapter;
     static TextView totalMass;
+
+    RecyclerView feedersRecyclerView;
+    FeedersAdapter fAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +128,7 @@ public class FeedersActivity extends AppCompatActivity implements
                 if (!String.valueOf(feederAmmountInput.getText()).isEmpty() &&
                         !String.valueOf(feederDiaInput.getText()).isEmpty() &&
                         !String.valueOf(feederHeightInput.getText()).isEmpty()) {
-                    Button btn = findViewById(R.id.lineRemoveBtn);
+                    Button btn = findViewById(R.id.save_remove_btn);
                     Support.removeBtn.add(btn);
                     btnAmount = Integer.valueOf(String.valueOf(feederAmmountInput.getText()));
                     btnDia = Double.valueOf(String.valueOf(feederDiaInput.getText()));
@@ -162,7 +163,7 @@ public class FeedersActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FeedersActivity.this, OptionsActivity.class));
+                startActivity(new Intent(FeedersActivity.this, SavesActivity.class));
             }
         });
     }

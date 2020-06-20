@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -260,7 +259,7 @@ public class ToolsActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ToolsActivity.this, OptionsActivity.class));
+                startActivity(new Intent(ToolsActivity.this, SavesActivity.class));
             }
         });
     }

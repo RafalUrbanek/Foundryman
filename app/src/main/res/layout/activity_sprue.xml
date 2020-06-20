@@ -132,7 +132,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
     <View
         android:id="@+id/divider2"

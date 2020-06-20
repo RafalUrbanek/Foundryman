@@ -68,8 +68,13 @@ public class Support {
     static ArrayList<Button> removeBtn = new ArrayList<>();
     static int feederBtnCounter = 0;
 
+    // recycler view content in Save Activity
+    static ArrayList<String> saveName = new ArrayList<>();
+    static ArrayList<String> saveMatType = new ArrayList<>();
+    static ArrayList<String> saveMatName = new ArrayList<>();
+    static ArrayList<Double> saveWeight = new ArrayList<>();
+
     public static void removeFeederLine (int position){
-        Log.d("LOG", "position: " + String.valueOf(position));
         feederIndex.remove(position);
         feederAmount.remove(position);
         feederTypeName.remove(position);
