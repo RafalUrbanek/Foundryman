@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class Support {
@@ -69,6 +71,7 @@ public class Support {
     static int feederBtnCounter = 0;
 
     // recycler view content in Save Activity
+    static ArrayList<Integer> saveFileIndex = new ArrayList<>();
     static ArrayList<String> saveName = new ArrayList<>();
     static ArrayList<String> saveMatType = new ArrayList<>();
     static ArrayList<String> saveMatName = new ArrayList<>();
@@ -85,8 +88,21 @@ public class Support {
         recalculateFeederMass();
     }
 
+    public static void removeSaveLine(int position) {
+        saveFileIndex.remove(position);
+        saveName.remove(position);
+        saveMatType.remove(position);
+        saveMatName.remove(position);
+        saveWeight.remove(position);
+    }
+
     public static int recLinePosition(int position){
         int index = feederIndex.indexOf(position);
+        return index;
+    }
+
+    public static int saveLinePosition(int position){
+        int index = saveFileIndex.indexOf(position);
         return index;
     }
 
@@ -352,4 +368,3 @@ public class Support {
         return velocity;
     }
 }
-

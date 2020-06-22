@@ -1,10 +1,12 @@
 package com.Raf.foundryman;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,10 +50,9 @@ public class SavesAdapter extends RecyclerView.Adapter<SavesAdapter.SavesViewHol
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                int index = Support.recLinePosition(position);
-//                Support.removeFeederLine(index);
-//                notifyItemRemoved(index);
-//                FeedersActivity.setTotalFeederMass();
+                int index = Support.saveLinePosition(position);
+                Support.removeSaveLine(index);
+                notifyItemRemoved(index);
             }
         });
     }
@@ -63,7 +64,7 @@ public class SavesAdapter extends RecyclerView.Adapter<SavesAdapter.SavesViewHol
 
     public class SavesViewHolder extends RecyclerView.ViewHolder{
         TextView text1, text2, text3, text4;
-        Button remove;
+        ImageButton remove;
         public SavesViewHolder(@NonNull View itemView) {
             super(itemView);
             text1 = itemView.findViewById(R.id.save_name_text);
