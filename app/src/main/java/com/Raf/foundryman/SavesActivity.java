@@ -10,29 +10,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 public class SavesActivity extends AppCompatActivity {
 
     RecyclerView savesRecyclerView;
     SavesAdapter savesAdapter;
+    static EditText projectText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_saves);
+        projectText = findViewById(R.id.projectNameTxt);
+        projectText.setText(Values.getProjectName());
         savesRecyclerView = findViewById(R.id.save_recycler);
-        savesAdapter = new SavesAdapter(this, Support.saveName, Support.saveMatType, Support.saveMatName, Support.saveWeight);
+        savesAdapter = new SavesAdapter(this, Support.saveName, Support.saveMatType, Support.saveMatName);
 
         savesRecyclerView.setAdapter(savesAdapter);
         savesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -41,6 +38,11 @@ public class SavesActivity extends AppCompatActivity {
         configureSaveBtn();
         configureLoadBtn();
         constructSavedList();
+    }
+
+    public void loadFromList(String name){
+        //MemAccess.importProject(SavesActivity.this, name);
+
     }
 
     private void constructSavedList() {
@@ -54,6 +56,7 @@ public class SavesActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 startActivity(new Intent(SavesActivity.this, SummaryActivity.class));
             }
         });
@@ -64,16 +67,22 @@ public class SavesActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveState.fms.add("test string");
-                SaveState.fms.add("test string 2");
-                SaveState.saveData(SaveState.getInstance());
-//                int index = Support.saveFileIndex.size();
-//                Support.saveFileIndex.add(index);
-//                Support.saveName.add("TEST1");
-//                Support.saveMatName.add("TEST1");
-//                Support.saveMatType.add("TEST1");
-//                Support.saveWeight.add(66.6);
-//                savesAdapter.notifyItemChanged(index);
+
+                String projectList = MemAccess.load(SavesActivity.this, Support.projectListAddress);
+
+                if (!projectList.contains(Values.getProjectName())){
+
+                    int index = Support.saveName.size();
+                    Support.saveName.add(Values.getProjectName());
+                    Support.saveMatName.add(Support.materialName);
+                    Support.saveMatType.add(Support.materialType);
+                    MemAccess.exportProject(SavesActivity.super.getApplicationContext());
+                    savesAdapter.notifyItemChanged(index);
+                } else {
+                    // make toast that file exists
+                }
+
+
             }
         });
     }
@@ -83,8 +92,9 @@ public class SavesActivity extends AppCompatActivity {
         loadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveState sv = SaveState.loadData();
-                Log.d("LOG", sv.toString());
+                //MemAccess.importProject(SavesActivity.super.getApplicationContext(), "test");
+                MemAccess.delete(SavesActivity.this, Support.projectListAddress);
+                //Log.d("LOG", Support.saveName.toString());
             }
         });
     }

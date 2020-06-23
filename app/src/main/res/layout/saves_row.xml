@@ -20,19 +20,6 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:id="@+id/save_weight_text"
-                android:layout_width="50dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/save_mat_name_text"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
                 android:id="@+id/save_mat_name_text"
                 android:layout_width="70dp"
                 android:layout_height="0dp"
@@ -41,45 +28,84 @@
                 android:textAlignment="center"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/save_mat_type_text"
+                app:layout_constraintStart_toEndOf="@+id/divider40"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/save_mat_type_text"
-                android:layout_width="50dp"
+                android:layout_width="70dp"
                 android:layout_height="0dp"
                 android:gravity="center"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/save_name_text"
+                app:layout_constraintStart_toEndOf="@+id/divider38"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/save_name_text"
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
                 android:text="TextView"
                 android:textAlignment="center"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/divider38"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                android:textSize="12sp" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
                 android:id="@+id/save_remove_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/save_weight_text"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/save_weight_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_delete" />
+
+            <View
+                android:id="@+id/divider38"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="120dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <View
+                android:id="@+id/divider40"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/save_mat_type_text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/save_load_btn"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/save_remove_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/stat_sys_upload_done" />
+
+            <View
+                android:id="@+id/divider43"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/save_mat_name_text"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

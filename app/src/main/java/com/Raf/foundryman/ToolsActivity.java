@@ -259,6 +259,7 @@ public class ToolsActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 startActivity(new Intent(ToolsActivity.this, SavesActivity.class));
             }
         });

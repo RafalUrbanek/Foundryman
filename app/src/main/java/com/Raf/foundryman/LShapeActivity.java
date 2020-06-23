@@ -279,6 +279,7 @@ public class LShapeActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 startActivity(new Intent(LShapeActivity.this, SavesActivity.class));
             }
         });

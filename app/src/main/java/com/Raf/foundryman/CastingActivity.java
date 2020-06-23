@@ -124,6 +124,7 @@ public class CastingActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 startActivity(new Intent(CastingActivity.this, SavesActivity.class));
             }
         });
@@ -140,21 +141,25 @@ public class CastingActivity extends AppCompatActivity implements
                     case 0:
                         // Aluminium
                         matDensityText.setText("2400");
+                        Support.materialType = "Aluminium";
                         break;
 
                     case 1:
                         // Copper
                         matDensityText.setText("8000");
+                        Support.materialType = "Copper";
                         break;
 
                     case 2:
                         // Iron
                         matDensityText.setText("7000");
+                        Support.materialType = "Iron";
                         break;
 
                     case 3:
                         // Magnesium
                         matDensityText.setText("1600");
+                        Support.materialType = "Magnesium";
                         break;
                 }
             }
@@ -167,7 +172,6 @@ public class CastingActivity extends AppCompatActivity implements
             }
         }
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
     }

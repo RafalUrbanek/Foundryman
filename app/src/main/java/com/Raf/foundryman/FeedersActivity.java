@@ -163,6 +163,7 @@ public class FeedersActivity extends AppCompatActivity implements
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 startActivity(new Intent(FeedersActivity.this, SavesActivity.class));
             }
         });

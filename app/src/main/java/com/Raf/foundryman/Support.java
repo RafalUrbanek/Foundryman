@@ -4,18 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class Support {
 
+    // INTERNAL VARIABLES
+    static final String projectListAddress = "projectList.data";
+
     // GENERAL VARIABLES
+    static double totalWeight = 0.0;
+
     // from casting activity
     static int sprues = 1;
     static int partsPerMould = 1;
-    static String materialName;
+    static String materialName = "";
+    static String materialType = "Aluminium";
     static double density = 2400;
 
     // from l-shape activity
@@ -71,11 +74,11 @@ public class Support {
     static int feederBtnCounter = 0;
 
     // recycler view content in Save Activity
-    static ArrayList<Integer> saveFileIndex = new ArrayList<>();
     static ArrayList<String> saveName = new ArrayList<>();
     static ArrayList<String> saveMatType = new ArrayList<>();
     static ArrayList<String> saveMatName = new ArrayList<>();
-    static ArrayList<Double> saveWeight = new ArrayList<>();
+
+    static ArrayList<Integer> projectIndex = new ArrayList<>();
 
     public static void removeFeederLine (int position){
         feederIndex.remove(position);
@@ -89,20 +92,19 @@ public class Support {
     }
 
     public static void removeSaveLine(int position) {
-        saveFileIndex.remove(position);
+        projectIndex.remove(position);
         saveName.remove(position);
         saveMatType.remove(position);
         saveMatName.remove(position);
-        saveWeight.remove(position);
+    }
+
+    public static int saveLinePosition(int position){
+        int index = projectIndex.indexOf(position);
+        return index;
     }
 
     public static int recLinePosition(int position){
         int index = feederIndex.indexOf(position);
-        return index;
-    }
-
-    public static int saveLinePosition(int position){
-        int index = saveFileIndex.indexOf(position);
         return index;
     }
 

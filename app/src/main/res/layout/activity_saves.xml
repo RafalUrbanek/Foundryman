@@ -6,6 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".SavesActivity">
 
+    <View
+        android:id="@+id/divider44"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/save_recycler"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="70dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:text="alloy name"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_recycler"
+        app:layout_constraintStart_toEndOf="@+id/divider42"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <View
+        android:id="@+id/divider42"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/save_recycler"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="70dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:text="alloy type"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_recycler"
+        app:layout_constraintStart_toEndOf="@+id/divider41"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
     <Button
         android:id="@+id/load_btn"
         android:layout_width="150dp"
@@ -55,12 +97,32 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save_btn" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Project name"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_recycler"
+        app:layout_constraintStart_toStartOf="@+id/save_recycler" />
+
+    <View
+        android:id="@+id/divider41"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/save_recycler"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
