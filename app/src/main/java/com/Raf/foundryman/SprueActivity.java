@@ -260,6 +260,13 @@ public class SprueActivity extends AppCompatActivity implements
                 flag = true;
             } else {
                 Support.sprueValArray = inputData;
+
+                if (inputData[6] != null){
+                        Support.initialMassFlowrate = inputData[6];
+                } else {
+                    Support.initialMassFlowrate = 0;
+                }
+
                 Values.setProjectName(String.valueOf(projectText.getText()));
                 Support.spinnerNavigator(SprueActivity.this, position);
             }

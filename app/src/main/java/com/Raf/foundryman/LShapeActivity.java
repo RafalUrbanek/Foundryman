@@ -214,14 +214,12 @@ public class LShapeActivity extends AppCompatActivity implements
                     bottomArea = bottomDim * bottomDim;
                 }
 
+                massFlowrate = velocity * Support.density * bottomArea / 1000000;
+                Support.initialMassFlowrate = massFlowrate;
+
                 volFolwrate = Math.round(bottomArea * velocity * 1000);
                 volFlowText.setText(String.valueOf(volFolwrate));
                 Support.initialVolFlowrate = volFolwrate;
-
-                double massFlowrateRounded = volFolwrate * Support.density / 1000000000 * 100;
-                massFlowrateRounded = Math.round(massFlowrateRounded);
-                massFlowrate =  massFlowrateRounded / 100;
-                Support.initialMassFlowrate = massFlowrate;
 
                 massFlowText1.setText(String.valueOf(massFlowrate));
                 massFlowText2.setText(String.valueOf(massFlowrate));
