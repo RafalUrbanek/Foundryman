@@ -343,7 +343,7 @@ public class Support {
     private static Double getBottomVelocity (){
         Double velocity = 0.0;
         if (modified[2]) {
-            velocity = (Math.sqrt(2 * G * 0.1) + Math.sqrt(2 * G * (dataOutput[2] / 1000))) *
+            velocity = Math.sqrt(2 * G * (0.1 +(dataOutput[2] / 1000))) *
                     (1 + safetyFactor / 100);
         }
         return velocity;
