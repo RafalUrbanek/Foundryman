@@ -300,6 +300,7 @@ public class SprueActivity extends AppCompatActivity implements
                 }
                 Support.sprueWidth = Double.valueOf(String.valueOf(values[3]));
                 userDataInput = true;
+                exportValues();
                 break;
 
             case R.id.sprueResetBtn:
@@ -312,6 +313,7 @@ public class SprueActivity extends AppCompatActivity implements
                     inputData[i] = null;
                     sprueDims[i].setText("");
                 }
+                deleteValues();
                 break;
 
             case R.id.sprueHelpBtn:
@@ -328,6 +330,27 @@ public class SprueActivity extends AppCompatActivity implements
                 helpAlert.create().show();
                 break;
         }
+    }
+
+    private void deleteValues() {
+        if (values[0] != null){Support.sprueVal0 = 0;}
+        if (values[1] != null){Support.sprueVal0 = 0;}
+        if (values[2] != null){Support.sprueVal0 = 0;}
+        if (values[3] != null){Support.sprueVal0 = 0;}
+        if (values[4] != null){Support.sprueVal0 = 0;}
+        if (values[5] != null){Support.sprueVal0 = 0;}
+        if (values[6] != null){Support.sprueVal0 = 0;}
+        if (values[7] != null){Support.sprueVal0 = 0;}
+    }
+    private void exportValues() {
+        if (values[0] != null){Support.sprueVal0 = values[0];}
+        if (values[1] != null){Support.sprueVal0 = values[1];}
+        if (values[2] != null){Support.sprueVal0 = values[2];}
+        if (values[3] != null){Support.sprueVal0 = values[3];}
+        if (values[4] != null){Support.sprueVal0 = values[4];}
+        if (values[5] != null){Support.sprueVal0 = values[5];}
+        if (values[6] != null){Support.sprueVal0 = values[6];}
+        if (values[7] != null){Support.sprueVal0 = values[7];}
     }
 }
 

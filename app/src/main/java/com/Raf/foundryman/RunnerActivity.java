@@ -32,7 +32,7 @@ public class RunnerActivity extends AppCompatActivity implements
     int armsAmmount;
 
     EditText armsCountText, wellCountText, ingateCountText, widthText, startHeightText, endHeightText,
-            armLengthText, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text;
+            armLengthText, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text, ingateDia;
 
     TextView wellText1, wellText2, ingateText1, ingateText2, weightText;
 
@@ -115,8 +115,12 @@ public class RunnerActivity extends AppCompatActivity implements
         wellType.setSelection(Support.wellType);
         wellFilterSwitch.setChecked(Support.wellFilterState);
         ingatesFilterSwitch.setChecked(Support.ingateFilterSwitch);
-        if (Support.runnerWidth > 0.0) {
 
+        if (Support.ingateDia > 0){
+            ingateDia.setText(String.valueOf(Support.round(Support.ingateDia, 2)));
+        }
+
+        if (Support.runnerWidth > 0.0) {
             widthText.setText(Double.toString(Support.round(Support.runnerWidth, 2)));
         } else if (Support.sprueWidth > 0) {
             widthText.setText(Double.toString(Support.round(Support.sprueWidth, 2)));
@@ -232,6 +236,10 @@ public class RunnerActivity extends AppCompatActivity implements
             Support.ingateFilter2 = Double.valueOf(String.valueOf(ingateFilter2Text.getText()));
         }
 
+        if (!String.valueOf(ingateDia.getText()).isEmpty()){
+            Support.ingateDia = Double.valueOf(String.valueOf(ingateDia.getText()));
+        }
+
         double ingateMass = 0;
         double armMass = 0;
         double wellMass = 0;
@@ -315,6 +323,7 @@ public class RunnerActivity extends AppCompatActivity implements
         weightText = findViewById(R.id.runner_text_13);
         calculateBtn = findViewById(R.id.runner_calc_btn);
         helpBtn = findViewById(R.id.runner_help_btn);
+        ingateDia = findViewById(R.id.runner_ingateDia);
         projectText = findViewById(R.id.projectNameTxt);
         projectText.setText(Values.getProjectName());
     }

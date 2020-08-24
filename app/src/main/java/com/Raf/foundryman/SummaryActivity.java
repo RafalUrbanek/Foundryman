@@ -2,6 +2,7 @@ package com.Raf.foundryman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -59,11 +60,67 @@ public class SummaryActivity extends AppCompatActivity implements
     }
 
     private void fillValues(){
-        Toast.makeText(this, String.valueOf(Support.initialMassFlowrate), Toast.LENGTH_LONG).show();
-        if (Support.initialMassFlowrate >0){
-            flowText.setText(String.valueOf(Support.initialMassFlowrate));
+        double estimatedWeight = 0;
+        double fillTime = 0;
+        double yield = 0;
+        double area1, area2, area3;
+
+        estimatedWeight = Support.castingMass + Support.runnerMass + Support.totalFeederMass; // requires sprue mass
+        if (estimatedWeight>0){
+            massText.setText(String.valueOf(estimatedWeight));
         } else {
-            flowText.setText("0");
+            massText.setText("-");
+        }
+
+        if (Support.initialMassFlowrate >0){
+            flowText.setText(String.valueOf(Support.round(Support.initialMassFlowrate, 2)));
+        } else {
+            flowText.setText("-");
+        }
+
+        if (Support.initialMassFlowrate>0 && estimatedWeight>0){
+            fillTime = Support.round(estimatedWeight / (Support.initialMassFlowrate * 0.75), 1);
+            fillTimeText.setText(String.valueOf(fillTime));
+        } else {
+            fillTimeText.setText("-");
+        }
+
+        if (Support.castingMass>0 && (Support.totalFeederMass>0 || Support.runnerMass>0)){
+            yield = (Support.castingMass / (Support.castingMass + Support.totalFeederMass + Support.runnerMass)) * 100;
+            yieldText.setText(String.valueOf(Math.round(yield)));
+        } else {
+            yieldText.setText("-");
+        }
+
+        if (Support.dataOutput[3] != null && Support.dataOutput[3]>0){
+            if (Values.getSprueTypeSelected() == 0){
+                area1 = (Support.dataOutput[3]/2) * (Support.dataOutput[3]/2) * Math.PI;
+            } else if (Values.getSprueTypeSelected() == 1){
+                area1 = Support.dataOutput[3] * Support.dataOutput[3];
+            } else {
+                area1 = Support.dataOutput[3] * Support.dataOutput[4];
+            }
+            ratio1Text.setText("1");
+            Log.d("area1", String.valueOf(area1));
+
+            if (Support.runnerWidth>0 && (Support.runnerHeight>0 || (Support.runnerStartHeight>0 && Support.runnerEndHeight>0))){
+                if (Support.runnerHeight>0){
+                    area2 = Support.runnerWidth * Support.runnerHeight;
+
+                } else {
+                    area2 = Support.runnerWidth * ((Support.runnerStartHeight + Support.runnerEndHeight) / 2);
+                    Log.d("area2", String.valueOf(area2));
+                }
+                double ratio2 = Support.round(area2 / area1, 1);
+                ratio2Text.setText(String.valueOf(ratio2));
+            }
+
+            if (Support.ingateDia>0){
+                area3 = (Support.ingateDia/2) * (Support.ingateDia/2) * Math.PI * Support.ingateCount;
+                double ratio3 = Support.round(area3 / area1, 1);
+                ratio3Text.setText(String.valueOf(ratio3));
+                Log.d("area3", String.valueOf(area3));
+            }
         }
     }
 

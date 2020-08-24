@@ -12,7 +12,7 @@ public class Support {
     static final String projectListAddress = "projectList.data";
 
     // GENERAL VARIABLES
-    static double totalWeight = 0.0;
+    // static double totalWeight = 0.0; --> calculated in summary
 
     // from casting activity
     static int sprues = 1;
@@ -59,6 +59,16 @@ public class Support {
     static final double DEFAULT_SF = 20;
     static Double[] dataOutput = new Double[8];
     static double safetyFactor = 0.0;
+
+        // created for save/load purposes
+    static double sprueVal0;
+    static double sprueVal1;
+    static double sprueVal2;
+    static double sprueVal3;
+    static double sprueVal4;
+    static double sprueVal5;
+    static double sprueVal6;
+    static double sprueVal7;
 
     static boolean[] modified = {false, false, false, false, false, false, false};
 

@@ -50,38 +50,38 @@ public class LShapeActivity extends AppCompatActivity implements
 
         if (Support.sprueWidth > 0){
             bottomDim = Support.round(Support.sprueWidth, 2);
-            bottomDiaEdit.setText(String.valueOf(bottomDim));
-            sprueSizeText.setText(String.valueOf(bottomDim));
+            bottomDiaEdit.setText(String.valueOf(Support.round(bottomDim,2)));
+            sprueSizeText.setText(String.valueOf(Support.round(bottomDim,2)));
 
         }
 
         if (Support.LshapeRad > 0){
             radius = Support.LshapeRad;
-            radiusText.setText(String.valueOf(Support.LshapeRad));
+            radiusText.setText(String.valueOf(Support.round(Support.LshapeRad,2)));
         }
 
         if (Support.sprueVelocity > 0){
             velocity = Support.sprueVelocity;
-            velocityEdit.setText(String.valueOf(velocity));
+            velocityEdit.setText(String.valueOf(Support.round(velocity,2)));
         } else velocity = 0;
 
         if (Support.runnerHeight > 0){
             runnerHeight = Support.runnerHeight;
-            runnerHeightText.setText(String.valueOf(Support.runnerHeight));
+            runnerHeightText.setText(String.valueOf(Support.round(Support.runnerHeight,2)));
         }
 
         if (Support.initialMassFlowrate > 0){
             massFlowrate = Support.initialMassFlowrate;
-            massFlowText1.setText(String.valueOf(massFlowrate));
-            massFlowText2.setText(String.valueOf(massFlowrate));
+            massFlowText1.setText(String.valueOf(Support.round(massFlowrate,2)));
+            massFlowText2.setText(String.valueOf(Support.round(massFlowrate,2)));
         } else massFlowrate = 0;
 
         if (Support.initialVolFlowrate > 0){
             volFolwrate = Support.initialVolFlowrate;
-            volFlowText.setText(String.valueOf(volFolwrate));
+            volFlowText.setText(String.valueOf(Support.round(volFolwrate,2)));
         } else if (Support.initialMassFlowrate > 0){
             volFolwrate = massFlowrate * Support.density / 1000;
-            volFlowText.setText(String.valueOf(volFolwrate));
+            volFlowText.setText(String.valueOf(Support.round(volFolwrate,2)));
         }
 
         if (Support.diaDim){
@@ -199,7 +199,7 @@ public class LShapeActivity extends AppCompatActivity implements
                 if (sprueHeight > 0) {
                     velocity = Support.round(Support.G * Math.sqrt(sprueHeight/ 1000 / (0.5 * Support.G)), 2);
                     Support.sprueVelocity = velocity;
-                    velocityEdit.setText(String.valueOf(velocity));
+                    velocityEdit.setText(String.valueOf(Support.round(velocity,2)));
                 } else {
                     Toast.makeText(this, "Please enter valid metal velocity at sprue " +
                             "bottom or sprue height including pouring cup", Toast.LENGTH_LONG).show();
@@ -221,13 +221,13 @@ public class LShapeActivity extends AppCompatActivity implements
                 volFlowText.setText(String.valueOf(volFolwrate));
                 Support.initialVolFlowrate = volFolwrate;
 
-                massFlowText1.setText(String.valueOf(massFlowrate));
-                massFlowText2.setText(String.valueOf(massFlowrate));
+                massFlowText1.setText(String.valueOf(Support.round(massFlowrate, 2)));
+                massFlowText2.setText(String.valueOf(Support.round(massFlowrate, 2)));
 
-                sprueSizeText.setText(String.valueOf(bottomDim));
+                sprueSizeText.setText(String.valueOf(Support.round(bottomDim,2)));
                 double radiusRounded = Math.round(bottomDim * radiusMultiplier(velocity) * 10);
                 radius = radiusRounded / 10;
-                radiusText.setText(String.valueOf(radius));
+                radiusText.setText(String.valueOf(Support.round(radius, 2)));
                 Support.LshapeRad = radius;
 
                 double runnerHeightRounded;
@@ -240,7 +240,7 @@ public class LShapeActivity extends AppCompatActivity implements
                     runnerHeight = runnerHeightRounded / 10;
                 }
 
-                runnerHeightText.setText(String.valueOf(runnerHeight));
+                runnerHeightText.setText(String.valueOf(Support.round(runnerHeight, 2)));
                 Support.runnerHeight = runnerHeight;
 
             } else {

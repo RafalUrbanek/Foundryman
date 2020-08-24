@@ -11,7 +11,35 @@
         android:layout_height="match_parent"
         tools:context=".SprueActivity"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-16dp">
+        tools:layout_editor_absoluteY="0dp">
+
+        <EditText
+            android:id="@+id/runner_ingateDia"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="number|numberDecimal"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/runner_text_3"
+            app:layout_constraintTop_toBottomOf="@+id/runner_ingates" />
+
+        <TextView
+            android:id="@+id/runner_text_"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:width="100dp"
+            android:height="30dp"
+            android:gravity="center"
+            android:text="/"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/runner_well_filter_1"
+            app:layout_constraintTop_toTopOf="@+id/runner_height_2" />
 
         <Button
             android:id="@+id/runner_calc_btn"
@@ -42,7 +70,7 @@
             android:layout_height="35dp"
             android:layout_marginEnd="5dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +162,7 @@
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
             android:visibility="invisible"
@@ -144,10 +172,10 @@
 
         <EditText
             android:id="@+id/runner_well_filter_2"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="35dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
             android:visibility="invisible"
@@ -205,11 +233,11 @@
             android:width="100dp"
             android:height="30dp"
             android:gravity="center"
-            android:text="Runner bar end height [mm]"
+            android:text="R-bar start/end height [mm]"
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/runner_height_2" />
+            app:layout_constraintTop_toBottomOf="@+id/runner_width" />
 
         <TextView
             android:id="@+id/runner_text_7"
@@ -234,11 +262,11 @@
             android:width="100dp"
             android:height="30dp"
             android:gravity="center"
-            android:text="Runner bar width [mm]"
+            android:text="in-gate diameter [mm]"
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/runner_width" />
+            app:layout_constraintTop_toTopOf="@+id/runner_ingateDia" />
 
         <TextView
             android:id="@+id/runner_text_5"
@@ -262,18 +290,18 @@
             android:width="100dp"
             android:height="30dp"
             android:gravity="center"
-            android:text="Runner bar start heigh [mm]"
+            android:text="Runner bar width [mm]"
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/runner_height_1" />
+            app:layout_constraintTop_toBottomOf="@+id/runner_ingateDia" />
 
         <EditText
             android:id="@+id/runner_ingate_filter_2"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
             android:visibility="invisible"
@@ -285,36 +313,32 @@
             android:id="@+id/runner_height_2"
             android:layout_width="0dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="5dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toStartOf="@+id/runner_text_11"
             app:layout_constraintStart_toEndOf="@+id/runner_text_3"
-            app:layout_constraintTop_toBottomOf="@+id/runner_height_1" />
+            app:layout_constraintTop_toTopOf="@+id/runner_text_8" />
 
         <EditText
             android:id="@+id/runner_height_1"
             android:layout_width="0dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="5dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/runner_text_3"
-            app:layout_constraintTop_toBottomOf="@+id/runner_width" />
+            app:layout_constraintEnd_toEndOf="@+id/runner_well_filter_2"
+            app:layout_constraintStart_toStartOf="@+id/runner_well_filter_2"
+            app:layout_constraintTop_toTopOf="@+id/runner_text_8" />
 
         <EditText
             android:id="@+id/runner_well_filter_1"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="35dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
             android:visibility="invisible"
@@ -327,13 +351,12 @@
             android:layout_height="35dp"
             android:layout_marginEnd="5dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textAlignment="center"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/runner_text_3"
-            app:layout_constraintTop_toBottomOf="@+id/runner_ingates" />
+            app:layout_constraintStart_toEndOf="@+id/runner_text_4"
+            app:layout_constraintTop_toBottomOf="@+id/runner_ingateDia" />
 
         <EditText
             android:id="@+id/runner_ingates"
