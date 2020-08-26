@@ -11,9 +11,6 @@ public class Support {
     // INTERNAL VARIABLES
     static final String projectListAddress = "projectList.data";
 
-    // GENERAL VARIABLES
-    // static double totalWeight = 0.0; --> calculated in summary
-
     // from casting activity
     static int sprues = 1;
     static int partsPerMould = 1;
@@ -153,17 +150,21 @@ public class Support {
 
     // rounds double value to n number of places
     public static double round(double number, int decPlace){
-        String multiplier = "1";
-        if (decPlace >= 0){
-            for (int i=0; i<decPlace; i++){
-                multiplier += "0";
+        if (decPlace < 8) {
+            String multiplier = "1";
+            if (decPlace >= 0) {
+                for (int i = 0; i < decPlace; i++) {
+                    multiplier += "0";
+                }
             }
+            decPlace = Integer.valueOf(multiplier);
+            number *= decPlace;
+            number = Math.round(number);
+            number /= decPlace;
+            return number;
+        } else {
+            return 0;
         }
-        decPlace = Integer.valueOf(multiplier);
-        number *= decPlace;
-        number = Math.round(number);
-        number /= decPlace;
-        return number;
     }
 
     // select correct activity based on the spinner selection

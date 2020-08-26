@@ -2,9 +2,7 @@ package com.Raf.foundryman;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,7 +42,6 @@ public class MemAccess extends Support{
 
             index = newIndex;
         }
-        Log.d("LOG", rawData.toString());
         uploadValues(values);
     }
 
@@ -82,7 +79,15 @@ public class MemAccess extends Support{
         Support.ingateDia = Double.valueOf(values.get(30));
         Support.totalFeederMass = Double.valueOf(values.get(31));
         Support.castingMass = Double.valueOf(values.get(32));
-        Support.safetyFactor = Double.valueOf(values.get(33));
+        Support.sprueVal0 = Double.valueOf(values.get(33));
+        Support.sprueVal1 = Double.valueOf(values.get(34));
+        Support.sprueVal2 = Double.valueOf(values.get(35));
+        Support.sprueVal3 = Double.valueOf(values.get(36));
+        Support.sprueVal4 = Double.valueOf(values.get(37));
+        Support.sprueVal5 = Double.valueOf(values.get(38));
+        Support.sprueVal6 = Double.valueOf(values.get(39));
+        Support.sprueVal7 = Double.valueOf(values.get(40));
+        Support.safetyFactor = Double.valueOf(values.get(41));
     }
 
     public static void exportProject(Context context){
@@ -104,10 +109,11 @@ public class MemAccess extends Support{
                 + "|wellFilter|" + wellFilter2 + "|ingateFilter1|" + ingateFilter1 + "|ingateFilter2|" + ingateFilter2
                 + "|runnerMass|" + runnerMass + "|ingateHeight|" + ingateHeight  + "|ingateDia|" + ingateDia
                 + "|totalFeederMass|" + totalFeederMass  + "|castingMass|" + castingMass
-                + "|safetyFactor|" + safetyFactor + "|";
+                + "|sprueVal0|" + sprueVal0 + "|sprueVal1|" + sprueVal1 + "|sprueVal2|" + sprueVal2
+                + "|sprueVal3|" + sprueVal3 + "|sprueVal4|" + sprueVal4 + "|sprueVal5|" + sprueVal5
+                + "|sprueVal6|" + sprueVal6 + "|sprueVal7|" + sprueVal7 + "|safetyFactor|" + safetyFactor + "|";
 
         save(context, Values.getProjectName(), projectData);
-
         Log.d("LOG", "Project: " + Values.getProjectName() + " Has been saved.");
     }
 

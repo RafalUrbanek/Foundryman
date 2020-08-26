@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,8 +47,10 @@ public class SprueActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sprue);
         flag = false;
-        inputData = Support.sprueValArray;
+        inputData = new Double[8];
+        importValues();
         inputData[7] = 0.0;
+
         sprueDims = new EditText[7];
 
         tools = getResources().getStringArray(R.array.tools);
@@ -79,6 +82,7 @@ public class SprueActivity extends AppCompatActivity implements
         setResetBtn();
         setHelpButton();
         topText.setText(tools[1].toUpperCase());
+        importValues();
         loadValues();
     }
 
@@ -165,6 +169,7 @@ public class SprueActivity extends AppCompatActivity implements
                 // modify the array based on values in sprueDim values
                 populateDataArray();
                 inputData = Support.computeSprue(inputData);
+                exportValues();
 
                 // set Calculate button background color based on computeSprue method
                 if (inputData[7] == 0.0){
@@ -260,6 +265,7 @@ public class SprueActivity extends AppCompatActivity implements
                 flag = true;
             } else {
                 Support.sprueValArray = inputData;
+                exportValues();
 
                 if (inputData[6] != null){
                         Support.initialMassFlowrate = inputData[6];
@@ -284,36 +290,39 @@ public class SprueActivity extends AppCompatActivity implements
             case R.id.sprueCalcBtn:
                 userDataInput = false;
                 values = Support.dataOutput;
-                for(int i = 0; i< inputData.length -1; i++){
-                    if (values[i] != null){
-                        double round;
-                        if (i == 5) {
-                            sprueDims[i].setText(String.valueOf(Math.round(values[i])));
-                        } else if(i == 6){
-                            round = Math.round(values[i] * 100);
-                            sprueDims[i].setText(String.valueOf(round / 100));
-                        } else{
-                            round = Math.round(values[i] * 10);
-                            sprueDims[i].setText(String.valueOf(round / 10));
+                if (inputData[7] == 1) {
+                    for (int i = 0; i < inputData.length - 1; i++) {
+                        if (values[i] != null) {
+                            if (i == 5) {
+                                sprueDims[i].setText(String.valueOf(Math.round(values[i])));
+                            } else if (i == 6) {
+                                sprueDims[i].setText((String.valueOf(Support.round(values[i], 2))));
+                            } else {
+                                sprueDims[i].setText((String.valueOf(Support.round(values[i], 1))));
+                            }
                         }
                     }
+                    Support.sprueWidth = Double.valueOf(String.valueOf(values[3]));
+                    userDataInput = true;
+                } else {
+                    Toast.makeText(this, "invalid input data", Toast.LENGTH_LONG).show();
+                    userDataInput = true;
                 }
-                Support.sprueWidth = Double.valueOf(String.valueOf(values[3]));
-                userDataInput = true;
-                exportValues();
                 break;
 
             case R.id.sprueResetBtn:
-                for(int i=0; i < Support.modified.length -1; i++){
-                    Support.modified[i] = false;
-                }
 
                 for(int i=0; i < Support.dataOutput.length -1; i++){
+                    Support.modified[i] = false;
                     Support.dataOutput[i] = null;
+                    Support.sprueValArray[i] = null;
                     inputData[i] = null;
+                    cleanData();
                     sprueDims[i].setText("");
                 }
-                deleteValues();
+                inputData[7] = 0.0;
+                Support.computeSprue(inputData);
+                calcBtn.setBackgroundColor(getResources().getColor(R.color.button_red));
                 break;
 
             case R.id.sprueHelpBtn:
@@ -332,25 +341,60 @@ public class SprueActivity extends AppCompatActivity implements
         }
     }
 
-    private void deleteValues() {
-        if (values[0] != null){Support.sprueVal0 = 0;}
-        if (values[1] != null){Support.sprueVal0 = 0;}
-        if (values[2] != null){Support.sprueVal0 = 0;}
-        if (values[3] != null){Support.sprueVal0 = 0;}
-        if (values[4] != null){Support.sprueVal0 = 0;}
-        if (values[5] != null){Support.sprueVal0 = 0;}
-        if (values[6] != null){Support.sprueVal0 = 0;}
-        if (values[7] != null){Support.sprueVal0 = 0;}
+    private void cleanData() {
+        Support.sprueVal0 = 0;
+        Support.sprueVal1 = 0;
+        Support.sprueVal2 = 0;
+        Support.sprueVal3 = 0;
+        Support.sprueVal4 = 0;
+        Support.sprueVal5 = 0;
+        Support.sprueVal6 = 0;
+        Support.sprueVal7 = 0;
     }
+
     private void exportValues() {
-        if (values[0] != null){Support.sprueVal0 = values[0];}
-        if (values[1] != null){Support.sprueVal0 = values[1];}
-        if (values[2] != null){Support.sprueVal0 = values[2];}
-        if (values[3] != null){Support.sprueVal0 = values[3];}
-        if (values[4] != null){Support.sprueVal0 = values[4];}
-        if (values[5] != null){Support.sprueVal0 = values[5];}
-        if (values[6] != null){Support.sprueVal0 = values[6];}
-        if (values[7] != null){Support.sprueVal0 = values[7];}
+        if (inputData[0] != null){Support.sprueVal0 = inputData[0];}
+        if (inputData[1] != null){Support.sprueVal1 = inputData[1];}
+        if (inputData[2] != null){Support.sprueVal2 = inputData[2];}
+        if (inputData[3] != null){Support.sprueVal3 = inputData[3];}
+        if (inputData[4] != null){Support.sprueVal4 = inputData[4];}
+        if (inputData[5] != null){Support.sprueVal5 = inputData[5];}
+        if (inputData[6] != null){Support.sprueVal6 = inputData[6];}
+        if (inputData[7] != null){Support.sprueVal7 = inputData[7];}
+    }
+
+    private void importValues() {
+        if (Support.sprueValArray[0] !=null){
+            inputData[0] = Support.sprueValArray[0];
+        }else if (Support.sprueVal0 != 0){inputData[0] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[1] != null){
+            inputData[1] = Support.sprueValArray[1];
+        }else if (Support.sprueVal1 != 0){inputData[1] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[2] != null){
+            inputData[2] = Support.sprueValArray[2];
+        }else if (Support.sprueVal2 != 0){inputData[2] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[3] != null){
+            inputData[3] = Support.sprueValArray[3];
+        }else if (Support.sprueVal3 != 0){inputData[3] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[4] != null){
+            inputData[4] = Support.sprueValArray[4];
+        }else if (Support.sprueVal4 != 0){inputData[4] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[5] != null){
+            inputData[5] = Support.sprueValArray[5];
+        }else if (Support.sprueVal5 != 0){inputData[5] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[6] != null){
+            inputData[6] = Support.sprueValArray[6];
+        }else if (Support.sprueVal6 != 0){inputData[6] = Support.sprueVal0;}
+
+        if (Support.sprueValArray[7] != null){
+            inputData[7] = Support.sprueValArray[7];
+        }else if (Support.sprueVal7 != 0){inputData[7] = Support.sprueVal0;}
     }
 }
 
