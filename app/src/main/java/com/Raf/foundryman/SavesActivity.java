@@ -25,24 +25,19 @@ public class SavesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Support.updateSaveList(this);
         setContentView(R.layout.activity_saves);
         projectText = findViewById(R.id.projectNameTxt);
         projectText.setText(Values.getProjectName());
         savesRecyclerView = findViewById(R.id.save_recycler);
-        savesAdapter = new SavesAdapter(this, Support.saveName, Support.saveMatType, Support.saveMatName);
+        savesAdapter = new SavesAdapter(this, Support.saveName, Support.saveMatType);
 
         savesRecyclerView.setAdapter(savesAdapter);
         savesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         configureBackBtn();
         configureSaveBtn();
-        configureLoadBtn();
         constructSavedList();
-    }
-
-    public void loadFromList(String name){
-        //MemAccess.importProject(SavesActivity.this, name);
-
     }
 
     private void constructSavedList() {
@@ -62,12 +57,17 @@ public class SavesActivity extends AppCompatActivity {
         });
     }
 
+    private void display(String text){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
     private void configureSaveBtn(){
         Button saveBtn = findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Values.setProjectName(String.valueOf(projectText.getText()));
                 String projectList = MemAccess.load(SavesActivity.this, Support.projectListAddress);
 
                 if (!projectList.contains(Values.getProjectName())){
@@ -78,23 +78,11 @@ public class SavesActivity extends AppCompatActivity {
                     Support.saveMatType.add(Support.materialType);
                     MemAccess.exportProject(SavesActivity.super.getApplicationContext());
                     savesAdapter.notifyItemChanged(index);
+                    display("Project " + Values.getProjectName() + " has been saved");
+                    //Support.updateSaveList(cont);
                 } else {
-                    // make toast that file exists
+                    display("Project with this filename already exist");
                 }
-
-
-            }
-        });
-    }
-
-    private void configureLoadBtn(){
-        Button loadBtn = findViewById(R.id.load_btn);
-        loadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //MemAccess.importProject(SavesActivity.super.getApplicationContext(), "test");
-                MemAccess.delete(SavesActivity.this, Support.projectListAddress);
-                //Log.d("LOG", Support.saveName.toString());
             }
         });
     }

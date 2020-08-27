@@ -1,5 +1,8 @@
 package com.Raf.foundryman;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +33,7 @@ public class RunnerActivity extends AppCompatActivity implements
     int ingateCount;
     int filterWidth = 22;
     int armsAmmount;
+    Context cont;
 
     EditText armsCountText, wellCountText, ingateCountText, widthText, startHeightText, endHeightText,
             armLengthText, wellFilter1Text, wellFilter2Text, ingateFilter1Text, ingateFilter2Text, ingateDia;
@@ -39,6 +43,7 @@ public class RunnerActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cont = this;
         setContentView(R.layout.activity_runner);
         flag = false;
         tools = getResources().getStringArray(R.array.tools);
@@ -66,7 +71,17 @@ public class RunnerActivity extends AppCompatActivity implements
         helpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder helpAlert  = new AlertDialog.Builder(cont);
+                helpAlert.setMessage(R.string.runnerHelp);
+                helpAlert.setTitle("RUNNER BAR");
+                helpAlert.setPositiveButton("OK", null);
+                helpAlert.setCancelable(true);
+                helpAlert.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                helpAlert.create().show();
             }
         });
     }

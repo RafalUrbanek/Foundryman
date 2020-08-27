@@ -19,20 +19,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".CastingActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".LShapeActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".SprueActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".ToolsActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".FeedersActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".SummaryActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".RunnerActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".SavesActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
     </application>
 

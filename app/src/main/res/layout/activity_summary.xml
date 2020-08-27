@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -223,11 +227,12 @@
         android:id="@+id/divider7"
         android:layout_width="0dp"
         android:layout_height="2dp"
+        android:layout_marginTop="210dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/divider19" />
 
     <TextView
         android:id="@+id/mainTxtWeight"
@@ -247,7 +252,7 @@
         android:text="INITIAL FLOW"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
     <View
         android:id="@+id/divider3"
@@ -332,11 +337,9 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_width="352dp"
+        android:layout_height="200dp"
         android:layout_marginTop="55dp"
-        android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3"

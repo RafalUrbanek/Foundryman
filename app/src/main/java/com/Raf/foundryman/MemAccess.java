@@ -114,7 +114,6 @@ public class MemAccess extends Support{
                 + "|sprueVal6|" + sprueVal6 + "|sprueVal7|" + sprueVal7 + "|safetyFactor|" + safetyFactor + "|";
 
         save(context, Values.getProjectName(), projectData);
-        Log.d("LOG", "Project: " + Values.getProjectName() + " Has been saved.");
     }
 
 

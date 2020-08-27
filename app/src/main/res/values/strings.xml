@@ -44,4 +44,23 @@
     <string name="FeedersInsulatedText">insulated</string>
     <string name="height">height</string>
     <string name="Insulation">insulation</string>
+    <string name="runnerHelp">\tRunner bar is the part of the running system that distributes the
+        liquid metal from sprue and well into the in-gates connected to the casting. There are two
+        main approaches to designing good runner bar. One is to constrain the metal flow to decrease
+        the space where turbulent flow can occur. This approach is commonly paired with l-shape
+        sprue-runner junction design or similar constrained design. In this design the runner bar
+        is usually slightly pressurized or neutral (see summary tab to check your design ratios). The
+        other approach is to have a significantly bigger sprue-runner bar area ratio (around 1:4) to
+        slow down the liquid metal below turbulent velocity (0.5m/s). This design is usually paired
+        with filters directly after the sprue.\n\n
+        \t Setup an values plugged in this tab are used for calculating the system ratio and metal
+        yield that can be found in the summary tab.</string>
+    <string name="lShapeHelp">\tThis calculator allows you to optimise the sprue - runner junction
+        for optimal flow utilising the L-shape design. This geometry allows for the least obstructive
+        fluid flow while at the same time reducing turbulence caused by rapid flow direction change
+        and high velocity. This shape also considers reasonable mouldability constrains.\n\n
+        \tThe main part of the design is the minimum smooth transition radius at the junction,
+        calculated based on the metal velocity and main sprue dimensions. This geometry is often
+        paired with filters placed directly under the ingates to prevent formation of high velocity
+        metal jets when the metal is required to rapidly change flow direction to fill the ingates.</string>
 </resources>

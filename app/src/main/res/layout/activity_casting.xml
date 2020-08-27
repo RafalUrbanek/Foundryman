@@ -7,6 +7,10 @@
     tools:context=".CastingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SprueActivity">
@@ -17,6 +21,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
+            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
@@ -39,6 +44,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number|numberDecimal"
+            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
@@ -72,6 +78,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
+            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/casting_mat_type_text"
@@ -106,6 +113,7 @@
             android:ems="10"
             android:hint="Project name"
             android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/spinner"
             app:layout_constraintEnd_toStartOf="@+id/MainOptionsBtn"
@@ -173,6 +181,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
+            android:selectAllOnFocus="true"
             android:textAlignment="textStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

@@ -380,4 +380,37 @@ public class Support {
         Double velocity = Math.sqrt(2 * G * WELL_HEIGHT);
         return velocity;
     }
+
+    public static void updateSaveList(Context cont) {
+        saveName.clear();
+        saveMatType.clear();
+        saveMatName.clear();
+        String projects = MemAccess.load(cont, projectListAddress);
+        int position = 0;
+        int index = 0;
+        boolean stop = false;
+        int newIndex;
+
+        while(true){
+            if (projects.isEmpty()){
+                break;
+            }
+            newIndex = projects.indexOf("~", index + 1);
+            if (newIndex == -1){
+                stop = true;
+                newIndex = projects.length()-1;
+            }
+            String project = projects.substring(index, newIndex);
+            int indexOfmarker = project.indexOf("|");
+            index = newIndex;
+            projectIndex.add(position);
+            position++;
+            saveName.add(project.substring(1, project.indexOf("|")));
+            saveMatType.add(project.substring(project.indexOf("|") + 1, project.indexOf("|", indexOfmarker + 1)));
+            saveMatName.add(project.substring(project.indexOf("|", indexOfmarker + 1) + 1));
+            if (stop){
+                break;
+            }
+        }
+    }
 }
