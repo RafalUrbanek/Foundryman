@@ -18,11 +18,23 @@
         tools:layout_editor_absoluteY="0dp">
 
         <View
+            android:id="@+id/divider48"
+            android:layout_width="409dp"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider6"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
             android:id="@+id/divider39"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginTop="5dp"
-            android:background="?android:attr/listDivider"
+            android:background="@color/cardview_dark_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +44,12 @@
             android:id="@+id/tools_inch_text"
             android:layout_width="100dp"
             android:layout_height="0dp"
+            android:background="@color/input_green"
             android:ems="10"
             android:inputType="numberDecimal"
             android:paddingBottom="6dp"
             android:textAlignment="center"
+            android:textColorHighlight="@color/button_green"
             app:layout_constraintBottom_toBottomOf="@+id/tools_text9"
             app:layout_constraintStart_toEndOf="@+id/tools_text9"
             app:layout_constraintTop_toTopOf="@+id/tools_text9" />
@@ -55,10 +69,13 @@
             android:id="@+id/tools_cm_text"
             android:layout_width="100dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/input_green"
             android:ems="10"
             android:inputType="numberDecimal"
             android:paddingBottom="6dp"
             android:textAlignment="center"
+            android:textColorHighlight="@color/button_green"
             app:layout_constraintBottom_toBottomOf="@+id/tools_text9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tools_text9" />
@@ -67,6 +84,7 @@
             android:id="@+id/tools_text9"
             android:layout_width="60dp"
             android:layout_height="35dp"
+            android:layout_marginStart="5dp"
             android:background="@color/sleeve_gray"
             android:gravity="center"
             android:text="Inch"
@@ -86,25 +104,26 @@
 
         <TextView
             android:id="@+id/tools_modulus_text"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:background="@color/field_gray"
             android:gravity="center"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tools_pic"
+            app:layout_constraintStart_toEndOf="@+id/tools_text5"
             app:layout_constraintTop_toBottomOf="@+id/tools_text3" />
 
         <TextView
             android:id="@+id/tools_text5"
-            android:layout_width="80dp"
+            android:layout_width="75dp"
             android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:background="@color/sleeve_gray"
             android:gravity="center"
             android:text="Modulus"
             android:textAlignment="center"
-            app:layout_constraintEnd_toStartOf="@+id/tools_modulus_text"
+            app:layout_constraintStart_toStartOf="@+id/tools_pic"
             app:layout_constraintTop_toBottomOf="@+id/tools_text3" />
 
         <TextView
@@ -115,18 +134,21 @@
             android:background="@color/field_gray"
             android:gravity="center"
             android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@+id/tools_text4"
+            app:layout_constraintEnd_toEndOf="@+id/tools_editText3"
+            app:layout_constraintStart_toEndOf="@+id/tools_text3"
             app:layout_constraintTop_toBottomOf="@+id/tools_text3" />
 
         <TextView
             android:id="@+id/tools_text4"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:background="@color/sleeve_gray"
             android:gravity="center"
             android:text="Volume [mm^3]"
             android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/tools_text3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tools_text3" />
 
@@ -134,7 +156,8 @@
             android:id="@+id/tools_text3"
             android:layout_width="100dp"
             android:layout_height="35dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
             android:background="@color/sleeve_gray"
             android:gravity="center"
             android:text="text"
@@ -147,13 +170,15 @@
             android:id="@+id/tools_editText3"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/input_green"
             android:ems="10"
             android:inputType="number|numberDecimal"
             android:paddingBottom="6dp"
             android:textAlignment="center"
+            android:textColorHighlight="@color/button_green"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/tools_text3"
-            app:layout_constraintEnd_toEndOf="@+id/tools_mod_spinner"
+            app:layout_constraintEnd_toEndOf="@+id/tools_editText1"
             app:layout_constraintStart_toEndOf="@+id/tools_text1"
             app:layout_constraintTop_toTopOf="@+id/tools_text3" />
 
@@ -161,12 +186,14 @@
             android:id="@+id/tools_editText2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/input_green"
             android:ems="10"
             android:inputType="number|numberDecimal"
             android:paddingBottom="6dp"
             android:textAlignment="center"
+            android:textColorHighlight="@color/button_green"
             app:layout_constraintBottom_toBottomOf="@+id/tools_text2"
-            app:layout_constraintEnd_toEndOf="@+id/tools_mod_spinner"
+            app:layout_constraintEnd_toEndOf="@+id/tools_editText1"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/tools_text1"
             app:layout_constraintTop_toTopOf="@+id/tools_text2" />
@@ -175,7 +202,8 @@
             android:id="@+id/tools_text2"
             android:layout_width="100dp"
             android:layout_height="35dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
             android:background="@color/sleeve_gray"
             android:gravity="center"
             android:text="text"
@@ -187,8 +215,8 @@
             android:id="@+id/divider36"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:background="?android:attr/listDivider"
+            android:layout_marginTop="20dp"
+            android:background="@color/cardview_dark_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +226,9 @@
             android:id="@+id/summaryTxtTools"
             android:layout_width="0sp"
             android:layout_height="40sp"
+            android:background="@color/colorPrimaryDark"
             android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -209,6 +239,7 @@
             android:id="@+id/projectNameTxt"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="5dp"
             android:ems="10"
             android:hint="Project name"
             android:inputType="textPersonName"
@@ -227,8 +258,12 @@
 
         <ImageButton
             android:id="@+id/MainOptionsBtn"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/button_green"
             app:layout_constraintBottom_toBottomOf="@+id/spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -255,18 +290,22 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
             android:text="Modulus"
+            android:textAlignment="textStart"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
         <Spinner
             android:id="@+id/tools_mod_spinner"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -274,6 +313,7 @@
             android:id="@+id/tools_text1"
             android:layout_width="100dp"
             android:layout_height="35dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:background="@color/sleeve_gray"
             android:gravity="center"
@@ -284,14 +324,15 @@
 
         <EditText
             android:id="@+id/tools_editText1"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="0dp"
+            android:background="@color/input_green"
             android:ems="10"
             android:inputType="number|numberDecimal"
             android:paddingBottom="6dp"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/tools_text2"
-            app:layout_constraintEnd_toEndOf="@+id/tools_mod_spinner"
+            android:textColorHighlight="@color/button_green"
+            app:layout_constraintBottom_toBottomOf="@+id/tools_text1"
             app:layout_constraintStart_toEndOf="@+id/tools_text1"
             app:layout_constraintTop_toTopOf="@+id/tools_text1" />
 
@@ -299,28 +340,25 @@
             android:id="@+id/tools_pic"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/tools_text3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tools_mod_spinner"
+            app:layout_constraintStart_toStartOf="@+id/tools_mod_calc_btn"
             app:layout_constraintTop_toBottomOf="@+id/tools_mod_spinner"
             app:srcCompat="@mipmap/cylinder" />
 
         <Button
             android:id="@+id/tools_mod_calc_btn"
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:background="#D3C9EFC8"
+            android:layout_marginBottom="5dp"
+            android:background="@color/button_green"
             android:text="Calculate"
             app:layout_constraintBottom_toBottomOf="@+id/tools_mod_spinner"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.63"
-            app:layout_constraintStart_toEndOf="@+id/tools_mod_spinner"
             app:layout_constraintTop_toBottomOf="@+id/divider6"
             app:layout_constraintVertical_bias="0.0" />
 

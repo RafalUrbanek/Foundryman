@@ -92,10 +92,10 @@
 
             <Button
                 android:id="@+id/save_remove_btn"
-                android:layout_width="0dp"
+                android:layout_width="40dp"
                 android:layout_height="0dp"
-                android:background="@color/button_red"
-                android:text="REMOVE"
+                android:background="@android:drawable/ic_menu_delete"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
