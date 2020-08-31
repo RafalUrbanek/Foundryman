@@ -12,13 +12,15 @@
 
     <View
         android:id="@+id/divider47"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/summary_ratio3_text"
@@ -126,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@+id/mainTxtFillTime" />
 
     <TextView
-        android:id="@+id/mainTxt2"
+        android:id="@+id/summary_runners_txt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
@@ -145,7 +147,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/mainTxt1"
+        android:id="@+id/summary_sprues_txt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
@@ -201,7 +203,7 @@
         android:id="@+id/divider18"
         android:layout_width="2dp"
         android:layout_height="0dp"
-        android:background="@color/cardview_dark_background"
+        android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/divider19"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -357,7 +359,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/button_green"
+        android:background="@drawable/button_layout"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -8,18 +8,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SprueActivity"
-        tools:layout_editor_absoluteX="-83dp"
-        tools:layout_editor_absoluteY="0dp">
+
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".SprueActivity">
 
         <View
             android:id="@+id/divider48"
-            android:layout_width="409dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/background"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginTop="5dp"
-            android:background="@color/cardview_dark_background"
+            android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +218,7 @@
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginTop="20dp"
-            android:background="@color/cardview_dark_background"
+            android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -263,7 +265,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/button_green"
+            android:background="@drawable/button_layout"
             app:layout_constraintBottom_toBottomOf="@+id/spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -355,7 +357,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/button_green"
+            android:background="@drawable/button_layout"
             android:text="Calculate"
             app:layout_constraintBottom_toBottomOf="@+id/tools_mod_spinner"
             app:layout_constraintEnd_toEndOf="parent"

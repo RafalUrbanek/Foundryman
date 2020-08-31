@@ -2,7 +2,6 @@ package com.Raf.foundryman;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,8 +19,8 @@ public class SummaryActivity extends AppCompatActivity implements
     Spinner toolSpinner;
     Boolean flag;
     TextView spruesAmmount;
-    TextView wells;
     EditText projectText;
+    TextView runnersAmmount;
     TextView flowText;
     TextView fillTimeText;
     TextView massText;
@@ -36,9 +34,11 @@ public class SummaryActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
         initialize();
+        Support.fillSprueValues();
         flag = false;
+        Support.computeSprue(Support.sprueValArray);
         spruesAmmount.setText(String.valueOf(Support.sprues));
-        wells.setText(String.valueOf(Support.wells));
+        runnersAmmount.setText(String.valueOf(Support.runnerArms));
         tools = getResources().getStringArray(R.array.tools);
         projectText.setText(Values.getProjectName());
         configureOptionsBtn();
@@ -47,9 +47,9 @@ public class SummaryActivity extends AppCompatActivity implements
     }
 
     private void initialize(){
-        spruesAmmount = findViewById(R.id.mainTxt1);
+        spruesAmmount = findViewById(R.id.summary_sprues_txt);
+        runnersAmmount = findViewById(R.id.summary_runners_txt);
         projectText = findViewById(R.id.projectNameTxt);
-        wells = findViewById(R.id.mainTxt2);
         flowText = findViewById(R.id.summary_initial_flow_text);
         fillTimeText = findViewById(R.id.summary_fill_time_text);
         massText = findViewById(R.id.summary_weight_text);
@@ -65,51 +65,49 @@ public class SummaryActivity extends AppCompatActivity implements
         double yield = 0;
         double area1, area2, area3;
 
-        estimatedWeight = Support.castingMass + Support.runnerMass + Support.totalFeederMass; // requires sprue mass
+        estimatedWeight = Support.castingMass + Support.runnerMass + Support.totalFeederMass + Support.calculateSprueMass(); // requires sprue mass
         if (estimatedWeight>0){
-            massText.setText(String.valueOf(estimatedWeight));
+            massText.setText(String.valueOf(Support.round(estimatedWeight,2)) + " kg");
         } else {
             massText.setText("-");
         }
 
         if (Support.initialMassFlowrate >0){
-            flowText.setText(String.valueOf(Support.round(Support.initialMassFlowrate, 2)));
+            flowText.setText(String.valueOf(Support.round(Support.initialMassFlowrate * Support.sprues, 2)) + " kg/s");
         } else {
             flowText.setText("-");
         }
 
         if (Support.initialMassFlowrate>0 && estimatedWeight>0){
-            fillTime = Support.round(estimatedWeight / (Support.initialMassFlowrate * 0.75), 1);
-            fillTimeText.setText(String.valueOf(fillTime));
+            fillTime = Support.round(estimatedWeight / (Support.initialMassFlowrate * 0.75) / Support.sprues, 1);
+            fillTimeText.setText(String.valueOf(fillTime) + " sec");
         } else {
             fillTimeText.setText("-");
         }
 
         if (Support.castingMass>0 && (Support.totalFeederMass>0 || Support.runnerMass>0)){
             yield = (Support.castingMass / (Support.castingMass + Support.totalFeederMass + Support.runnerMass)) * 100;
-            yieldText.setText(String.valueOf(Math.round(yield)));
+            yieldText.setText(Math.round(yield) + " %");
         } else {
             yieldText.setText("-");
         }
 
-        if (Support.dataOutput[3] != null && Support.dataOutput[3]>0){
+        if (Support.sprueVal3>0){
             if (Values.getSprueTypeSelected() == 0){
-                area1 = (Support.dataOutput[3]/2) * (Support.dataOutput[3]/2) * Math.PI;
+                area1 = (Support.sprueVal3/2) * (Support.sprueVal3/2) * Math.PI * Support.sprues;
             } else if (Values.getSprueTypeSelected() == 1){
-                area1 = Support.dataOutput[3] * Support.dataOutput[3];
+                area1 = Support.sprueVal3 * Support.sprueVal3 * Support.sprues;
             } else {
-                area1 = Support.dataOutput[3] * Support.dataOutput[4];
+                area1 = Support.sprueVal3 * Support.sprueVal4 * Support.sprues;
             }
             ratio1Text.setText("1");
-            Log.d("area1", String.valueOf(area1));
 
             if (Support.runnerWidth>0 && (Support.runnerHeight>0 || (Support.runnerStartHeight>0 && Support.runnerEndHeight>0))){
                 if (Support.runnerHeight>0){
-                    area2 = Support.runnerWidth * Support.runnerHeight;
+                    area2 = Support.runnerWidth * Support.runnerHeight * Support.runnerArms;
 
                 } else {
-                    area2 = Support.runnerWidth * ((Support.runnerStartHeight + Support.runnerEndHeight) / 2);
-                    Log.d("area2", String.valueOf(area2));
+                    area2 = Support.runnerWidth * ((Support.runnerStartHeight + Support.runnerEndHeight) / 2) * Support.runnerArms;
                 }
                 double ratio2 = Support.round(area2 / area1, 1);
                 ratio2Text.setText(String.valueOf(ratio2));
@@ -119,7 +117,6 @@ public class SummaryActivity extends AppCompatActivity implements
                 area3 = (Support.ingateDia/2) * (Support.ingateDia/2) * Math.PI * Support.ingateCount;
                 double ratio3 = Support.round(area3 / area1, 1);
                 ratio3Text.setText(String.valueOf(ratio3));
-                Log.d("area3", String.valueOf(area3));
             }
         }
     }
@@ -159,4 +156,3 @@ public class SummaryActivity extends AppCompatActivity implements
     public void onNothingSelected(AdapterView<?> arg0) {
     }
 }
-

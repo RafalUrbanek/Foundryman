@@ -17,10 +17,10 @@
     </string-array>
 
     <string-array name="alloys">
-        <item>Aluminium alloy</item>
-        <item>Copper alloy</item>
-        <item>Iron alloy</item>
-        <item>Magnesium alloy</item>
+        <item>Aluminium</item>
+        <item>Copper</item>
+        <item>Iron</item>
+        <item>Magnesium</item>
     </string-array>
 
     <string-array name="mod_geometries">

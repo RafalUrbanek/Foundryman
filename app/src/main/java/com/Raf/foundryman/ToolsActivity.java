@@ -297,8 +297,8 @@ public class ToolsActivity extends AppCompatActivity implements
                 modulusEdit2.setVisibility(View.VISIBLE);
                 modText3.setVisibility(View.INVISIBLE);
                 modulusEdit3.setVisibility(View.INVISIBLE);
-                modText1.setText("height h");
-                modText2.setText("radius r");
+                modText1.setText("Height h");
+                modText2.setText("Radius r");
 
                 break;
 
@@ -309,9 +309,9 @@ public class ToolsActivity extends AppCompatActivity implements
                 modulusEdit2.setVisibility(View.VISIBLE);
                 modText3.setVisibility(View.VISIBLE);
                 modulusEdit3.setVisibility(View.VISIBLE);
-                modText1.setText("height h");
-                modText2.setText("length x");
-                modText3.setText("width y");
+                modText1.setText("Height h");
+                modText2.setText("Length x");
+                modText3.setText("Width y");
                 break;
 
             case 2:
@@ -321,7 +321,7 @@ public class ToolsActivity extends AppCompatActivity implements
                 modulusEdit2.setVisibility(View.INVISIBLE);
                 modText3.setVisibility(View.INVISIBLE);
                 modulusEdit3.setVisibility(View.INVISIBLE);
-                modText1.setText("radius r");
+                modText1.setText("Radius r");
                 break;
         }
     }

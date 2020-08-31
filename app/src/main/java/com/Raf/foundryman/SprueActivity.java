@@ -30,6 +30,7 @@ public class SprueActivity extends AppCompatActivity implements
     TextView sprueText2, sprueText3, sprueText5, sprueText8;
     EditText projectText;
     EditText[] sprueDims;
+    EditText noOfSprues;
     Button calcBtn;
     Button resetBtn;
     ImageButton helpBtn;
@@ -60,6 +61,8 @@ public class SprueActivity extends AppCompatActivity implements
         sprueText3 = findViewById(R.id.sprueText3);
         sprueText5 = findViewById(R.id.sprueText5);
         sprueText8 = findViewById(R.id.sprueText8);
+        noOfSprues = findViewById(R.id.sprueDim9);
+
         projectText = findViewById(R.id.projectNameTxt);
         projectText.setText(Values.getProjectName());
 
@@ -84,6 +87,12 @@ public class SprueActivity extends AppCompatActivity implements
         topText.setText(tools[1].toUpperCase());
         importValues();
         loadValues();
+
+        if (Support.sprues ==1){
+            noOfSprues.setText("1");
+        } else {
+            noOfSprues.setText(String.valueOf(Support.sprues));
+        }
     }
 
     private void loadValues() {
@@ -290,6 +299,16 @@ public class SprueActivity extends AppCompatActivity implements
             case R.id.sprueCalcBtn:
                 userDataInput = false;
                 values = Support.dataOutput;
+                if (noOfSprues.getText().equals(null) || String.valueOf(noOfSprues.getText()).equals("")){
+                    Support.sprues = 1;
+                    noOfSprues.setText("1");
+                } else if (Integer.valueOf(String.valueOf(noOfSprues.getText())) > 0){
+                    Support.sprues = Integer.valueOf(String.valueOf(noOfSprues.getText()));
+                }else{
+                    Support.sprues = 1;
+                    noOfSprues.setText("1");
+                }
+
                 if (inputData[7] == 1) {
                     for (int i = 0; i < inputData.length - 1; i++) {
                         if (values[i] != null) {
@@ -370,31 +389,31 @@ public class SprueActivity extends AppCompatActivity implements
 
         if (Support.sprueValArray[1] != null){
             inputData[1] = Support.sprueValArray[1];
-        }else if (Support.sprueVal1 != 0){inputData[1] = Support.sprueVal0;}
+        }else if (Support.sprueVal1 != 0){inputData[1] = Support.sprueVal1;}
 
         if (Support.sprueValArray[2] != null){
             inputData[2] = Support.sprueValArray[2];
-        }else if (Support.sprueVal2 != 0){inputData[2] = Support.sprueVal0;}
+        }else if (Support.sprueVal2 != 0){inputData[2] = Support.sprueVal2;}
 
         if (Support.sprueValArray[3] != null){
             inputData[3] = Support.sprueValArray[3];
-        }else if (Support.sprueVal3 != 0){inputData[3] = Support.sprueVal0;}
+        }else if (Support.sprueVal3 != 0){inputData[3] = Support.sprueVal3;}
 
         if (Support.sprueValArray[4] != null){
             inputData[4] = Support.sprueValArray[4];
-        }else if (Support.sprueVal4 != 0){inputData[4] = Support.sprueVal0;}
+        }else if (Support.sprueVal4 != 0){inputData[4] = Support.sprueVal4;}
 
         if (Support.sprueValArray[5] != null){
             inputData[5] = Support.sprueValArray[5];
-        }else if (Support.sprueVal5 != 0){inputData[5] = Support.sprueVal0;}
+        }else if (Support.sprueVal5 != 0){inputData[5] = Support.sprueVal5;}
 
         if (Support.sprueValArray[6] != null){
             inputData[6] = Support.sprueValArray[6];
-        }else if (Support.sprueVal6 != 0){inputData[6] = Support.sprueVal0;}
+        }else if (Support.sprueVal6 != 0){inputData[6] = Support.sprueVal6;}
 
         if (Support.sprueValArray[7] != null){
             inputData[7] = Support.sprueValArray[7];
-        }else if (Support.sprueVal7 != 0){inputData[7] = Support.sprueVal0;}
+        }else if (Support.sprueVal7 != 0){inputData[7] = Support.sprueVal7;}
     }
 }
 

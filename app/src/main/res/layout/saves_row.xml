@@ -83,7 +83,7 @@
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/dark_green"
+                android:backgroundTint="@color/button_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/save_remove_btn"
                 app:layout_constraintTop_toTopOf="parent"

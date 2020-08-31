@@ -12,7 +12,6 @@ public class Support {
     static final String projectListAddress = "projectList.data";
 
     // from casting activity
-    static int sprues = 1;
     static int partsPerMould = 1;
     static String materialName = "";
     static String materialType = "Aluminium";
@@ -46,6 +45,7 @@ public class Support {
     static double runnerMass;
 
     // from sprue activity
+    static int sprues = 1;
     static Double[] sprueValArray = new Double[8];
     static double ingateHeight = 0.0;
     static double ingateDia = 0.0;
@@ -368,8 +368,6 @@ public class Support {
             flowRate = getBottomArea() * getBottomVelocity() * density;
         } else {
             flowRate = 0.0;
-            Log.d("getFlow: ", "Flowrate not calculated correctly due to method called " +
-                    "despite missing data");
         }
         return flowRate;
     }
@@ -379,6 +377,19 @@ public class Support {
     private static Double getTopVelocity() {
         Double velocity = Math.sqrt(2 * G * WELL_HEIGHT);
         return velocity;
+    }
+
+    public static double runnerWeight(){
+        double weight = 0;
+        if (runnerArmLength > 0 && runnerWidth > 0 ){
+            if (runnerHeight > 0){
+                weight = runnerArmLength * runnerHeight * runnerWidth * density / 1000000000;
+            } else if (runnerStartHeight > 0 && runnerEndHeight > 0){
+                weight = runnerArmLength * runnerWidth * ((runnerStartHeight + runnerEndHeight) / 2)
+                        * density / 1000000000;
+            }
+        }
+        return round(weight, 2);
     }
 
     public static void updateSaveList(Context cont) {
@@ -412,5 +423,43 @@ public class Support {
                 break;
             }
         }
+    }
+
+    public static double calculateSprueMass() {
+        double mass = 0;
+        double areaBottom = 0;
+        double areaTop = 0;
+
+        if (Values.getSprueTypeSelected() == 0){
+            areaBottom = Math.PI * (sprueVal3 / 2) * (sprueVal3 / 2);
+        } else if (Values.getSprueTypeSelected() ==1) {
+            areaBottom = sprueVal3 * sprueVal3;
+        } else {
+            areaBottom = sprueVal3 * sprueVal4;
+        }
+
+        if (Values.getSprueTypeSelected() == 0){
+            areaTop = Math.PI * (sprueVal0 / 2) * (sprueVal0 / 2);
+        } else if (Values.getSprueTypeSelected() == 1) {
+            areaTop = sprueVal0 * sprueVal0;
+        } else {
+            areaTop = sprueVal0 * sprueVal1;
+        }
+
+        if (sprueVal3 > 0 && areaBottom > 0 && areaTop > 0){
+            mass = ((areaBottom + areaTop) / 2) * sprueVal2 * density * sprues / 1000000000;
+        }
+        return round(mass, 2);
+    }
+
+    public static void fillSprueValues() {
+        if (sprueVal0 > 0){dataOutput[0] = sprueVal0;}
+        if (sprueVal1 > 0){dataOutput[1] = sprueVal1;}
+        if (sprueVal2 > 0){dataOutput[2] = sprueVal2;}
+        if (sprueVal3 > 0){dataOutput[3] = sprueVal3;}
+        if (sprueVal4 > 0){dataOutput[4] = sprueVal4;}
+        if (sprueVal5 > 0){dataOutput[5] = sprueVal5;}
+        if (sprueVal6 > 0){dataOutput[6] = sprueVal6;}
+        if (sprueVal7 > 0){dataOutput[7] = sprueVal7;}
     }
 }

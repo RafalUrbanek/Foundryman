@@ -12,7 +12,7 @@
 
     <View
         android:id="@+id/divider46"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +20,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/sprueText"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="No. of"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sprueDim9"
+        app:layout_constraintEnd_toStartOf="@+id/sprueDim9"
+        app:layout_constraintStart_toStartOf="@+id/sprueText1"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim9" />
 
     <TextView
         android:id="@+id/sprueText8"
@@ -33,20 +46,6 @@
         app:layout_constraintEnd_toStartOf="@+id/sprueDim2"
         app:layout_constraintTop_toTopOf="@+id/sprueDim5" />
 
-    <EditText
-        android:id="@+id/sprueDim5"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/input_green"
-        android:ems="10"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHighlight="@color/button_green"
-        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
-        app:layout_constraintTop_toBottomOf="@+id/sprueDim4" />
-
     <TextView
         android:id="@+id/sprueText7"
         android:layout_width="80dp"
@@ -58,20 +57,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/sprueDim4"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="235dp"
-        android:background="@color/input_green"
-        android:ems="10"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHighlight="@color/button_green"
-        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
-        app:layout_constraintTop_toBottomOf="@+id/sprueDim1" />
-
     <TextView
         android:id="@+id/sprueText5"
         android:layout_width="wrap_content"
@@ -82,34 +67,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/sprueDim4"
         app:layout_constraintEnd_toStartOf="@+id/sprueDim4"
         app:layout_constraintTop_toTopOf="@+id/sprueDim4" />
-
-    <EditText
-        android:id="@+id/sprueDim2"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/input_green"
-        android:ems="10"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHighlight="@color/button_green"
-        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
-        app:layout_constraintTop_toBottomOf="@+id/sprueDim1" />
-
-    <EditText
-        android:id="@+id/sprueDim3"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="140dp"
-        android:background="@color/input_green"
-        android:ems="10"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHighlight="@color/button_green"
-        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/sprueText3"
@@ -162,7 +119,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/button_green"
+        android:background="@drawable/button_layout"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -191,22 +148,21 @@
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="300dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="11dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sprueSpinner"
+        app:layout_constraintTop_toTopOf="@+id/sprueDim1"
         app:srcCompat="@mipmap/sprue" />
 
     <TextView
         android:id="@+id/sprueText1"
-        android:layout_width="0dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:text="@string/sprue_type"
+        android:layout_marginEnd="5dp"
+        android:text="Type"
         android:textAlignment="center"
         android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
-        app:layout_constraintStart_toEndOf="@+id/sprueResetBtn"
+        app:layout_constraintEnd_toStartOf="@+id/sprueSpinner"
         app:layout_constraintTop_toBottomOf="@+id/summaryTxtLShape" />
 
     <Spinner
@@ -214,10 +170,10 @@
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/sprueText1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sprueText1"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/sprueText1" />
 
     <TextView
@@ -235,15 +191,17 @@
         android:id="@+id/sprueDim1"
         android:layout_width="70dp"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="180dp"
         android:background="@color/input_green"
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
+        android:selectAllOnFocus="true"
         android:textAlignment="center"
         android:textColorHighlight="@color/button_green"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/sprueSpinner" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim9" />
 
     <TextView
         android:id="@+id/sprueText4"
@@ -263,7 +221,7 @@
         android:layout_height="70dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/button_green"
+        android:background="@drawable/button_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_help" />
@@ -299,6 +257,7 @@
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
+        android:selectAllOnFocus="true"
         android:textAlignment="center"
         android:textColorHighlight="@color/button_green"
         app:layout_constraintBottom_toBottomOf="@+id/sprueText6"
@@ -314,6 +273,7 @@
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
+        android:selectAllOnFocus="true"
         android:textAlignment="center"
         android:textColorHighlight="@color/button_green"
         app:layout_constraintBottom_toBottomOf="@+id/sprueText7"
@@ -330,6 +290,83 @@
         app:layout_constraintBottom_toTopOf="@+id/sprueText6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/sprueDim3"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="140dp"
+        android:background="@color/input_green"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColorHighlight="@color/button_green"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/sprueDim9"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/input_green"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColorHighlight="@color/button_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/sprueSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/sprueSpinner" />
+
+    <EditText
+        android:id="@+id/sprueDim2"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/input_green"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColorHighlight="@color/button_green"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim1" />
+
+    <EditText
+        android:id="@+id/sprueDim5"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/input_green"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColorHighlight="@color/button_green"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim4" />
+
+    <EditText
+        android:id="@+id/sprueDim4"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="235dp"
+        android:background="@color/input_green"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColorHighlight="@color/button_green"
+        app:layout_constraintEnd_toEndOf="@+id/sprueDim1"
+        app:layout_constraintTop_toBottomOf="@+id/sprueDim1" />
 
     <Button
         android:id="@+id/sprueResetBtn"

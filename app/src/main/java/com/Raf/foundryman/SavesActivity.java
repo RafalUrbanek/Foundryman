@@ -79,7 +79,6 @@ public class SavesActivity extends AppCompatActivity {
                     MemAccess.exportProject(SavesActivity.super.getApplicationContext());
                     savesAdapter.notifyItemChanged(index);
                     display("Project " + Values.getProjectName() + " has been saved");
-                    //Support.updateSaveList(cont);
                 } else {
                     display("Project with this filename already exist");
                 }

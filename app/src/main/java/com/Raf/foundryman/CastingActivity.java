@@ -2,6 +2,7 @@ package com.Raf.foundryman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,10 +34,10 @@ public class CastingActivity extends AppCompatActivity implements
         flag = false;
 
         initialize();
-        loadValues();
-        configureOptionsBtn();
         configureSpinner();
         configureAlloySpinner();
+        loadValues();
+        configureOptionsBtn();
         configureApplyBtn();
     }
 
@@ -53,6 +54,17 @@ public class CastingActivity extends AppCompatActivity implements
         if (Support.materialName != null){
             matNameText.setText(Support.materialName);
         }
+        if (Support.materialType != null){
+            if (Support.materialType.equals(alloys[0])){
+                alloySpinner.setSelection(0);
+            }else if (Support.materialType.equals(alloys[1])){
+                alloySpinner.setSelection(1);
+            }else if (Support.materialType.equals(alloys[2])){
+                alloySpinner.setSelection(2);
+            }else if (Support.materialType.equals(alloys[3])){
+                alloySpinner.setSelection(3);
+            }
+        }
     }
 
     private void configureApplyBtn() {
@@ -63,18 +75,15 @@ public class CastingActivity extends AppCompatActivity implements
                     Support.materialName = String.valueOf(matNameText.getText());
                 }
 
-                if (!String.valueOf(matDensityText.getText()).isEmpty() &&
-                        Double.valueOf(String.valueOf(matDensityText.getText())) > 0){
+                if (!String.valueOf(matDensityText.getText()).isEmpty() && Double.valueOf(String.valueOf(matDensityText.getText())) > 0){
                     Support.density = Double.valueOf(String.valueOf(matDensityText.getText()));
                 }
 
-                if (!String.valueOf(partWeightText.getText()).isEmpty() &&
-                        Double.valueOf(String.valueOf(partWeightText.getText())) > 0){
+                if (!String.valueOf(partWeightText.getText()).isEmpty() && Double.valueOf(String.valueOf(partWeightText.getText())) > 0){
                     Support.castingMass = Double.valueOf(String.valueOf(partWeightText.getText()));
                 }
 
-                if (!String.valueOf(partsPerMouldText.getText()).isEmpty() &&
-                        Double.valueOf(String.valueOf(partsPerMouldText.getText())) > 0){
+                if (!String.valueOf(partsPerMouldText.getText()).isEmpty() && Double.valueOf(String.valueOf(partsPerMouldText.getText())) > 0){
                     Support.partsPerMould = Integer.valueOf(String.valueOf(partsPerMouldText.getText()));
                 }
 
@@ -116,7 +125,6 @@ public class CastingActivity extends AppCompatActivity implements
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tools);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolSpinner.setAdapter(adapter);
-        toolSpinner.setSelection(0);
     }
 
     private void configureOptionsBtn(){
@@ -141,25 +149,25 @@ public class CastingActivity extends AppCompatActivity implements
                     case 0:
                         // Aluminium
                         matDensityText.setText("2400");
-                        Support.materialType = "Aluminium";
+                        Support.materialType = alloys[0];
                         break;
 
                     case 1:
                         // Copper
                         matDensityText.setText("8000");
-                        Support.materialType = "Copper";
+                        Support.materialType =  alloys[1];
                         break;
 
                     case 2:
                         // Iron
                         matDensityText.setText("7000");
-                        Support.materialType = "Iron";
+                        Support.materialType =  alloys[2];
                         break;
 
                     case 3:
                         // Magnesium
                         matDensityText.setText("1600");
-                        Support.materialType = "Magnesium";
+                        Support.materialType =  alloys[3];
                         break;
                 }
             }

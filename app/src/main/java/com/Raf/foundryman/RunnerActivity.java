@@ -169,18 +169,38 @@ public class RunnerActivity extends AppCompatActivity implements
 
         if (Support.wellFilter1 > 0.0) {
             wellFilter1Text.setText(Double.toString(Support.round(Support.wellFilter1,2)));
+            wellFilterSwitch.setChecked(true);
+            wellFilter1Text.setVisibility(View.VISIBLE);
+            wellFilter2Text.setVisibility(View.VISIBLE);
+            wellText1.setVisibility(View.VISIBLE);
+            wellText2.setVisibility(View.VISIBLE);
         }
 
         if (Support.wellFilter2 > 0.0) {
             wellFilter2Text.setText(Double.toString(Support.round(Support.wellFilter2,2)));
+            wellFilterSwitch.setChecked(true);
+            wellFilter1Text.setVisibility(View.VISIBLE);
+            wellFilter2Text.setVisibility(View.VISIBLE);
+            wellText1.setVisibility(View.VISIBLE);
+            wellText2.setVisibility(View.VISIBLE);
         }
 
         if (Support.ingateFilter1 > 0.0) {
             ingateFilter1Text.setText(Double.toString(Support.round(Support.ingateFilter1,2)));
+            ingatesFilterSwitch.setChecked(true);
+            ingateFilter1Text.setVisibility(View.VISIBLE);
+            ingateFilter2Text.setVisibility(View.VISIBLE);
+            ingateText1.setVisibility(View.VISIBLE);
+            ingateText2.setVisibility(View.VISIBLE);
         }
 
         if (Support.ingateFilter2 > 0.0) {
             ingateFilter2Text.setText(Double.toString(Support.round(Support.ingateFilter2,2)));
+            ingatesFilterSwitch.setChecked(true);
+            ingateFilter1Text.setVisibility(View.VISIBLE);
+            ingateFilter2Text.setVisibility(View.VISIBLE);
+            ingateText1.setVisibility(View.VISIBLE);
+            ingateText2.setVisibility(View.VISIBLE);
         }
 
         if (Support.runnerMass > 0.0) {

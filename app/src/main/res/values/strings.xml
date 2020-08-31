@@ -17,14 +17,14 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
-    <string name="sprue_type">sprue type</string>
-    <string name="diameter">dia</string>
-    <string name="width">width</string>
-    <string name="sprueHeight">height</string>
-    <string name="factor">safety factor [%]</string>
-    <string name="flowRate">mass flow rate[kg/s]</string>
-    <string name="flowRateImp">mass flow rate [lb/s]</string>
-    <string name="sprueDepth">depth</string>
+    <string name="sprue_type">Sprue type</string>
+    <string name="diameter">Dia</string>
+    <string name="width">Width</string>
+    <string name="sprueHeight">Height</string>
+    <string name="factor">Safety Factor [%]</string>
+    <string name="flowRate">Mass Flow Rate[kg/s]</string>
+    <string name="flowRateImp">Mass Flow Rate [lb/s]</string>
+    <string name="sprueDepth">Depth</string>
     <string name="Reset">Reset</string>
     <string name="sprueHelp">
         \tThe Sprue is the vertical part of the running system that in sand
@@ -41,9 +41,10 @@
         the taper, choking the metal flow and therefore preventing any potential turbulent flow.
         The default value is 20%</string>
     <string name="feedersTotalWeight">Total Feeder Weight</string>
-    <string name="FeedersInsulatedText">insulated</string>
-    <string name="height">height</string>
-    <string name="Insulation">insulation</string>
+    <string name="FeedersInsulatedText">Insulated</string>
+    <string name="height">Height</string>
+    <string name="Insulation">Insulation</string>
+    <string name="version">Version 0.1</string>
     <string name="runnerHelp">\tRunner bar is the part of the running system that distributes the
         liquid metal from sprue and well into the in-gates connected to the casting. There are two
         main approaches to designing good runner bar. One is to constrain the metal flow to decrease
@@ -55,12 +56,31 @@
         with filters directly after the sprue.\n\n
         \t Setup an values plugged in this tab are used for calculating the system ratio and metal
         yield that can be found in the summary tab.</string>
-    <string name="lShapeHelp">\tThis calculator allows you to optimise the sprue - runner junction
+
+    <string name="lShapeHelp">This calculator allows you to optimise the sprue - runner junction
         for optimal flow utilising the L-shape design. This geometry allows for the least obstructive
         fluid flow while at the same time reducing turbulence caused by rapid flow direction change
         and high velocity. This shape also considers reasonable mouldability constrains.\n\n
-        \tThe main part of the design is the minimum smooth transition radius at the junction,
+        The main part of the design is the minimum smooth transition radius at the junction,
         calculated based on the metal velocity and main sprue dimensions. This geometry is often
         paired with filters placed directly under the ingates to prevent formation of high velocity
         metal jets when the metal is required to rapidly change flow direction to fill the ingates.</string>
+
+    <string name="about">This app was developed with foundry engineers in mind (professional and home-grown)
+        looking to speed up their design process when developing new systems and calculating design
+        properties. Please be aware that some of the calculations base on approximations and every
+        foundry uses different approach to system design, therefore results may differ from those
+        tailor made for your foundry. I do not take responsibility for decisions taken by the reader
+        based solely on the information provided in this app.
+        \n\nVersion: 0.1
+        \nThis is the first release of this app and it may still contain bugs and errors, so feel
+        free to let me know if you encounter any problems or have a suggestion for improvement.
+        \nAs of now, the project saves do not store the values for feeders. Please bear that in mind
+        when working with loaded project and want to analyze the yield od fill time.</string>
+
+    <string name="author">I am a foundry engineer working professionally with light weight alloys in
+        defense and airspace industry. I am learning programming and this engineering calculator is
+        the first app that I developed. I wanted to develop a tool that I could also use in my
+        professional career and I hope that someone else might also find it useful. If you would like
+        to share your thoughts on this app please feel free to write to \nrafal.m.urbanek@gmail.com</string>
 </resources>
